@@ -11,6 +11,6 @@ export MYINSTALL=$dir/Singularity/install
 source $dir/Singularity/cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/opt/sphenix/core/bin/setup_local.sh $MYINSTALL
 
 cd $dir/Singularity/myanalysis/
-root -b -l -q Fun4All_G4_simplified_pythia.C
+root -b -l -q Fun4All_G4_simplified_pythia8.C
 
 

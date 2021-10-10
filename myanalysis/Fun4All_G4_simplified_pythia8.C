@@ -18,7 +18,7 @@
 #include <g4detectors/PHG4DetectorSubsystem.h>
 #include <g4detectors/PHG4CylinderSubsystem.h>
 #include <g4histos/G4HitNtuple.h>
-#include <phpythia6/PHPythia6.h>
+#include <phpythia8/PHPythia8.h>
 #include <g4main/HepMCNodeReader.h>
 #include <g4main/PHG4ParticleGenerator.h>
 #include <g4main/PHG4ParticleGeneratorBase.h>
@@ -46,10 +46,10 @@ R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libg4detectors.so)
 R__LOAD_LIBRARY(libg4lblvtx.so)
 R__LOAD_LIBRARY(libg4trackfastsim.so)
-R__LOAD_LIBRARY(libpythia6eRHIC.so)
+R__LOAD_LIBRARY(libPHPythia8.so)
 
-void Fun4All_G4_simplified_pythia(
-			int nEvents        = 100   ,	// number of events
+void Fun4All_G4_simplified_pythia8(
+			int nEvents        = 5   ,	// number of events
 			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = -1    ,	// Number of Quartz bars in the DIRC
@@ -114,15 +114,17 @@ void Fun4All_G4_simplified_pythia(
 	gen_pT->set_eta_range(eta_min,eta_max);               // Detector coverage corresponds to |η|< 4
 	gen_pT->set_phi_range(0.,2.*TMath::Pi());
 	// ======================================================================================================
+ gSystem->Setenv("PYTHIA8DATA",Form("%s/xmldoc",getenv("PYTHIA8")));
 	bool do_pythia8_jets = false;	
 	if(particle_gen==1){se->registerSubsystem(   gen); cout << "Using particle generator"             << endl;}
 	else if(particle_gen==5){se->registerSubsystem(gen_pT); cout << "Using particle generator flat in pT"  << endl;}
  else if(particle_gen==4){
 		do_pythia8_jets = true;
-		gSystem->Load("libpythia6eRHIC.so");
+		gSystem->Load("libPHPythia8.so");
 
-		PHPythia6 *pythia8 = new PHPythia6(); // see coresoftware/generators/PHPythia8 for example config
-		pythia8->set_config_file("phpythia6.cfg"); // example configure files : https://github.com/sPHENIX-Collaboration/coresoftware/tree/master/generators/PHPythia8 
+		PHPythia8 *pythia8 = new PHPythia8(); // see coresoftware/generators/PHPythia8 for example config
+		pythia8->set_config_file("phpythia8.cfg"); // example configure files : https://github.com/sPHENIX-Collaboration/coresoftware/tree/master/generators/PHPythia8 
+  pythia8->print_config();
 	 pythia8->Verbosity(10);
 		se->registerSubsystem(pythia8);
 
@@ -313,7 +315,7 @@ void Fun4All_G4_simplified_pythia(
 		kalman->add_zplane_state  (projname3, projzpos3  );     // projection on vertical planes
 	}
 
-	kalman->Verbosity(10);
+	kalman->Verbosity(0);
 	kalman->set_use_vertex_in_fitting(false);
 	kalman->set_vertex_xy_resolution(0);
 	kalman->set_vertex_z_resolution(0);
@@ -355,8 +357,8 @@ void Fun4All_G4_simplified_pythia(
 	se->registerSubsystem(fast_sim_eval);
 
 	// resonstruct jets after the tracking
-//	if(do_pythia8_jets) Jet_Reco();
-//	if(do_pythia8_jets) Jet_Eval(string(outputFile) + "_g4jet_eval.root");
+	if(do_pythia8_jets) Jet_Reco();
+	if(do_pythia8_jets) Jet_Eval(string(outputFile) + "_g4jet_eval.root");
 
 	// ======================================================================================================
 	// IOManagers...
@@ -368,14 +370,14 @@ void Fun4All_G4_simplified_pythia(
 	Fun4AllInputManager *in = new Fun4AllDummyInputManager("JADE");
 	se->registerInputManager(in);
 
-	/*if(do_pythia8_jets){
+	if(do_pythia8_jets){
 		gSystem->Load("libmyjetanalysis");
 		std::string jetoutputFile = std::string(outputFile) + std::string("_electrons+jets.root");
 		MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r10","AntiKt_Truth_r10",jetoutputFile.data());	
 	//	MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r04","AntiKt_Truth_r04",jetoutputFile.data());
 	//	MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r02","AntiKt_Truth_r02",jetoutputFile.data());
 		se->registerSubsystem(myJetAnalysis);
-	}*/
+	}
 	if (nEvents <= 0) return;
 	se->run(nEvents);
 	se->End();
