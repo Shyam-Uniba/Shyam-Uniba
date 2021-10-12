@@ -431,7 +431,7 @@ void Fun4All_G4_simplified_v3(
 
 	se->run(nEvents);
 	se->End();
- g4Reco->Dump_GDML("simple_geom.gdml");
+ //g4Reco->Dump_GDML("simple_geom.gdml");
 	delete se;
 	gSystem->Exit(0);
 }
