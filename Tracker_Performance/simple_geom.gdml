@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define/>
+
+  <materials>
+    <isotope N="28" Z="14" name="Si280x79cf410">
+      <atom unit="g/mole" value="27.9769"/>
+    </isotope>
+    <isotope N="29" Z="14" name="Si290x79d2130">
+      <atom unit="g/mole" value="28.9765"/>
+    </isotope>
+    <isotope N="30" Z="14" name="Si300x79d21a0">
+      <atom unit="g/mole" value="29.9738"/>
+    </isotope>
+    <element name="Si0x79d21f0">
+      <fraction n="0.922296077703922" ref="Si280x79cf410"/>
+      <fraction n="0.0468319531680468" ref="Si290x79d2130"/>
+      <fraction n="0.0308719691280309" ref="Si300x79d21a0"/>
+    </element>
+    <material name="G4_Si0x7aae460" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="173"/>
+      <D unit="g/cm3" value="2.33"/>
+      <fraction n="1" ref="Si0x79d21f0"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x791bd10">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x791bda0">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x791be10">
+      <fraction n="0.999885" ref="H10x791bd10"/>
+      <fraction n="0.000115" ref="H20x791bda0"/>
+    </element>
+    <material name="G4_Galactic0x79b2100" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="21.8"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H0x791be10"/>
+    </material>
+    <material Z="4" name="G4_Be0x7ab2c90" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="63.7"/>
+      <D unit="g/cm3" value="1.848"/>
+      <atom unit="g/mole" value="9.01218"/>
+    </material>
+    <material Z="79" name="G4_Au0x7a84ac0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="790"/>
+      <D unit="g/cm3" value="19.32"/>
+      <atom unit="g/mole" value="196.967"/>
+    </material>
+    <isotope N="16" Z="8" name="O160x791c5f0">
+      <atom unit="g/mole" value="15.9949"/>
+    </isotope>
+    <isotope N="17" Z="8" name="O170x791c640">
+      <atom unit="g/mole" value="16.9991"/>
+    </isotope>
+    <isotope N="18" Z="8" name="O180x791c6b0">
+      <atom unit="g/mole" value="17.9992"/>
+    </isotope>
+    <element name="O0x791c7c0">
+      <fraction n="0.99757" ref="O160x791c5f0"/>
+      <fraction n="0.00038" ref="O170x791c640"/>
+      <fraction n="0.00205" ref="O180x791c6b0"/>
+    </element>
+    <material name="Quartz0x7ab4e00" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="125.663004061076"/>
+      <D unit="g/cm3" value="2.2"/>
+      <fraction n="0.467433841791527" ref="Si0x79d21f0"/>
+      <fraction n="0.532566158208473" ref="O0x791c7c0"/>
+    </material>
+    <material Z="13" name="G4_Al0x7aaeaf0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="166"/>
+      <D unit="g/cm3" value="2.699"/>
+      <atom unit="g/mole" value="26.9815"/>
+    </material>
+    <isotope N="12" Z="6" name="C120x791c040">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C130x791c0c0">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="C0x791c130">
+      <fraction n="0.9893" ref="C120x791c040"/>
+      <fraction n="0.0107" ref="C130x791c0c0"/>
+    </element>
+    <material name="G4_MYLAR0x79dfd70" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="78.7"/>
+      <D unit="g/cm3" value="1.4"/>
+      <fraction n="0.625010832340889" ref="C0x791c130"/>
+      <fraction n="0.0419607170679433" ref="H0x791be10"/>
+      <fraction n="0.333028450591168" ref="O0x791c7c0"/>
+    </material>
+    <isotope N="14" Z="7" name="N140x791c310">
+      <atom unit="g/mole" value="14.0031"/>
+    </isotope>
+    <isotope N="15" Z="7" name="N150x791c3b0">
+      <atom unit="g/mole" value="15.0001"/>
+    </isotope>
+    <element name="N0x791c420">
+      <fraction n="0.99632" ref="N140x791c310"/>
+      <fraction n="0.00368" ref="N150x791c3b0"/>
+    </element>
+    <isotope N="36" Z="18" name="Ar360x79b6020">
+      <atom unit="g/mole" value="35.9675"/>
+    </isotope>
+    <isotope N="38" Z="18" name="Ar380x79b63e0">
+      <atom unit="g/mole" value="37.9627"/>
+    </isotope>
+    <isotope N="40" Z="18" name="Ar400x79b6450">
+      <atom unit="g/mole" value="39.9624"/>
+    </isotope>
+    <element name="Ar0x79b64d0">
+      <fraction n="0.003365" ref="Ar360x79b6020"/>
+      <fraction n="0.000632" ref="Ar380x79b63e0"/>
+      <fraction n="0.996003" ref="Ar400x79b6450"/>
+    </element>
+    <material name="aerogel0xc4da800" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="86.9921132076999"/>
+      <D unit="g/cm3" value="0.094"/>
+      <fraction n="0.000119040119040119" ref="C0x791c130"/>
+      <fraction n="0.725057045057045" ref="N0x791c420"/>
+      <fraction n="0.243812628838321" ref="O0x791c7c0"/>
+      <fraction n="0.0123139323139323" ref="Ar0x79b64d0"/>
+      <fraction n="0.0186973536716611" ref="Si0x79d21f0"/>
+    </material>
+    <material name="PMMA0xc53f780" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="30.2563129348498"/>
+      <D unit="g/cm3" value="1.18"/>
+      <fraction n="0.336448598130841" ref="C0x791c130"/>
+      <fraction n="0.532710280373832" ref="H0x791be10"/>
+      <fraction n="0.130841121495327" ref="O0x791c7c0"/>
+    </material>
+    <isotope N="19" Z="9" name="F190x79b6f90">
+      <atom unit="g/mole" value="18.9984"/>
+    </isotope>
+    <element name="F0x79b9f10">
+      <fraction n="1" ref="F190x79b6f90"/>
+    </element>
+    <material name="C2F60x6372bc0" state="gas">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="107.900332231568"/>
+      <D unit="g/cm3" value="0.0057"/>
+      <fraction n="0.174053668569319" ref="C0x791c130"/>
+      <fraction n="0.825946331430681" ref="F0x79b9f10"/>
+    </material>
+    <material name="SiO20xc5252a0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="125.663004061076"/>
+      <D unit="g/cm3" value="2.5"/>
+      <fraction n="0.467433841791527" ref="Si0x79d21f0"/>
+      <fraction n="0.532566158208473" ref="O0x791c7c0"/>
+    </material>
+    <isotope N="1" Z="1" name="H10xcc2fab0">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20xcc2e610">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="Hydrogen0xc51a3e0">
+      <fraction n="0.999885" ref="H10xcc2fab0"/>
+      <fraction n="0.000115" ref="H20xcc2e610"/>
+    </element>
+    <isotope N="14" Z="7" name="N140xcc1fe10">
+      <atom unit="g/mole" value="14.0031"/>
+    </isotope>
+    <isotope N="15" Z="7" name="N150xcc2e090">
+      <atom unit="g/mole" value="15.0001"/>
+    </isotope>
+    <element name="Nitrogen0xc52c1a0">
+      <fraction n="0.99632" ref="N140xcc1fe10"/>
+      <fraction n="0.00368" ref="N150xcc2e090"/>
+    </element>
+    <isotope N="16" Z="8" name="O160xcc053f0">
+      <atom unit="g/mole" value="15.9949"/>
+    </isotope>
+    <isotope N="17" Z="8" name="O170xcc34d30">
+      <atom unit="g/mole" value="16.9991"/>
+    </isotope>
+    <isotope N="18" Z="8" name="O180xcc2fed0">
+      <atom unit="g/mole" value="17.9992"/>
+    </isotope>
+    <element name="Oxygen0xc4eb8e0">
+      <fraction n="0.99757" ref="O160xcc053f0"/>
+      <fraction n="0.00038" ref="O170xcc34d30"/>
+      <fraction n="0.00205" ref="O180xcc2fed0"/>
+    </element>
+    <isotope N="12" Z="6" name="C120xcc34e90">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C130xcc01b90">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="Carbon0xc4e6a40">
+      <fraction n="0.9893" ref="C120xcc34e90"/>
+      <fraction n="0.0107" ref="C130xcc01b90"/>
+    </element>
+    <material name="CarbonFiber0xc4df200" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="75.7803553532697"/>
+      <D unit="g/cm3" value="1.75"/>
+      <fraction n="0.745" ref="C0x791c130"/>
+      <fraction n="0.0270668987487274" ref="Hydrogen0xc51a3e0"/>
+      <fraction n="0.0234657952642123" ref="Nitrogen0xc52c1a0"/>
+      <fraction n="0.0535978193044107" ref="Oxygen0xc4eb8e0"/>
+      <fraction n="0.15086948668265" ref="Carbon0xc4e6a40"/>
+    </material>
+    <material name="G4_GRAPHITE0x79b8390" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="78"/>
+      <D unit="g/cm3" value="2.21"/>
+      <fraction n="1" ref="C0x791c130"/>
+    </material>
+    <material name="G4_METHANE0x79f2620" state="gas">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="41.7"/>
+      <D unit="g/cm3" value="0.000667151"/>
+      <fraction n="0.748682364731288" ref="C0x791c130"/>
+      <fraction n="0.251317635268712" ref="H0x791be10"/>
+    </material>
+    <isotope N="63" Z="29" name="Cu630x79adcd0">
+      <atom unit="g/mole" value="62.9296"/>
+    </isotope>
+    <isotope N="65" Z="29" name="Cu650x7954a60">
+      <atom unit="g/mole" value="64.9278"/>
+    </isotope>
+    <element name="Cu0x79ae990">
+      <fraction n="0.6917" ref="Cu630x79adcd0"/>
+      <fraction n="0.3083" ref="Cu650x7954a60"/>
+    </element>
+    <material name="G4_Cu0x7aa78f0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="322"/>
+      <D unit="g/cm3" value="8.96"/>
+      <fraction n="1" ref="Cu0x79ae990"/>
+    </material>
+    <material name="G4_KAPTON0x79d2f80" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="79.6"/>
+      <D unit="g/cm3" value="1.42"/>
+      <fraction n="0.691127814286998" ref="C0x791c130"/>
+      <fraction n="0.026363378233988" ref="H0x791be10"/>
+      <fraction n="0.0732713201549139" ref="N0x791c420"/>
+      <fraction n="0.2092374873241" ref="O0x791c7c0"/>
+    </material>
+    <material name="G100x7ac9a90" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="96.3605255313061"/>
+      <D unit="g/cm3" value="1.7"/>
+      <fraction n="0.2832894114898" ref="Si0x79d21f0"/>
+      <fraction n="0.322763009541678" ref="O0x791c7c0"/>
+      <fraction n="0.363447105286765" ref="C0x791c130"/>
+      <fraction n="0.0305004736817568" ref="H0x791be10"/>
+    </material>
+    <material name="G4_AIR0x7a73cd0" state="gas">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="85.7"/>
+      <D unit="g/cm3" value="0.00120479"/>
+      <fraction n="0.000124000124000124" ref="C0x791c130"/>
+      <fraction n="0.755267755267755" ref="N0x791c420"/>
+      <fraction n="0.231781231781232" ref="O0x791c7c0"/>
+      <fraction n="0.0128270128270128" ref="Ar0x79b64d0"/>
+    </material>
+  </materials>
+
+  <solids>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="SVTX_00x7d3a5b0" rmax="36.44685" rmin="36.4" startphi="0" z="280"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="SVTX_10x7ce40e0" rmax="44.54685" rmin="44.5" startphi="0" z="280"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="SVTX_20x7cd07b0" rmax="52.64685" rmin="52.6" startphi="0" z="280"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="BARR_00x7cd0a60" rmax="210.51535" rmin="210" startphi="0" z="540"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="BARR_10x63685c0" rmax="227.31535" rmin="226.8" startphi="0" z="600"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="BARR_20x7d347e0" rmax="393.51535" rmin="393" startphi="0" z="1050"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="BARR_30x7d05c20" rmax="432.81535" rmin="432.3" startphi="0" z="1140"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_00x7d05ed0" rmax="432.3" rmin="52.614131" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_10x7d99230" rmax="432.3" rmin="41.1781295" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_20x7d06150" rmax="432.3" rmin="31.8" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_30x7ccc8f0" rmax="362.6" rmin="31.8" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_40x7cccba0" rmax="185" rmin="31.8" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_50x7cd8850" rmax="185" rmin="31.8" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_60x7ccc400" rmax="362.6" rmin="31.8" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_70x7ccc6b0" rmax="432.3" rmin="34.8777853" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_80x39a0e30" rmax="432.3" rmin="51.11002433" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_90x7d065b0" rmax="432.3" rmin="67.39251797" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FBVS_100x39a3800" rmax="432.3" rmin="83.624757" startphi="0" z="0.22488"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="VAC_BE_PIPE_00x39a3ab0" rmax="31" rmin="0" startphi="0" z="1466"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="BE_PIPE_10x733c930" rmax="31.762" rmin="31" startphi="0" z="1466"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="AU_BE_PIPE_20x5365390" rmax="31.764" rmin="31.762" startphi="0" z="1466"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DIRC_SMALL_Radiator_Sol_Raw0xc547e70" rmax="5947.86966079418" rmin="0" startphi="0" z="17"/>
+    <box lunit="mm" name="BoxBoundary_Det0xccf9690" x="11895.7393215884" y="4000" z="34"/>
+    <sphere aunit="deg" deltaphi="30" deltatheta="179.999986339622" lunit="mm" name="SecConeBoundary_Hall0xc513430" rmax="5947.86966079418" rmin="836.5" startphi="75" starttheta="6.83018917001275e-06"/>
+    <intersection name="Boundary_Det0xc521240">
+      <first ref="BoxBoundary_Det0xccf9690"/>
+      <second ref="SecConeBoundary_Hall0xc513430"/>
+      <position name="Boundary_Det0xc521240_pos" unit="mm" x="0" y="0" z="-845"/>
+      <rotation name="Boundary_Det0xc521240_rot" unit="deg" x="90" y="0" z="0"/>
+      <firstposition name="Boundary_Det0xc521240_fpos" unit="mm" x="0" y="750.000000000001" z="0"/>
+    </intersection>
+    <intersection name="DIRC_SMALL_Radiator_Sol0xc509e80">
+      <first ref="DIRC_SMALL_Radiator_Sol_Raw0xc547e70"/>
+      <second ref="Boundary_Det0xc521240"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DetectorBox_Det_Raw0xc53ee40" rmax="5947.86966079418" rmin="0" startphi="0" z="17"/>
+    <intersection name="DetectorBox_Det0xc51a780">
+      <first ref="DetectorBox_Det_Raw0xc53ee40"/>
+      <second ref="Boundary_Det0xc521240"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DIRC_SMALL_CST_Inner_Skin_100xc4d9af0" rmax="818.37" rmin="817.1" startphi="0" z="4000"/>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DIRC_SMALL_CST_Outer_Skin_110x7d06860" rmax="892.500044764549" rmin="891.740044764549" startphi="0" z="4000"/>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_mylar_ent0xc4dedc0" startphi="0">
+      <zplane rmax="993.6" rmin="75.201107" z="1500"/>
+      <zplane rmax="993.73248" rmin="75.211157922" z="1500.2"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_aerogel0xc4f44b0" startphi="0">
+      <zplane rmax="993.73248" rmin="75.211157922" z="1500.2"/>
+      <zplane rmax="1020.22848" rmin="77.221342322" z="1540.2"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_PMMA0xc509f90" startphi="0">
+      <zplane rmax="1020.22848" rmin="77.221342322" z="1540.2"/>
+      <zplane rmax="1021.55328" rmin="77.321851542" z="1542.2"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_C2F60xc4f1fa0" startphi="0">
+      <zplane rmax="1021.55328" rmin="77.321851542" z="1542.2"/>
+      <zplane rmax="1975.40928" rmin="149.688489942" z="2982.2"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_mirror_l10xc4d7aa0" startphi="0">
+      <zplane rmax="1975.40928" rmin="149.688489942" z="2982.2"/>
+      <zplane rmax="1975.47552" rmin="149.693515403" z="2982.3"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_mirror_l20xc505a10" startphi="0">
+      <zplane rmax="1975.47552" rmin="149.693515403" z="2982.3"/>
+      <zplane rmax="1975.50864" rmin="149.6960281335" z="2982.35"/>
+    </polycone>
+    <polycone aunit="deg" deltaphi="360" lunit="mm" name="RICH_mylar_ext0xc4ddb10" startphi="0">
+      <zplane rmax="1975.50864" rmin="149.6960281335" z="2982.35"/>
+      <zplane rmax="1975.64112" rmin="149.7060790555" z="2982.55"/>
+    </polycone>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_EntranceWindow_Sol_Raw0xc4e8a80" rmax="5417.05660140536" rmin="0" startphi="0" z="0.025"/>
+    <box lunit="mm" name="BoxBoundary_Det0xc52cbc0" x="10834.1132028107" y="736.049988611564" z="50.54"/>
+    <sphere aunit="deg" deltaphi="45" deltatheta="179.999986339622" lunit="mm" name="SecConeBoundary_Hall0xc509080" rmax="5417.05660140536" rmin="1800" startphi="67.5" starttheta="6.83018917001275e-06"/>
+    <intersection name="Boundary_Det0xc537600">
+      <first ref="BoxBoundary_Det0xc52cbc0"/>
+      <second ref="SecConeBoundary_Hall0xc509080"/>
+      <position name="Boundary_Det0xc537600_pos" unit="mm" x="0" y="0" z="-1812.635"/>
+      <rotation name="Boundary_Det0xc537600_rot" unit="deg" x="180" y="0" z="0"/>
+      <firstposition name="Boundary_Det0xc537600_fpos" unit="mm" x="0" y="-440.925745498435" z="0"/>
+    </intersection>
+    <intersection name="EGEM_EntranceWindow_Sol0xc46dd80">
+      <first ref="EGEM_EntranceWindow_Sol_Raw0xc4e8a80"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_EntranceWindow_Sol0xc46dd80_fpos" unit="mm" x="0" y="0" z="-12.6225"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_Cathode_Sol_Raw0xc543ce0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.01"/>
+    <intersection name="EGEM_Cathode_Sol0xc5021a0">
+      <first ref="EGEM_Cathode_Sol_Raw0xc543ce0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_Cathode_Sol0xc5021a0_fpos" unit="mm" x="0" y="0" z="-12.605"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_DriftLayer_1_Sol_Raw0xc4fa020" rmax="5417.05660140536" rmin="0" startphi="0" z="20"/>
+    <intersection name="EGEM_DriftLayer_1_Sol0x6371900">
+      <first ref="EGEM_DriftLayer_1_Sol_Raw0xc4fa020"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_DriftLayer_1_Sol0x6371900_fpos" unit="mm" x="0" y="0" z="-2.6"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMFrontCu1_Sol_Raw0xc4719f0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMFrontCu1_Sol0x6372800">
+      <first ref="EGEM_GEMFrontCu1_Sol_Raw0xc4719f0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMFrontCu1_Sol0x6372800_fpos" unit="mm" x="0" y="0" z="7.4016"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMKapton1_Sol_Raw0xc46ae70" rmax="5417.05660140536" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="EGEM_GEMKapton1_Sol0xc4e8b90">
+      <first ref="EGEM_GEMKapton1_Sol_Raw0xc46ae70"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMKapton1_Sol0xc4e8b90_fpos" unit="mm" x="0" y="0" z="7.421"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMBackCu1_Sol_Raw0xc4edde0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMBackCu1_Sol0xc4fa130">
+      <first ref="EGEM_GEMBackCu1_Sol_Raw0xc4edde0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMBackCu1_Sol0xc4fa130_fpos" unit="mm" x="0" y="0" z="7.4566"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_Frame1_Sol_Raw0xc507e20" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="EGEM_Frame1_Sol0xc46af80">
+      <first ref="EGEM_Frame1_Sol_Raw0xc507e20"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_Frame1_Sol0xc46af80_fpos" unit="mm" x="0" y="0" z="7.50875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMFrontCu2_Sol_Raw0xc4f5620" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMFrontCu2_Sol0xc507f30">
+      <first ref="EGEM_GEMFrontCu2_Sol_Raw0xc4f5620"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMFrontCu2_Sol0xc507f30_fpos" unit="mm" x="0" y="0" z="8.9616"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMKapton2_Sol_Raw0xc525be0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="EGEM_GEMKapton2_Sol0xc525cf0">
+      <first ref="EGEM_GEMKapton2_Sol_Raw0xc525be0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMKapton2_Sol0xc525cf0_fpos" unit="mm" x="0" y="0" z="8.981"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMBackCu2_Sol_Raw0xc4e85e0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMBackCu2_Sol0xc545e20">
+      <first ref="EGEM_GEMBackCu2_Sol_Raw0xc4e85e0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMBackCu2_Sol0xc545e20_fpos" unit="mm" x="0" y="0" z="9.0166"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_Frame2_Sol_Raw0xc515440" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="EGEM_Frame2_Sol0xc53f8b0">
+      <first ref="EGEM_Frame2_Sol_Raw0xc515440"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_Frame2_Sol0xc53f8b0_fpos" unit="mm" x="0" y="0" z="9.06875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMFrontCu3_Sol_Raw0x5cac700" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMFrontCu3_Sol0xc4df780">
+      <first ref="EGEM_GEMFrontCu3_Sol_Raw0x5cac700"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMFrontCu3_Sol0xc4df780_fpos" unit="mm" x="0" y="0" z="10.5216"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMKapton3_Sol_Raw0x7cba090" rmax="5417.05660140536" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="EGEM_GEMKapton3_Sol0xc50ace0">
+      <first ref="EGEM_GEMKapton3_Sol_Raw0x7cba090"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMKapton3_Sol0xc50ace0_fpos" unit="mm" x="0" y="0" z="10.541"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_GEMBackCu3_Sol_Raw0xc502260" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="EGEM_GEMBackCu3_Sol0xc51f6a0">
+      <first ref="EGEM_GEMBackCu3_Sol_Raw0xc502260"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_GEMBackCu3_Sol0xc51f6a0_fpos" unit="mm" x="0" y="0" z="10.5766"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_Frame3_Sol_Raw0xc52c260" rmax="5417.05660140536" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="EGEM_Frame3_Sol0xc535620">
+      <first ref="EGEM_Frame3_Sol_Raw0xc52c260"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_Frame3_Sol0xc535620_fpos" unit="mm" x="0" y="0" z="10.62875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_PCBKapton_Sol_Raw0xc4eb9a0" rmax="5417.05660140536" rmin="0" startphi="0" z="0.05"/>
+    <intersection name="EGEM_PCBKapton_Sol0xc54ac60">
+      <first ref="EGEM_PCBKapton_Sol_Raw0xc4eb9a0"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_PCBKapton_Sol0xc54ac60_fpos" unit="mm" x="0" y="0" z="12.105"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_PCBCu_Sol_Raw0xc512600" rmax="5417.05660140536" rmin="0" startphi="0" z="0.004"/>
+    <intersection name="EGEM_PCBCu_Sol0xc4de4a0">
+      <first ref="EGEM_PCBCu_Sol_Raw0xc512600"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_PCBCu_Sol0xc4de4a0_fpos" unit="mm" x="0" y="0" z="12.132"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="EGEM_Facesheet_Sol_Raw0xc4e6b00" rmax="5417.05660140536" rmin="0" startphi="0" z="0.5"/>
+    <intersection name="EGEM_Facesheet_Sol0xc4eec40">
+      <first ref="EGEM_Facesheet_Sol_Raw0xc4e6b00"/>
+      <second ref="Boundary_Det0xc537600"/>
+      <firstposition name="EGEM_Facesheet_Sol0xc4eec40_fpos" unit="mm" x="0" y="0" z="12.385"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DetectorBox_Det_Raw0xc4d5e00" rmax="5417.05660140536" rmin="0" startphi="0" z="25.27"/>
+    <intersection name="DetectorBox_Det0xc4ee720">
+      <first ref="DetectorBox_Det_Raw0xc4d5e00"/>
+      <second ref="Boundary_Det0xc537600"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_EntranceWindow_Sol_Raw0xc472d20" rmax="9248.29761921028" rmin="0" startphi="0" z="0.025"/>
+    <box lunit="mm" name="BoxBoundary_Det0xc53bc40" x="18496.5952384206" y="1444.46135252416" z="50.54"/>
+    <sphere aunit="deg" deltaphi="45" deltatheta="179.999986339622" lunit="mm" name="SecConeBoundary_Hall0x7e4f870" rmax="9248.29761921028" rmin="3040" startphi="67.5" starttheta="6.83018917001275e-06"/>
+    <intersection name="Boundary_Det0xc502b60">
+      <first ref="BoxBoundary_Det0xc53bc40"/>
+      <second ref="SecConeBoundary_Hall0x7e4f870"/>
+      <position name="Boundary_Det0xc502b60_pos" unit="mm" x="0" y="0" z="-3052.635"/>
+      <firstposition name="Boundary_Det0xc502b60_fpos" unit="mm" x="0" y="874.155188939829" z="0"/>
+    </intersection>
+    <intersection name="FGEM_EntranceWindow_Sol0xc520920">
+      <first ref="FGEM_EntranceWindow_Sol_Raw0xc472d20"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_EntranceWindow_Sol0xc520920_fpos" unit="mm" x="0" y="0" z="-12.6225"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_Cathode_Sol_Raw0x5cac840" rmax="9248.29761921028" rmin="0" startphi="0" z="0.01"/>
+    <intersection name="FGEM_Cathode_Sol0xc5327e0">
+      <first ref="FGEM_Cathode_Sol_Raw0x5cac840"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_Cathode_Sol0xc5327e0_fpos" unit="mm" x="0" y="0" z="-12.605"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_DriftLayer_1_Sol_Raw0x7d3cd00" rmax="9248.29761921028" rmin="0" startphi="0" z="20"/>
+    <intersection name="FGEM_DriftLayer_1_Sol0xc545480">
+      <first ref="FGEM_DriftLayer_1_Sol_Raw0x7d3cd00"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_DriftLayer_1_Sol0xc545480_fpos" unit="mm" x="0" y="0" z="-2.6"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMFrontCu1_Sol_Raw0x7cba1d0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMFrontCu1_Sol0xc4d8cc0">
+      <first ref="FGEM_GEMFrontCu1_Sol_Raw0x7cba1d0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMFrontCu1_Sol0xc4d8cc0_fpos" unit="mm" x="0" y="0" z="7.4016"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMKapton1_Sol_Raw0x7d359f0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="FGEM_GEMKapton1_Sol0xc4eab80">
+      <first ref="FGEM_GEMKapton1_Sol_Raw0x7d359f0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMKapton1_Sol0xc4eab80_fpos" unit="mm" x="0" y="0" z="7.421"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMBackCu1_Sol_Raw0x7cbb210" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMBackCu1_Sol0xc4fb320">
+      <first ref="FGEM_GEMBackCu1_Sol_Raw0x7cbb210"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMBackCu1_Sol0xc4fb320_fpos" unit="mm" x="0" y="0" z="7.4566"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_Frame1_Sol_Raw0x7d9b520" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="FGEM_Frame1_Sol0xc46fdf0">
+      <first ref="FGEM_Frame1_Sol_Raw0x7d9b520"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_Frame1_Sol0xc46fdf0_fpos" unit="mm" x="0" y="0" z="7.50875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMFrontCu2_Sol_Raw0x6371060" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMFrontCu2_Sol0xc51e420">
+      <first ref="FGEM_GEMFrontCu2_Sol_Raw0x6371060"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMFrontCu2_Sol0xc51e420_fpos" unit="mm" x="0" y="0" z="8.9616"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMKapton2_Sol_Raw0xc516220" rmax="9248.29761921028" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="FGEM_GEMKapton2_Sol0xc530c20">
+      <first ref="FGEM_GEMKapton2_Sol_Raw0xc516220"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMKapton2_Sol0xc530c20_fpos" unit="mm" x="0" y="0" z="8.981"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMBackCu2_Sol_Raw0xc516bf0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMBackCu2_Sol0xc4db660">
+      <first ref="FGEM_GEMBackCu2_Sol_Raw0xc516bf0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMBackCu2_Sol0xc4db660_fpos" unit="mm" x="0" y="0" z="9.0166"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_Frame2_Sol_Raw0xc4e81d0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="FGEM_Frame2_Sol0xc4fbc60">
+      <first ref="FGEM_Frame2_Sol_Raw0xc4e81d0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_Frame2_Sol0xc4fbc60_fpos" unit="mm" x="0" y="0" z="9.06875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMFrontCu3_Sol_Raw0xc4e6f70" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMFrontCu3_Sol0xc51ba80">
+      <first ref="FGEM_GEMFrontCu3_Sol_Raw0xc4e6f70"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMFrontCu3_Sol0xc51ba80_fpos" unit="mm" x="0" y="0" z="10.5216"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMKapton3_Sol_Raw0xc4f0360" rmax="9248.29761921028" rmin="0" startphi="0" z="0.032"/>
+    <intersection name="FGEM_GEMKapton3_Sol0xc53ce60">
+      <first ref="FGEM_GEMKapton3_Sol_Raw0xc4f0360"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMKapton3_Sol0xc53ce60_fpos" unit="mm" x="0" y="0" z="10.541"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_GEMBackCu3_Sol_Raw0xc5265a0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0032"/>
+    <intersection name="FGEM_GEMBackCu3_Sol0xc4dcd80">
+      <first ref="FGEM_GEMBackCu3_Sol_Raw0xc5265a0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_GEMBackCu3_Sol0xc4dcd80_fpos" unit="mm" x="0" y="0" z="10.5766"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_Frame3_Sol_Raw0xc46d3d0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.0975"/>
+    <intersection name="FGEM_Frame3_Sol0xc4fa540">
+      <first ref="FGEM_Frame3_Sol_Raw0xc46d3d0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_Frame3_Sol0xc4fa540_fpos" unit="mm" x="0" y="0" z="10.62875"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_PCBKapton_Sol_Raw0xc54daa0" rmax="9248.29761921028" rmin="0" startphi="0" z="0.05"/>
+    <intersection name="FGEM_PCBKapton_Sol0xc520480">
+      <first ref="FGEM_PCBKapton_Sol_Raw0xc54daa0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_PCBKapton_Sol0xc520480_fpos" unit="mm" x="0" y="0" z="12.105"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_PCBCu_Sol_Raw0xc4e2e90" rmax="9248.29761921028" rmin="0" startphi="0" z="0.004"/>
+    <intersection name="FGEM_PCBCu_Sol0xc53dc40">
+      <first ref="FGEM_PCBCu_Sol_Raw0xc4e2e90"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_PCBCu_Sol0xc53dc40_fpos" unit="mm" x="0" y="0" z="12.132"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="FGEM_Facesheet_Sol_Raw0xc505040" rmax="9248.29761921028" rmin="0" startphi="0" z="0.5"/>
+    <intersection name="FGEM_Facesheet_Sol0xc4d4340">
+      <first ref="FGEM_Facesheet_Sol_Raw0xc505040"/>
+      <second ref="Boundary_Det0xc502b60"/>
+      <firstposition name="FGEM_Facesheet_Sol0xc4d4340_fpos" unit="mm" x="0" y="0" z="12.385"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="DetectorBox_Det_Raw0x3c9e1b0" rmax="9248.29761921028" rmin="0" startphi="0" z="25.27"/>
+    <intersection name="DetectorBox_Det0xc46f950">
+      <first ref="DetectorBox_Det_Raw0x3c9e1b0"/>
+      <second ref="Boundary_Det0xc502b60"/>
+    </intersection>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="World0x7ce6fc0" rmax="5000" rmin="0" startphi="0" z="10000"/>
+  </solids>
+
+  <structure>
+    <volume name="SVTX_00x7d3a6c0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="SVTX_00x7d3a5b0"/>
+    </volume>
+    <volume name="SVTX_10x7ce41f0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="SVTX_10x7ce40e0"/>
+    </volume>
+    <volume name="SVTX_20x7cd08c0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="SVTX_20x7cd07b0"/>
+    </volume>
+    <volume name="BARR_00x6368420">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="BARR_00x7cd0a60"/>
+    </volume>
+    <volume name="BARR_10x63686d0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="BARR_10x63685c0"/>
+    </volume>
+    <volume name="BARR_20x7d348f0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="BARR_20x7d347e0"/>
+    </volume>
+    <volume name="BARR_30x7d05d30">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="BARR_30x7d05c20"/>
+    </volume>
+    <volume name="FBVS_00x7d99090">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_00x7d05ed0"/>
+    </volume>
+    <volume name="FBVS_10x7d99340">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_10x7d99230"/>
+    </volume>
+    <volume name="FBVS_20x7d06260">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_20x7d06150"/>
+    </volume>
+    <volume name="FBVS_30x7ccca00">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_30x7ccc8f0"/>
+    </volume>
+    <volume name="FBVS_40x7d063b0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_40x7cccba0"/>
+    </volume>
+    <volume name="FBVS_50x7cd8960">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_50x7cd8850"/>
+    </volume>
+    <volume name="FBVS_60x7ccc510">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_60x7ccc400"/>
+    </volume>
+    <volume name="FBVS_70x39a0c90">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_70x7ccc6b0"/>
+    </volume>
+    <volume name="FBVS_80x39a0f40">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_80x39a0e30"/>
+    </volume>
+    <volume name="FBVS_90x7d066c0">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_90x7d065b0"/>
+    </volume>
+    <volume name="FBVS_100x39a3910">
+      <materialref ref="G4_Si0x7aae460"/>
+      <solidref ref="FBVS_100x39a3800"/>
+    </volume>
+    <volume name="VAC_BE_PIPE_00x733c790">
+      <materialref ref="G4_Galactic0x79b2100"/>
+      <solidref ref="VAC_BE_PIPE_00x39a3ab0"/>
+    </volume>
+    <volume name="BE_PIPE_10x733ca40">
+      <materialref ref="G4_Be0x7ab2c90"/>
+      <solidref ref="BE_PIPE_10x733c930"/>
+    </volume>
+    <volume name="AU_BE_PIPE_20x53654a0">
+      <materialref ref="G4_Au0x7a84ac0"/>
+      <solidref ref="AU_BE_PIPE_20x5365390"/>
+    </volume>
+    <volume name="DIRC_SMALL_Radiator_Log0xc4f43a0">
+      <materialref ref="Quartz0x7ab4e00"/>
+      <solidref ref="DIRC_SMALL_Radiator_Sol0xc509e80"/>
+    </volume>
+    <volume name="DIRC_SMALL_Log0xc5062f0">
+      <materialref ref="Quartz0x7ab4e00"/>
+      <solidref ref="DetectorBox_Det0xc51a780"/>
+      <physvol name="DIRC_SMALL_Radiator_Physical0xc2eb3b0">
+        <volumeref ref="DIRC_SMALL_Radiator_Log0xc4f43a0"/>
+      </physvol>
+    </volume>
+    <volume name="DIRC_SMALL_CST_Inner_Skin_100xc4fef20">
+      <materialref ref="G4_Al0x7aaeaf0"/>
+      <solidref ref="DIRC_SMALL_CST_Inner_Skin_100xc4d9af0"/>
+    </volume>
+    <volume name="DIRC_SMALL_CST_Outer_Skin_110xc4e93e0">
+      <materialref ref="G4_Al0x7aaeaf0"/>
+      <solidref ref="DIRC_SMALL_CST_Outer_Skin_110x7d06860"/>
+    </volume>
+    <volume name="EicFRichLogical0xc472c70">
+      <materialref ref="G4_MYLAR0x79dfd70"/>
+      <solidref ref="RICH_mylar_ent0xc4dedc0"/>
+    </volume>
+    <volume name="EicFRichLogical0xc4e94f0">
+      <materialref ref="aerogel0xc4da800"/>
+      <solidref ref="RICH_aerogel0xc4f44b0"/>
+    </volume>
+    <volume name="EicFRichLogical0xc52b030">
+      <materialref ref="PMMA0xc53f780"/>
+      <solidref ref="RICH_PMMA0xc509f90"/>
+    </volume>
+    <volume name="EicFRichLogical0xc5490e0">
+      <materialref ref="C2F60x6372bc0"/>
+      <solidref ref="RICH_C2F60xc4f1fa0"/>
+    </volume>
+    <volume name="EicFRichLogical0xc537240">
+      <materialref ref="SiO20xc5252a0"/>
+      <solidref ref="RICH_mirror_l10xc4d7aa0"/>
+    </volume>
+    <volume name="EicFRichLogical0xc531a90">
+      <materialref ref="CarbonFiber0xc4df200"/>
+      <solidref ref="RICH_mirror_l20xc505a10"/>
+    </volume>
+    <volume name="EicFRichLogical0xc4fa960">
+      <materialref ref="G4_MYLAR0x79dfd70"/>
+      <solidref ref="RICH_mylar_ext0xc4ddb10"/>
+    </volume>
+    <volume name="EGEM_EntranceWindow_Log0xc527830">
+      <materialref ref="G4_MYLAR0x79dfd70"/>
+      <solidref ref="EGEM_EntranceWindow_Sol0xc46dd80"/>
+    </volume>
+    <volume name="EGEM_Cathode_Log0xc5388b0">
+      <materialref ref="G4_GRAPHITE0x79b8390"/>
+      <solidref ref="EGEM_Cathode_Sol0xc5021a0"/>
+    </volume>
+    <volume name="EGEM_DriftLayer_1_Log0x7d35930">
+      <materialref ref="G4_METHANE0x79f2620"/>
+      <solidref ref="EGEM_DriftLayer_1_Sol0x6371900"/>
+    </volume>
+    <volume name="EGEM_GEMFrontCu1_Log0xc4d5f10">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMFrontCu1_Sol0x6372800"/>
+    </volume>
+    <volume name="EGEM_GEMKapton1_Log0xc543df0">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="EGEM_GEMKapton1_Sol0xc4e8b90"/>
+    </volume>
+    <volume name="EGEM_GEMBackCu1_Log0xc471b00">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMBackCu1_Sol0xc4fa130"/>
+    </volume>
+    <volume name="EGEM_Frame1_Log0xc4edef0">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="EGEM_Frame1_Sol0xc46af80"/>
+    </volume>
+    <volume name="EGEM_GEMFrontCu2_Log0xc4f5730">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMFrontCu2_Sol0xc507f30"/>
+    </volume>
+    <volume name="EGEM_GEMKapton2_Log0xc528660">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="EGEM_GEMKapton2_Sol0xc525cf0"/>
+    </volume>
+    <volume name="EGEM_GEMBackCu2_Log0xc4da930">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMBackCu2_Sol0xc545e20"/>
+    </volume>
+    <volume name="EGEM_Frame2_Log0xc46de40">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="EGEM_Frame2_Sol0xc53f8b0"/>
+    </volume>
+    <volume name="EGEM_GEMFrontCu3_Log0xc500b00">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMFrontCu3_Sol0xc4df780"/>
+    </volume>
+    <volume name="EGEM_GEMKapton3_Log0xc514240">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="EGEM_GEMKapton3_Sol0xc50ace0"/>
+    </volume>
+    <volume name="EGEM_GEMBackCu3_Log0xc52b440">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_GEMBackCu3_Sol0xc51f6a0"/>
+    </volume>
+    <volume name="EGEM_Frame3_Log0xc540140">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="EGEM_Frame3_Sol0xc535620"/>
+    </volume>
+    <volume name="EGEM_PCBKapton_Log0xc474410">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="EGEM_PCBKapton_Sol0xc54ac60"/>
+    </volume>
+    <volume name="EGEM_PCBCu_Log0xc4e6180">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="EGEM_PCBCu_Sol0xc4de4a0"/>
+    </volume>
+    <volume name="EGEM_Facesheet_Log0xc4f8e20">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="EGEM_Facesheet_Sol0xc4eec40"/>
+    </volume>
+    <volume name="EGEM_Log0xc51ccb0">
+      <materialref ref="G4_METHANE0x79f2620"/>
+      <solidref ref="DetectorBox_Det0xc4ee720"/>
+      <physvol name="EGEM_EntranceWindow_Physical0xc2ec130">
+        <volumeref ref="EGEM_EntranceWindow_Log0xc527830"/>
+      </physvol>
+      <physvol name="EGEM_Cathode_Physical0xc5249c0">
+        <volumeref ref="EGEM_Cathode_Log0xc5388b0"/>
+      </physvol>
+      <physvol name="EGEM_DriftLayer_1_Physical0x7e0d7c0">
+        <volumeref ref="EGEM_DriftLayer_1_Log0x7d35930"/>
+      </physvol>
+      <physvol name="EGEM_GEMFrontCu1_Physical0x7e0d940">
+        <volumeref ref="EGEM_GEMFrontCu1_Log0xc4d5f10"/>
+      </physvol>
+      <physvol name="EGEM_GEMKapton1_Physical0x7e0da60">
+        <volumeref ref="EGEM_GEMKapton1_Log0xc543df0"/>
+      </physvol>
+      <physvol name="EGEM_GEMBackCu1_Physical0x7e0db20">
+        <volumeref ref="EGEM_GEMBackCu1_Log0xc471b00"/>
+      </physvol>
+      <physvol name="EGEM_Frame1_Physical0x7e0dc40">
+        <volumeref ref="EGEM_Frame1_Log0xc4edef0"/>
+      </physvol>
+      <physvol name="EGEM_GEMFrontCu2_Physical0x7e0dd60">
+        <volumeref ref="EGEM_GEMFrontCu2_Log0xc4f5730"/>
+      </physvol>
+      <physvol name="EGEM_GEMKapton2_Physical0xc507ab0">
+        <volumeref ref="EGEM_GEMKapton2_Log0xc528660"/>
+      </physvol>
+      <physvol name="EGEM_GEMBackCu2_Physical0x5365680">
+        <volumeref ref="EGEM_GEMBackCu2_Log0xc4da930"/>
+      </physvol>
+      <physvol name="EGEM_Frame2_Physical0x6372f20">
+        <volumeref ref="EGEM_Frame2_Log0xc46de40"/>
+      </physvol>
+      <physvol name="EGEM_GEMFrontCu3_Physical0xc4f60e0">
+        <volumeref ref="EGEM_GEMFrontCu3_Log0xc500b00"/>
+      </physvol>
+      <physvol name="EGEM_GEMKapton3_Physical0xc50adc0">
+        <volumeref ref="EGEM_GEMKapton3_Log0xc514240"/>
+      </physvol>
+      <physvol name="EGEM_GEMBackCu3_Physical0xc52b520">
+        <volumeref ref="EGEM_GEMBackCu3_Log0xc52b440"/>
+      </physvol>
+      <physvol name="EGEM_Frame3_Physical0xc54ad40">
+        <volumeref ref="EGEM_Frame3_Log0xc540140"/>
+      </physvol>
+      <physvol name="EGEM_PCBKapton_Physical0xc4e6260">
+        <volumeref ref="EGEM_PCBKapton_Log0xc474410"/>
+      </physvol>
+      <physvol name="EGEM_PCBCu_Physical0xc502c40">
+        <volumeref ref="EGEM_PCBCu_Log0xc4e6180"/>
+      </physvol>
+      <physvol name="EGEM_Facesheet_Physical0xc520a00">
+        <volumeref ref="EGEM_Facesheet_Log0xc4f8e20"/>
+      </physvol>
+    </volume>
+    <volume name="FGEM_EntranceWindow_Log0xc529d20">
+      <materialref ref="G4_MYLAR0x79dfd70"/>
+      <solidref ref="FGEM_EntranceWindow_Sol0xc520920"/>
+    </volume>
+    <volume name="FGEM_Cathode_Log0xc53c520">
+      <materialref ref="G4_GRAPHITE0x79b8390"/>
+      <solidref ref="FGEM_Cathode_Sol0xc5327e0"/>
+    </volume>
+    <volume name="FGEM_DriftLayer_1_Log0xc46f4b0">
+      <materialref ref="G4_METHANE0x79f2620"/>
+      <solidref ref="FGEM_DriftLayer_1_Sol0xc545480"/>
+    </volume>
+    <volume name="FGEM_GEMFrontCu1_Log0xc4e1780">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMFrontCu1_Sol0xc4d8cc0"/>
+    </volume>
+    <volume name="FGEM_GEMKapton1_Log0xc4f15e0">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="FGEM_GEMKapton1_Sol0xc4eab80"/>
+    </volume>
+    <volume name="FGEM_GEMBackCu1_Log0xc505500">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMBackCu1_Sol0xc4fb320"/>
+    </volume>
+    <volume name="FGEM_Frame1_Log0xc514b80">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="FGEM_Frame1_Sol0xc46fdf0"/>
+    </volume>
+    <volume name="FGEM_GEMFrontCu2_Log0xc527380">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMFrontCu2_Sol0xc51e420"/>
+    </volume>
+    <volume name="FGEM_GEMKapton2_Log0xc539240">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="FGEM_GEMKapton2_Sol0xc530c20"/>
+    </volume>
+    <volume name="FGEM_GEMBackCu2_Log0xc4e4120">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMBackCu2_Sol0xc4db660"/>
+    </volume>
+    <volume name="FGEM_Frame2_Log0xc504280">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="FGEM_Frame2_Sol0xc4fbc60"/>
+    </volume>
+    <volume name="FGEM_GEMFrontCu3_Log0xc524540">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMFrontCu3_Sol0xc51ba80"/>
+    </volume>
+    <volume name="FGEM_GEMKapton3_Log0xc549540">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="FGEM_GEMKapton3_Sol0xc53ce60"/>
+    </volume>
+    <volume name="FGEM_GEMBackCu3_Log0xc4e5840">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_GEMBackCu3_Sol0xc4dcd80"/>
+    </volume>
+    <volume name="FGEM_Frame3_Log0xc501d80">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="FGEM_Frame3_Sol0xc4fa540"/>
+    </volume>
+    <volume name="FGEM_PCBKapton_Log0xc526ee0">
+      <materialref ref="G4_KAPTON0x79d2f80"/>
+      <solidref ref="FGEM_PCBKapton_Sol0xc520480"/>
+    </volume>
+    <volume name="FGEM_PCBCu_Log0xc548c00">
+      <materialref ref="G4_Cu0x7aa78f0"/>
+      <solidref ref="FGEM_PCBCu_Sol0xc53dc40"/>
+    </volume>
+    <volume name="FGEM_Facesheet_Log0xc4dad20">
+      <materialref ref="G100x7ac9a90"/>
+      <solidref ref="FGEM_Facesheet_Sol0xc4d4340"/>
+    </volume>
+    <volume name="FGEM_Log0xc515020">
+      <materialref ref="G4_METHANE0x79f2620"/>
+      <solidref ref="DetectorBox_Det0xc46f950"/>
+      <physvol name="FGEM_EntranceWindow_Physical0xc4e4200">
+        <volumeref ref="FGEM_EntranceWindow_Log0xc529d20"/>
+      </physvol>
+      <physvol name="FGEM_Cathode_Physical0xc4fbd40">
+        <volumeref ref="FGEM_Cathode_Log0xc53c520"/>
+      </physvol>
+      <physvol name="FGEM_DriftLayer_1_Physical0xc5139e0">
+        <volumeref ref="FGEM_DriftLayer_1_Log0xc46f4b0"/>
+      </physvol>
+      <physvol name="FGEM_GEMFrontCu1_Physical0xc534920">
+        <volumeref ref="FGEM_GEMFrontCu1_Log0xc4e1780"/>
+      </physvol>
+      <physvol name="FGEM_GEMKapton1_Physical0xc46d090">
+        <volumeref ref="FGEM_GEMKapton1_Log0xc4f15e0"/>
+      </physvol>
+      <physvol name="FGEM_GEMBackCu1_Physical0xc4e5920">
+        <volumeref ref="FGEM_GEMBackCu1_Log0xc505500"/>
+      </physvol>
+      <physvol name="FGEM_Frame1_Physical0xc4fa620">
+        <volumeref ref="FGEM_Frame1_Log0xc514b80"/>
+      </physvol>
+      <physvol name="FGEM_GEMFrontCu2_Physical0xc517aa0">
+        <volumeref ref="FGEM_GEMFrontCu2_Log0xc527380"/>
+      </physvol>
+      <physvol name="FGEM_GEMKapton2_Physical0xc52f5e0">
+        <volumeref ref="FGEM_GEMKapton2_Log0xc539240"/>
+      </physvol>
+      <physvol name="FGEM_GEMBackCu2_Physical0xc548ce0">
+        <volumeref ref="FGEM_GEMBackCu2_Log0xc4e4120"/>
+      </physvol>
+      <physvol name="FGEM_Frame2_Physical0xc4dae00">
+        <volumeref ref="FGEM_Frame2_Log0xc504280"/>
+      </physvol>
+      <physvol name="FGEM_GEMFrontCu3_Physical0xc4ee3e0">
+        <volumeref ref="FGEM_GEMFrontCu3_Log0xc524540"/>
+      </physvol>
+      <physvol name="FGEM_GEMKapton3_Physical0xc504800">
+        <volumeref ref="FGEM_GEMKapton3_Log0xc549540"/>
+      </physvol>
+      <physvol name="FGEM_GEMBackCu3_Physical0xc518880">
+        <volumeref ref="FGEM_GEMBackCu3_Log0xc4e5840"/>
+      </physvol>
+      <physvol name="FGEM_Frame3_Physical0xc52d580">
+        <volumeref ref="FGEM_Frame3_Log0xc501d80"/>
+      </physvol>
+      <physvol name="FGEM_PCBKapton_Physical0xc542bc0">
+        <volumeref ref="FGEM_PCBKapton_Log0xc526ee0"/>
+      </physvol>
+      <physvol name="FGEM_PCBCu_Physical0xc4de0e0">
+        <volumeref ref="FGEM_PCBCu_Log0xc548c00"/>
+      </physvol>
+      <physvol name="FGEM_Facesheet_Physical0xc4efb00">
+        <volumeref ref="FGEM_Facesheet_Log0xc4dad20"/>
+      </physvol>
+    </volume>
+    <volume name="World0x611d5b0">
+      <materialref ref="G4_AIR0x7a73cd0"/>
+      <solidref ref="World0x7ce6fc0"/>
+      <physvol name="SVTX_00x7ce12e0">
+        <volumeref ref="SVTX_00x7d3a6c0"/>
+      </physvol>
+      <physvol name="SVTX_10x7ce42f0">
+        <volumeref ref="SVTX_10x7ce41f0"/>
+      </physvol>
+      <physvol name="SVTX_20x7cd0a00">
+        <volumeref ref="SVTX_20x7cd08c0"/>
+      </physvol>
+      <physvol name="BARR_00x6368560">
+        <volumeref ref="BARR_00x6368420"/>
+      </physvol>
+      <physvol name="BARR_10x7d34730">
+        <volumeref ref="BARR_10x63686d0"/>
+      </physvol>
+      <physvol name="BARR_20x7d34a30">
+        <volumeref ref="BARR_20x7d348f0"/>
+      </physvol>
+      <physvol name="BARR_30x7d05e70">
+        <volumeref ref="BARR_30x7d05d30"/>
+      </physvol>
+      <physvol name="FBVS_00x7d991d0">
+        <volumeref ref="FBVS_00x7d99090"/>
+        <position name="FBVS_00x7d991d0_pos" unit="mm" x="0" y="0" z="-1500"/>
+      </physvol>
+      <physvol name="FBVS_10x7d34a90">
+        <volumeref ref="FBVS_10x7d99340"/>
+        <position name="FBVS_10x7d34a90_pos" unit="mm" x="0" y="0" z="-1115"/>
+      </physvol>
+      <physvol name="FBVS_20x7d06350">
+        <volumeref ref="FBVS_20x7d06260"/>
+        <position name="FBVS_20x7d06350_pos" unit="mm" x="0" y="0" z="-730"/>
+      </physvol>
+      <physvol name="FBVS_30x7cccb40">
+        <volumeref ref="FBVS_30x7ccca00"/>
+        <position name="FBVS_30x7cccb40_pos" unit="mm" x="0" y="0" z="-490"/>
+      </physvol>
+      <physvol name="FBVS_40x7cd87f0">
+        <volumeref ref="FBVS_40x7d063b0"/>
+        <position name="FBVS_40x7cd87f0_pos" unit="mm" x="0" y="0" z="-250"/>
+      </physvol>
+      <physvol name="FBVS_50x7cd8aa0">
+        <volumeref ref="FBVS_50x7cd8960"/>
+        <position name="FBVS_50x7cd8aa0_pos" unit="mm" x="0" y="0" z="250"/>
+      </physvol>
+      <physvol name="FBVS_60x7ccc650">
+        <volumeref ref="FBVS_60x7ccc510"/>
+        <position name="FBVS_60x7ccc650_pos" unit="mm" x="0" y="0" z="490"/>
+      </physvol>
+      <physvol name="FBVS_70x39a0dd0">
+        <volumeref ref="FBVS_70x39a0c90"/>
+        <position name="FBVS_70x39a0dd0_pos" unit="mm" x="0" y="0" z="730"/>
+      </physvol>
+      <physvol name="FBVS_80x7cd8b00">
+        <volumeref ref="FBVS_80x39a0f40"/>
+        <position name="FBVS_80x7cd8b00_pos" unit="mm" x="0" y="0" z="1053"/>
+      </physvol>
+      <physvol name="FBVS_90x7d06800">
+        <volumeref ref="FBVS_90x7d066c0"/>
+        <position name="FBVS_90x7d06800_pos" unit="mm" x="0" y="0" z="1377"/>
+      </physvol>
+      <physvol name="FBVS_100x39a3a50">
+        <volumeref ref="FBVS_100x39a3910"/>
+        <position name="FBVS_100x39a3a50_pos" unit="mm" x="0" y="0" z="1700"/>
+      </physvol>
+      <physvol name="VAC_BE_PIPE_00x733c8d0">
+        <volumeref ref="VAC_BE_PIPE_00x733c790"/>
+        <position name="VAC_BE_PIPE_00x733c8d0_pos" unit="mm" x="0" y="0" z="-65"/>
+      </physvol>
+      <physvol name="BE_PIPE_10x733cb80">
+        <volumeref ref="BE_PIPE_10x733ca40"/>
+        <position name="BE_PIPE_10x733cb80_pos" unit="mm" x="0" y="0" z="-65"/>
+      </physvol>
+      <physvol name="AU_BE_PIPE_20x53655e0">
+        <volumeref ref="AU_BE_PIPE_20x53654a0"/>
+        <position name="AU_BE_PIPE_20x53655e0_pos" unit="mm" x="0" y="0" z="-65"/>
+      </physvol>
+      <physvol name="DIRC_SMALL_Physical0xc504fe0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc504fe0_pos" unit="mm" x="0" y="845" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc504fe0_rot" unit="deg" x="90" y="0" z="0"/>
+      </physvol>
+      <physvol copynumber="1" name="DIRC_SMALL_Physical0xc2eabd0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eabd0_pos" unit="mm" x="-422.5" y="731.791466197851" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eabd0_rot" unit="deg" x="90" y="30" z="0"/>
+      </physvol>
+      <physvol copynumber="2" name="DIRC_SMALL_Physical0xc2eac90">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eac90_pos" unit="mm" x="-731.791466197851" y="422.5" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eac90_rot" unit="deg" x="90" y="60" z="0"/>
+      </physvol>
+      <physvol copynumber="3" name="DIRC_SMALL_Physical0xc2ead50">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2ead50_pos" unit="mm" x="-845" y="5.17413272639757e-14" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2ead50_rot" unit="deg" x="90" y="90" z="0"/>
+      </physvol>
+      <physvol copynumber="4" name="DIRC_SMALL_Physical0xc2eae10">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eae10_pos" unit="mm" x="-731.791466197851" y="-422.5" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eae10_rot" unit="deg" x="-90" y="60" z="-180"/>
+      </physvol>
+      <physvol copynumber="5" name="DIRC_SMALL_Physical0xc2eaed0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eaed0_pos" unit="mm" x="-422.5" y="-731.79146619785" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eaed0_rot" unit="deg" x="-90" y="30" z="-180"/>
+      </physvol>
+      <physvol copynumber="6" name="DIRC_SMALL_Physical0xc46eb50">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc46eb50_pos" unit="mm" x="-1.03482654527951e-13" y="-845" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc46eb50_rot" unit="deg" x="-90" y="0" z="-180"/>
+      </physvol>
+      <physvol copynumber="7" name="DIRC_SMALL_Physical0xc2eaff0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eaff0_pos" unit="mm" x="422.5" y="-731.791466197851" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eaff0_rot" unit="deg" x="-90" y="-30" z="180"/>
+      </physvol>
+      <physvol copynumber="8" name="DIRC_SMALL_Physical0xc2eb0b0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eb0b0_pos" unit="mm" x="731.79146619785" y="-422.5" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eb0b0_rot" unit="deg" x="-90" y="-60" z="180"/>
+      </physvol>
+      <physvol copynumber="9" name="DIRC_SMALL_Physical0xc2eb170">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eb170_pos" unit="mm" x="845" y="-1.55223981791927e-13" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eb170_rot" unit="deg" x="90" y="-90" z="0"/>
+      </physvol>
+      <physvol copynumber="10" name="DIRC_SMALL_Physical0xc2eb230">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eb230_pos" unit="mm" x="731.791466197851" y="422.499999999999" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eb230_rot" unit="deg" x="90" y="-60" z="0"/>
+      </physvol>
+      <physvol copynumber="11" name="DIRC_SMALL_Physical0xc2eb2f0">
+        <volumeref ref="DIRC_SMALL_Log0xc5062f0"/>
+        <position name="DIRC_SMALL_Physical0xc2eb2f0_pos" unit="mm" x="422.5" y="731.79146619785" z="5.17413272639757e-14"/>
+        <rotation name="DIRC_SMALL_Physical0xc2eb2f0_rot" unit="deg" x="90" y="-30" z="0"/>
+      </physvol>
+      <physvol name="DIRC_SMALL_CST_Inner_Skin_100xc2eb4d0">
+        <volumeref ref="DIRC_SMALL_CST_Inner_Skin_100xc4fef20"/>
+        <position name="DIRC_SMALL_CST_Inner_Skin_100xc2eb4d0_pos" unit="mm" x="0" y="0" z="-750"/>
+      </physvol>
+      <physvol name="DIRC_SMALL_CST_Outer_Skin_110xc2eb530">
+        <volumeref ref="DIRC_SMALL_CST_Outer_Skin_110xc4e93e0"/>
+        <position name="DIRC_SMALL_CST_Outer_Skin_110xc2eb530_pos" unit="mm" x="0" y="0" z="-750"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb590">
+        <volumeref ref="EicFRichLogical0xc472c70"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb6b0">
+        <volumeref ref="EicFRichLogical0xc4e94f0"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb710">
+        <volumeref ref="EicFRichLogical0xc52b030"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb7d0">
+        <volumeref ref="EicFRichLogical0xc5490e0"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb890">
+        <volumeref ref="EicFRichLogical0xc537240"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eb9b0">
+        <volumeref ref="EicFRichLogical0xc531a90"/>
+      </physvol>
+      <physvol name="EicFRich0xc2eba10">
+        <volumeref ref="EicFRichLogical0xc4fa960"/>
+      </physvol>
+      <physvol name="EGEM_Physical0xc2ebb30">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebb30_pos" unit="mm" x="0" y="2.21983765077246e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebb30_rot" unit="deg" x="180" y="0" z="0"/>
+      </physvol>
+      <physvol copynumber="1" name="EGEM_Physical0xc2ebbf0">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebbf0_pos" unit="mm" x="-1.56966225599442e-13" y="1.56966225599442e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebbf0_rot" unit="deg" x="180" y="0" z="45"/>
+      </physvol>
+      <physvol copynumber="2" name="EGEM_Physical0xc2ebcb0">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebcb0_pos" unit="mm" x="-2.21983765077246e-13" y="0" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebcb0_rot" unit="deg" x="180" y="0" z="90"/>
+      </physvol>
+      <physvol copynumber="3" name="EGEM_Physical0xc2ebd70">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebd70_pos" unit="mm" x="-1.56966225599442e-13" y="-1.56966225599442e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebd70_rot" unit="deg" x="-180" y="0" z="135"/>
+      </physvol>
+      <physvol copynumber="4" name="EGEM_Physical0xc2ebe30">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebe30_pos" unit="mm" x="0" y="-2.21983765077246e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebe30_rot" unit="deg" x="-180" y="0" z="180"/>
+      </physvol>
+      <physvol copynumber="5" name="EGEM_Physical0xc2ebe90">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebe90_pos" unit="mm" x="1.56966225599442e-13" y="-1.56966225599442e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebe90_rot" unit="deg" x="-180" y="0" z="-135"/>
+      </physvol>
+      <physvol copynumber="6" name="EGEM_Physical0xc2ebf50">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ebf50_pos" unit="mm" x="2.21983765077246e-13" y="0" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ebf50_rot" unit="deg" x="-180" y="0" z="-90"/>
+      </physvol>
+      <physvol copynumber="7" name="EGEM_Physical0xc2ec010">
+        <volumeref ref="EGEM_Log0xc51ccb0"/>
+        <position name="EGEM_Physical0xc2ec010_pos" unit="mm" x="1.56966225599442e-13" y="1.56966225599442e-13" z="-1812.635"/>
+        <rotation name="EGEM_Physical0xc2ec010_rot" unit="deg" x="180" y="0" z="-45"/>
+      </physvol>
+      <physvol name="FGEM_Physical0xc46f590">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc46f590_pos" unit="mm" x="0" y="0" z="3052.635"/>
+      </physvol>
+      <physvol copynumber="1" name="FGEM_Physical0xc4e1860">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc4e1860_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc4e1860_rot" unit="deg" x="0" y="0" z="-45"/>
+      </physvol>
+      <physvol copynumber="2" name="FGEM_Physical0xc4f16c0">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc4f16c0_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc4f16c0_rot" unit="deg" x="0" y="0" z="-90"/>
+      </physvol>
+      <physvol copynumber="3" name="FGEM_Physical0xc5055e0">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc5055e0_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc5055e0_rot" unit="deg" x="0" y="0" z="-135"/>
+      </physvol>
+      <physvol copynumber="4" name="FGEM_Physical0xc514c60">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc514c60_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc514c60_rot" unit="deg" x="0" y="0" z="-180"/>
+      </physvol>
+      <physvol copynumber="5" name="FGEM_Physical0xc527460">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc527460_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc527460_rot" unit="deg" x="0" y="0" z="135"/>
+      </physvol>
+      <physvol copynumber="6" name="FGEM_Physical0xc539320">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc539320_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc539320_rot" unit="deg" x="0" y="0" z="90"/>
+      </physvol>
+      <physvol copynumber="7" name="FGEM_Physical0xc46b1f0">
+        <volumeref ref="FGEM_Log0xc515020"/>
+        <position name="FGEM_Physical0xc46b1f0_pos" unit="mm" x="0" y="0" z="3052.635"/>
+        <rotation name="FGEM_Physical0xc46b1f0_rot" unit="deg" x="0" y="0" z="45"/>
+      </physvol>
+    </volume>
+  </structure>
+
+  <setup name="Default" version="1.0">
+    <world ref="World0x611d5b0"/>
+  </setup>
+
+</gdml>
