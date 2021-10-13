@@ -33,8 +33,14 @@ void eve_eic(Int_t startEv, Int_t endEv)
    TString rootfile="simple_geom.gdml"; // Eic Tracker
    TEveManager::Create();
    gGeoManager = TGeoManager::Import(rootfile); // or use TGeoManager::Import(rootfile)
-  if (gGeoManager == nullptr)
-        return;
+    if (gGeoManager == nullptr) return;
+   
+   TObjArray* allvolumes = gGeoManager->GetListOfVolumes();
+    for(Int_t i=0; i<allvolumes->GetEntries();i++){
+          TGeoVolume* vol= (TGeoVolume*)allvolumes->At(i);
+          vol->SetTransparency(20); // set the transparency level for the volumes
+     }
+
     TEveGeoTopNode *TNod = new TEveGeoTopNode(gGeoManager,gGeoManager->GetTopNode());
     TGeoBBox *box = dynamic_cast<TGeoBBox *>(gGeoManager->GetTopNode()->GetVolume()->GetShape());
 
@@ -119,7 +125,7 @@ void eve_eic(Int_t startEv, Int_t endEv)
 
   Double_t prec = sqrt(px*px+py*py+pz*pz);
   Double_t etarec = -1.0*TMath::Log(TMath::Tan((TMath::ACos(pz/prec))/2));
-//  if (etarec<1.1 || etarec>1.2) continue;
+ // if (etarec<-1.5 || etarec>-1.3) continue;
   track = new TEveTrack(rc, prop);
  // track->SetRnrPoints(kTRUE);
   track->SetMarkerStyle(4);
@@ -142,11 +148,16 @@ void eve_eic(Int_t startEv, Int_t endEv)
   } 
   gEve->AddElement(list); 
   list->SetLineColor(kMagenta);
-  TEveViewer *ev = gEve->GetDefaultViewer();
-  TGLViewer  *gv = ev->GetGLViewer();
-  gv->GetClipSet()->SetClipType(TGLClip::kClipPlane); // Other options are kClipNone = 0, kClipPlane, kClipBox  
- // gv->SetGuideState(TGLUtil::kAxesOrigin, kTRUE, kFALSE, 0);
-  gEve->Redraw3D(kTRUE);
+  TGLViewer  *viewer = gEve->GetDefaultGLViewer();
+  viewer->GetClipSet()->SetClipType(TGLClip::kClipPlane); // Other options are kClipNone = 0, kClipPlane, kClipBox  
+  Double_t center[3] ={0.,0.,0.};
+  Double_t *cent; cent = center;
+  viewer->SetOrthoCamera(TGLViewer::kCameraOrthoZOX,2.0, 1.0, cent,1.0,0.); // kCameraPerspXOZ, kCameraPerspYOZ, kCameraPerspXOY, kCameraOrthoXOY,
+ // viewer->SetGuideState(TGLUtil::kAxesOrigin, kTRUE, kFALSE, 0);
+  viewer->RefreshPadEditor(viewer);	
+  viewer->CurrentCamera().RotateRad(-0.5, 0.5);
+  viewer->DoDraw();
+  gEve->Redraw3D();
 
 
 

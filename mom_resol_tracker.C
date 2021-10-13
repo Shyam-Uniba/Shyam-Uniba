@@ -29,7 +29,7 @@
 	 Double_t N = 6; // 2 Vtx + 4Barrel
   Double_t resolution = 10*1.0e-6/sqrt(12); // pixel resolution in meter
   Double_t length = 0.43; // Radius of outer Barrl layer in meter
-  Double_t magfield = 2.0; // Mag field Eic 2.0 T
+  Double_t magfield = 3.0; // Mag field Eic 2.0 T
 
 	
 void mom_resol_tracker()
