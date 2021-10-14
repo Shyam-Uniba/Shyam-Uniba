@@ -6,7 +6,7 @@
 #include <TString.h>
 
 
-  void MultipleScattering(Double_t &mp, Double_t &momI, Double_t &theta);
+  void MultipleScattering(Double_t &mp, Double_t &momI, Double_t &theta, Double_t &effradlen);
         
   
   // masses in MeV
@@ -24,17 +24,18 @@
 	 
 	 Int_t charge=1;
 	  
-	 Double_t effradlen=0.023; // All Silicon Tracker
+
 	 
 	 Double_t N = 7; // 3 Vtx + 4Barrel
   Double_t resolution = 10*1.0e-6/sqrt(12); // pixel resolution in meter
-  Double_t length = 0.43; // Radius of outer Barrel layer in meter
   Double_t magfield = 3.0; // Mag field Eic 2.0 T
+  Double_t p =10000.0; // p means pt
 
 	
-void mom_resol_tracker()
+void mom_resol_tracker_eta()
 {
-	
+	       
+
         gStyle->SetTitleSize(0.04,"");
         gStyle->SetTitleSize(0.04,"X");	
         gStyle->SetTitleSize(0.05,"Y");	
@@ -47,22 +48,31 @@ void mom_resol_tracker()
         std::vector<Double_t> x,y,c,d,e,f; 
 	       std::vector<Double_t> mre,mrmu,mrpi,mrk,mrp; 
 
+
      //--------Muon Bethe Bloch---------------------
-      for (Double_t p=10; p<=30000.;p=p+100)
-     {
-     	
-        x.push_back(p*0.001);
+     	  for (Int_t i=-10; i<11.; i++){
+        Double_t eta = i*0.1; 	
+        x.push_back(eta); // Eta
         //----Energy of incident particles---------- 
         Double_t ms_el=0.,ms_mu=0., ms_pi=0., ms_k=0. , ms_p=0. ;    
-        Double_t MSel=0.,MSmu=0., MSpi=0., MSk=0. , MSp=0. ;  
-        
-        MultipleScattering(mel,p,ms_el);
-        MultipleScattering(mmu,p,ms_mu);
-        MultipleScattering(mpi,p,ms_pi);
-        MultipleScattering(mk,p,ms_k);
-        MultipleScattering(mp,p,ms_p);
+        Double_t MSel=0.,MSmu=0., MSpi=0., MSk=0. , MSp=0. ; 
 
+	       Double_t effradlen=0.023; // All Silicon Tracker
+        Double_t length = 0.43; // Radius of outer Barrel layer in meter         
+
+        Double_t theta = 2.0*TMath::ATan(TMath::Exp(-1.0*eta));
+        Double_t sin_theta = fabs(TMath::Sin(theta));
+
+        length = fabs(length/sin_theta);
+        effradlen = fabs(effradlen/sin_theta); 
         
+        MultipleScattering(mel,p,ms_el,effradlen);
+        MultipleScattering(mmu,p,ms_mu,effradlen);
+        MultipleScattering(mpi,p,ms_pi,effradlen);
+        MultipleScattering(mk,p,ms_k,effradlen);
+        MultipleScattering(mp,p,ms_p,effradlen);
+
+     
         // Length can be parameterize as a function of eta or theta
        // Momentum (pT) measurement error due to multiple scattering
        
@@ -87,6 +97,8 @@ void mom_resol_tracker()
          mrpi.push_back(pi_pT_resol);
          mrp.push_back(p_pT_resol);
 
+      //   cout<<"Pt MS Pi:"<<MSpi<<endl;
+
         
 }
  //----------Pion----------------------------------
@@ -102,12 +114,12 @@ void mom_resol_tracker()
 	      
      TGraph *gr1 = new TGraph(n,a,b);
      gr1->SetLineColor(2);
-     gr1->GetYaxis()->SetRangeUser(0.0, 4.0);
+     gr1->GetYaxis()->SetRangeUser(0.0, 2.0);
      gr1->SetLineWidth(1);
      gr1->SetMarkerColor(2);
      gr1->SetMarkerStyle(6);
-     gr1->SetTitle("Transverse Momentum Resolution");
-     gr1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+     gr1->SetTitle(Form("Transverse Momentum Resolution p_{T} = %1.1f (GeV/c)",p*0.001));
+     gr1->GetXaxis()->SetTitle("#eta");
      gr1->GetXaxis()->CenterTitle(true);
      gr1->GetYaxis()->SetTitle("#frac{#sigma_{p_{T}}}{p_{T}}"); // #sigma_{x} (cm)
      gr1->GetYaxis()->CenterTitle(true);
@@ -185,7 +197,7 @@ void mom_resol_tracker()
 }
 
   // This will return theta in radian
-		void MultipleScattering(Double_t &mp, Double_t &momI, Double_t &theta){
+		void MultipleScattering(Double_t &mp, Double_t &momI, Double_t &theta, Double_t &effradlen){
 			Double_t En = TMath::Sqrt(mp*mp+momI*momI);
 			Double_t beta = momI/En;
 			theta=((13.6*charge)/(beta*momI))*(TMath::Sqrt(effradlen))*(1+0.038*TMath::Log(effradlen)); //*(1+0.038*TMath::Log(effradlen))
