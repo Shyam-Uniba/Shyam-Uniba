@@ -38,6 +38,9 @@ void eve_eic(Int_t startEv, Int_t endEv)
    TObjArray* allvolumes = gGeoManager->GetListOfVolumes();
     for(Int_t i=0; i<allvolumes->GetEntries();i++){
           TGeoVolume* vol= (TGeoVolume*)allvolumes->At(i);
+          TString volname = vol->GetIconName();
+          if (volname.Contains("SVTX")) vol->SetLineColor(kRed); 	
+          else if (volname.Contains("BARR")) vol->SetLineColor(kBlue); 
           vol->SetTransparency(20); // set the transparency level for the volumes
      }
 
@@ -125,7 +128,7 @@ void eve_eic(Int_t startEv, Int_t endEv)
 
   Double_t prec = sqrt(px*px+py*py+pz*pz);
   Double_t etarec = -1.0*TMath::Log(TMath::Tan((TMath::ACos(pz/prec))/2));
- // if (etarec<-1.5 || etarec>-1.3) continue;
+  //if (etarec<-2.0 || etarec>-1.2) continue;
   track = new TEveTrack(rc, prop);
  // track->SetRnrPoints(kTRUE);
   track->SetMarkerStyle(4);

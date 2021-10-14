@@ -24,6 +24,7 @@
 #include <g4main/PHG4TruthSubsystem.h>
 #include <g4trackfastsim/PHG4TrackFastSim.h>
 #include <g4trackfastsim/PHG4TrackFastSimEval.h>
+#include <g4lblvtx/TrackFastSimEval.h>
 #include <phool/recoConsts.h>
 #include <g4lblvtx/EicFRichSubsystem.h>			// Forward RICH
 #include <g4lblvtx/PHG4ParticleGenerator_flat_pT.h>	// Flat-pT generator
@@ -42,7 +43,7 @@ R__LOAD_LIBRARY(libg4trackfastsim.so)
 // root -l "Fun4All_G4_simplified_v3.C(100,false,-1,-1,7)"
 
 void Fun4All_G4_simplified_v3(
-			int nEvents        = 3000000    ,	// number of events
+			int nEvents        = 30    ,	// number of events
 			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
@@ -406,8 +407,8 @@ void Fun4All_G4_simplified_v3(
 	if(nDircSectors>0)
 		label_DIRC = Form("_DIRC_%i_sect",nDircSectors);
 
-	std::string outputFile = (std::string)(out_name)+std::string(label_mat)+std::string(label_RICH)+std::string(label_GEM)+std::string(label_DIRC)+std::string(B_label)+"_FastSimEval.root";
-	PHG4TrackFastSimEval *fast_sim_eval = new PHG4TrackFastSimEval("FastTrackingEval");
+	TString outputFile = (std::string)(out_name)+std::string(label_mat)+std::string(label_RICH)+std::string(label_GEM)+std::string(label_DIRC)+std::string(B_label)+"_FastSimEval.root";
+	TrackFastSimEval *fast_sim_eval = new TrackFastSimEval("FastTrackingEval");
 	fast_sim_eval->set_filename(outputFile);
 	if(do_projections){
 		fast_sim_eval->AddProjection(projname1);
