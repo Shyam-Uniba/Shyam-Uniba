@@ -43,7 +43,7 @@ R__LOAD_LIBRARY(libg4trackfastsim.so)
 
 void Fun4All_G4_simplified_v3(
 			int nEvents        = 3000000    ,	// number of events
-			bool include_RICH  = true ,	// if true, RICH material will be included
+			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
 			int magnetic_field = 5     ,	// Magnetic field setting
@@ -92,7 +92,7 @@ void Fun4All_G4_simplified_v3(
 	// ======================================================================================================
 	// Particle Generator Setup
 	PHG4ParticleGenerator *gen = new PHG4ParticleGenerator();
-	gen->set_name(std::string("geantino"));	// geantino, pi-, pi+, mu-, mu+, e-., e+, proton, ... (currently passed as an input)
+	gen->set_name(std::string("pi-"));	// geantino, pi-, pi+, mu-, mu+, e-., e+, proton, ... (currently passed as an input)
 	gen->set_vtx(0,0,0);			// Vertex generation range
 	gen->set_mom_range(pmin,pmax);		// Momentum generation range in GeV/c
 	gen->set_z_range(0.,0.);
@@ -201,7 +201,7 @@ void Fun4All_G4_simplified_v3(
 	//---------------------------
 	// Disks
 	//double si_z_pos[] = {-121,-97,-73,-49,-25,25,49,73,97,121};
-	double si_z_pos[] = {-150,-111.5,-73,-49,-25,25,49,73,105.3,137.7,170};
+	double si_z_pos[] = {-150,-111.5,-73,-49,-25,25,49,73,105.3,137.7,165.};
 	const int nDisks = sizeof(si_z_pos)/sizeof(*si_z_pos);
 	double si_r_max[nDisks] = {0};
 	double si_r_min[nDisks] = {0};
@@ -258,9 +258,9 @@ void Fun4All_G4_simplified_v3(
 	//---------------------------
 	// Forward - Backward GEMs
 	if(GEM_res>0){
-		EGEM_Init();                            // Loading backward GEM geometry
+		//EGEM_Init();                            // Loading backward GEM geometry commented: 13/10/2021
 		FGEM_Init();                            // Loading forward GEM geometry
-		EGEMSetup(g4Reco);
+	//	EGEMSetup(g4Reco);                  // commented: 13/10/2021
 		FGEMSetup(g4Reco);
 	}
 	//---------------------------
@@ -347,14 +347,14 @@ void Fun4All_G4_simplified_v3(
 	// add forward and backward GEMs
 	if(GEM_res>0){
 		// BACKWARD GEM
-		kalman->add_phg4hits("G4HIT_EGEM",              // const std::string& phg4hitsNames,
+		/*kalman->add_phg4hits("G4HIT_EGEM",              // const std::string& phg4hitsNames,
 				PHG4TrackFastSim::Vertical_Plane,               // const DETECTOR_TYPE phg4dettype,
 				GEM_res/10000.,                                 // const float radres,
 				GEM_res/10000.,                                 // const float phires,
 				999.,                                           // longitudinal (z) resolution [cm] (this number is not used in vertical plane geometry)
 				1,                                              // const float eff,
 				0                                               // const float noise
-				);
+				);*/
 		// FORWARD GEM2
 		kalman->add_phg4hits("G4HIT_FGEM",              // const std::string& phg4hitsNames,
 				PHG4TrackFastSim::Vertical_Plane,               // const DETECTOR_TYPE phg4dettype,
@@ -386,10 +386,9 @@ void Fun4All_G4_simplified_v3(
  hits->AddNode("SVTX", 0);
  hits->AddNode("BARR", 1);
  hits->AddNode("FBST", 2);
- hits->AddNode("EGEM", 3);
- hits->AddNode("FGEM", 4);
- hits->AddNode("DIRC_SMALL",5);
- hits->AddNode("RICH",6);
+ hits->AddNode("FGEM", 3);
+ hits->AddNode("DIRC_SMALL",4);
+// hits->AddNode("RICH",6);
 	se->registerSubsystem(hits);
 
 	// ======================================================================================================
@@ -431,7 +430,7 @@ void Fun4All_G4_simplified_v3(
 
 	se->run(nEvents);
 	se->End();
- //g4Reco->Dump_GDML("simple_geom.gdml");
+// g4Reco->Dump_GDML("simple_geom.gdml");
 	delete se;
 	gSystem->Exit(0);
 }
