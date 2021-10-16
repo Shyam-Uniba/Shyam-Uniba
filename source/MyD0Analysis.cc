@@ -67,7 +67,7 @@ int MyD0Analysis::Init(PHCompositeNode *topNode)
   PHTFileServer::get().open(_outfile_name, "RECREATE");
 
   // create TTree
-  _eval_tree_tracks = new TTree("tracks", "FastSim Eval => tracks");
+  _eval_tree_tracks = new TTree("D0Analysis", "D0Analysis");
   _eval_tree_tracks->Branch("event", &event, "event/I");
   _eval_tree_tracks->Branch("tracks", &tracks, "tracks/I");
   _eval_tree_tracks->Branch("gtrackID", &gtrackID, "gtrackID[tracks]/I");
