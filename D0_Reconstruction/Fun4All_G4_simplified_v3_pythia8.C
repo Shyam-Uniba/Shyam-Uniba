@@ -54,7 +54,7 @@ void Fun4All_G4_simplified_v3_pythia8(
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
 			int magnetic_field = 5     ,	// Magnetic field setting
 			bool do_projections = false,	// Projections
-			TString out_name   = "out" )	// output filename
+			TString out_name   = "D0_Analysis" )	// output filename
 {	
 	// ======================================================================================================
 	// Input from the user
@@ -404,15 +404,6 @@ void Fun4All_G4_simplified_v3_pythia8(
 	kalman->set_vertex_min_ndf(2);
 
 	se->registerSubsystem(kalman);
-//=======Register Hits==============
-	SimpleNtuple *hits = new SimpleNtuple("Hits");
- hits->AddNode("SVTX", 0);
- hits->AddNode("BARR", 1);
- hits->AddNode("FBST", 2);
- hits->AddNode("FGEM", 3);
- hits->AddNode("DIRC_SMALL",4);
-// hits->AddNode("RICH",6);
-	se->registerSubsystem(hits);
 
 	// ======================================================================================================
 	TString label_mat = Form("_AllSi_vbd_%.2f_%.2f_%.2f",vtx_matBud,barr_matBud,disk_matBud);
@@ -430,18 +421,10 @@ void Fun4All_G4_simplified_v3_pythia8(
 		label_DIRC = Form("_DIRC_%i_sect",nDircSectors);
 
 	TString outputFile = (std::string)(out_name)+std::string(label_mat)+std::string(label_RICH)+std::string(label_GEM)+std::string(label_DIRC)+std::string(B_label)+"_FastSimEval.root";
-	TrackFastSimEval *fast_sim_eval = new TrackFastSimEval("FastTrackingEval");
-	fast_sim_eval->set_filename(outputFile);
-	if(do_projections){
-		fast_sim_eval->AddProjection(projname1);
-		fast_sim_eval->AddProjection(projname2);
-		fast_sim_eval->AddProjection(projname3);
-	}
-	se->registerSubsystem(fast_sim_eval);
 
  // D0Analysis Task
 	MyD0Analysis *myanalysistask = new MyD0Analysis("MyD0Analysis");
-	myanalysistask->set_filename("D0Aanalysis.root");
+	myanalysistask->set_filename(outputFile);
 	se->registerSubsystem(myanalysistask);
 
 	// ======================================================================================================
