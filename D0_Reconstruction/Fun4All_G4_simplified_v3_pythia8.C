@@ -38,6 +38,7 @@
 #include "G4_Pipe_EIC.C"				// Beampipe
 #include "G4_GEM.C"					// GEMs
 #include "G4_DIRC_SMALL.C"				// DIRC
+#include"TStopwatch.h"
 
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libg4detectors.so)
@@ -48,7 +49,7 @@ R__LOAD_LIBRARY(libPHPythia8.so)
 // root -l "Fun4All_G4_simplified_v3.C(100,false,-1,-1,7)"
 
 void Fun4All_G4_simplified_v3_pythia8(
-			int nEvents        = 10000    ,	// number of events
+			int nEvents        = 100000    ,	// number of events
 			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
@@ -56,6 +57,9 @@ void Fun4All_G4_simplified_v3_pythia8(
 			bool do_projections = false,	// Projections
 			TString out_name   = "D0_Analysis" )	// output filename
 {	
+  // -----   Timer   --------------------------------------------------------
+							TStopwatch timer;
+							timer.Start();
 	// ======================================================================================================
 	// Input from the user
 	double vtx_matBud  = 0.05; // % X/X0 (material budget of vertexing layers)
@@ -125,7 +129,7 @@ void Fun4All_G4_simplified_v3_pythia8(
 		PHPythia8 *pythia8 = new PHPythia8(); // see coresoftware/generators/PHPythia8 for example config
 		pythia8->set_config_file("phpythia8.cfg"); // example configure files : https://github.com/sPHENIX-Collaboration/coresoftware/tree/master/generators/PHPythia8 
   pythia8->print_config();
-	 pythia8->Verbosity(10);
+	 pythia8->Verbosity(0);
 		se->registerSubsystem(pythia8);
 
 		// read-in HepMC events to Geant4 if there are any pythia8 produces hepmc records, so this is needed to read the above generated pythia8 events
@@ -436,12 +440,19 @@ void Fun4All_G4_simplified_v3_pythia8(
 
 	Fun4AllInputManager *in = new Fun4AllDummyInputManager("JADE");
 	se->registerInputManager(in);
-
-
-
+ std::cout.setstate(std::ios_base::failbit); // stop printing cout
 	if (nEvents <= 0) return;
 	se->run(nEvents);
 	se->End();
+
+  std::cout.clear(); // // cout is on again
+  timer.Stop();
+  Double_t rtime = timer.RealTime();
+  Double_t ctime = timer.CpuTime();
+  cout << endl << endl;
+  cout << "Macro finished succesfully." << endl;
+  cout << "Real time " << rtime << " s, CPU time " << ctime << " s" << endl;
+  cout << endl;
 // g4Reco->Dump_GDML("simple_geom.gdml");
 	delete se;
 	gSystem->Exit(0);
