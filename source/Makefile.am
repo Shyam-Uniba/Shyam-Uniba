@@ -32,7 +32,8 @@ pkginclude_HEADERS = \
   SimpleNtuple.h \
   TrackFastSimEval.h \
   PHG4ParticleGenerator_flat_pT.h \
-  MyJetAnalysis_AllSi.h
+  MyJetAnalysis_AllSi.h \
+  MyD0Analysis.h
 
 libg4lblvtx_la_SOURCES = \
   AllSiliconTrackerDetector.cc \
@@ -57,7 +58,8 @@ libg4lblvtx_la_SOURCES = \
   SimpleNtuple.cc \
   TrackFastSimEval.cc \
   PHG4ParticleGenerator_flat_pT.cc \
-  MyJetAnalysis_AllSi.cc
+  MyJetAnalysis_AllSi.cc \
+  MyD0Analysis.cc
 
 # Rule for generating table CINT dictionaries.
 %_Dict.cc: %.h %LinkDef.h

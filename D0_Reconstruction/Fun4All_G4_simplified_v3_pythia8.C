@@ -27,6 +27,7 @@
 #include <g4trackfastsim/PHG4TrackFastSim.h>
 #include <g4trackfastsim/PHG4TrackFastSimEval.h>
 #include <g4lblvtx/TrackFastSimEval.h>
+#include <g4lblvtx/MyD0Analysis.h>
 #include <phool/recoConsts.h>
 #include <g4lblvtx/EicFRichSubsystem.h>			// Forward RICH
 #include <g4lblvtx/PHG4ParticleGenerator_flat_pT.h>	// Flat-pT generator
@@ -37,9 +38,6 @@
 #include "G4_Pipe_EIC.C"				// Beampipe
 #include "G4_GEM.C"					// GEMs
 #include "G4_DIRC_SMALL.C"				// DIRC
-#include "G4_Jets.C"
-#include "G4_Bbc.C"
-#include "G4_Global.C"
 
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libg4detectors.so)
@@ -50,7 +48,7 @@ R__LOAD_LIBRARY(libPHPythia8.so)
 // root -l "Fun4All_G4_simplified_v3.C(100,false,-1,-1,7)"
 
 void Fun4All_G4_simplified_v3_pythia8(
-			int nEvents        = 1000    ,	// number of events
+			int nEvents        = 10000    ,	// number of events
 			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
@@ -117,11 +115,11 @@ void Fun4All_G4_simplified_v3_pythia8(
 	gen_pT->set_phi_range(0.,2.*TMath::Pi());
 	// ======================================================================================================
  gSystem->Setenv("PYTHIA8DATA",Form("%s/xmldoc",getenv("PYTHIA8")));
-	bool do_pythia8_jets = false;	
+	bool do_pythia8 = false;	
 	if     (particle_gen==1){se->registerSubsystem(   gen); cout << "Using particle generator"             << endl;}
 	else if(particle_gen==5){se->registerSubsystem(gen_pT); cout << "Using particle generator flat in pT"  << endl;}
  else if(particle_gen==4){
-		do_pythia8_jets = true;
+		do_pythia8 = true;
 		gSystem->Load("libPHPythia8.so");
 
 		PHPythia8 *pythia8 = new PHPythia8(); // see coresoftware/generators/PHPythia8 for example config
@@ -327,10 +325,6 @@ void Fun4All_G4_simplified_v3_pythia8(
 
 	se->registerSubsystem(g4Reco);
 
-	if(do_pythia8_jets){
-		Bbc_Reco();
-		Global_Reco();
-	}
 
 	// ======================================================================================================
 	// fast pattern recognition and full Kalman filter
@@ -445,9 +439,10 @@ void Fun4All_G4_simplified_v3_pythia8(
 	}
 	se->registerSubsystem(fast_sim_eval);
 
-	// resonstruct jets after the tracking
-	if(do_pythia8_jets) Jet_Reco();
-	if(do_pythia8_jets) Jet_Eval(string(outputFile) + "_g4jet_eval.root");
+ // D0Analysis Task
+	MyD0Analysis *myanalysistask = new MyD0Analysis("MyD0Analysis");
+	myanalysistask->set_filename("D0Aanalysis.root");
+	se->registerSubsystem(myanalysistask);
 
 	// ======================================================================================================
 	// IOManagers...
@@ -459,14 +454,6 @@ void Fun4All_G4_simplified_v3_pythia8(
 	Fun4AllInputManager *in = new Fun4AllDummyInputManager("JADE");
 	se->registerInputManager(in);
 
-	if(do_pythia8_jets){
-		gSystem->Load("libmyjetanalysis");
-		std::string jetoutputFile = std::string(outputFile) + std::string("_electrons+jets.root");
-		MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r10","AntiKt_Truth_r10",jetoutputFile.data());	
-	//	MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r04","AntiKt_Truth_r04",jetoutputFile.data());
-	//	MyJetAnalysis_AllSi *myJetAnalysis = new MyJetAnalysis_AllSi("AntiKt_Track_r02","AntiKt_Truth_r02",jetoutputFile.data());
-		se->registerSubsystem(myJetAnalysis);
-	}
 
 
 	if (nEvents <= 0) return;
