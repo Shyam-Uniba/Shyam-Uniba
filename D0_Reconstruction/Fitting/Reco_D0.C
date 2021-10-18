@@ -44,7 +44,7 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
   
   Int_t Ntracks =0;
   Double_t px[k], py[k], pz[k], pcax[k], pcay[k], pcaz[k];
-  Int_t trackID[k];
+  Int_t trackID[k], charge[k];
 
   t->SetBranchAddress ("tracks",&Ntracks);  
   t->SetBranchAddress ("px",&px);  
@@ -53,52 +53,68 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
   t->SetBranchAddress ("pcax", &pcax);
   t->SetBranchAddress ("pcay", &pcay);
   t->SetBranchAddress ("pcaz", &pcaz);
+  t->SetBranchAddress ("charge", &charge);
 
-      
+ 
+  TVector3 Mom_Track1, Mom_Track2, Mom_Sum;
+
   Int_t n = (Int_t)t->GetEntries();
   cout << "Number of Events" << n << endl;
 
-   for(Int_t i = 0; i < n; i++) //Event loop start
+   for(Int_t iEvent = 0; iEvent < n; iEvent++) //Event loop start
   {
-      t->GetEntry(i);
+      t->GetEntry(iEvent);
       
-      for(Int_t j=0 ; j <Ntracks; j++) // Assume first Track K-
+      for(Int_t i=0 ; i <Ntracks; i++) // Assume first Track K-
 	   { 
 
     if (trackID[i]<0) continue; // Skip fake tracks
-    Double_t E_Kminus1 = sqrt(px[i]*px[i]+py[i]*py[i]+pz[i]*pz[i]+mK*mK); // Asssume Kaon+
-    Double_t E_PionMinus1 = sqrt(px[i]*px[i]+py[i]*py[i]+pz[i]*pz[i]+mPi*mPi); // Asssume Pion-
+    
+    Mom_Track1.SetXYZ(px[i],py[i],pz[i]);
+ 
+    Double_t E_Kminus1 = sqrt(Mom_Track1.Mag2()+mK*mK);       // Asssume Kaon
+    Double_t E_PionMinus1 = sqrt(Mom_Track1.Mag2()+mPi*mPi); // Asssume Pion
     
     Bool_t check_d0_track1 = ImpactParameterSelection(pcax[i],pcay[i],pcaz[i],300.0e-4);
     if (!check_d0_track1) continue;
          
-      for(Int_t k=0 ; k < Ntracks; k++) //Assume first Track Pi+
-	   {
-	     
+      for(Int_t j=0 ; j < Ntracks; j++) //Assume first Track Pi+
+	   {	     
+
      if (trackID[i]<0) continue; // Skip fake tracks
      if (i==j) continue; // Same Tracks
 
-     Bool_t check_d0_track2 = ImpactParameterSelection(pcax[j],pcay[j],pcaz[j],100.0e-4);
-     if (!check_d0_track2) continue;
+     Mom_Track2.SetXYZ(px[j],py[j],pz[j]);
+     Mom_Sum = Mom_Track1+Mom_Track2;
 
+    Bool_t check_d0_track2 = ImpactParameterSelection(pcax[j],pcay[j],pcaz[j],100.0e-4);
+    if (!check_d0_track2) continue;
+    
      // Sum d02 cut
-      Double_t sumd02_cut = 10000.e-8; 
-      Double_t sum_d02_1 = (pcax[i]*pcax[i]+pcax[j]*pcax[j]);
-      if (sum_d02_1>sumd02_cut) continue; // sum d02cut
+    Double_t sumd02_cut = 10000.e-8; 
+    Double_t sum_d02_1 = (pcax[i]*pcax[i]+pcax[j]*pcax[j]);
+    if (sum_d02_1<sumd02_cut) continue; // sum d02cut
   
-     Double_t E_PiPlus1 = sqrt(px[j]*px[j]+py[j]*py[j]+pz[j]*pz[j]+mPi*mPi); // Assume Pion+
-     Double_t E_KPlus2 = sqrt(px[j]*px[j]+py[j]*py[j]+pz[j]*pz[j]+mK*mK); // Assume Kaon+
+     Double_t E_PiPlus1 = sqrt(Mom_Track2.Mag2()+mPi*mPi); // Assume Pion
+     Double_t E_KPlus2 = sqrt(Mom_Track2.Mag2()+mK*mK); // Assume Kaon
 
-     Double_t mD0 = sqrt((E_Kminus1+E_PiPlus1)*(E_Kminus1+E_PiPlus1) -((px[i]+px[j])*(px[i]+px[j])+(py[i]+py[j])*(py[i]+py[j])+(pz[i]+pz[j])*(pz[i]+pz[j]))); // K-Pi+
-     Double_t mD0bar = sqrt((E_KPlus2+E_PionMinus1)*(E_KPlus2+E_PionMinus1) -((px[i]+px[j])*(px[i]+px[j])+(py[i]+py[j])*(py[i]+py[j])+(pz[i]+pz[j])*(pz[i]+pz[j]))); // // K+Pi-
-
+     if (charge[i]<0 && charge[j]>0)
+     {
+     Double_t mD0 = sqrt((E_Kminus1+E_PiPlus1)*(E_Kminus1+E_PiPlus1)-Mom_Sum.Mag2()); // K-Pi+
      h_InvMass->Fill(mD0);
+     }
+     
+     if (charge[j]>0 && charge[i]<0)
+     { 
+     Double_t mD0bar = sqrt((E_KPlus2+E_PionMinus1)*(E_KPlus2+E_PionMinus1)-Mom_Sum.Mag2()); // // K+Pi-
      h_InvMass->Fill(mD0bar);
-    } 	          
+     } 	          
 	 
-	}//Particle loop ends
+	}//Particle loop j
       
- }// event loop ends
+ }//Particle loop i
+
+ }//Event loop i
 
   TFile *fout = new TFile("D0_invmass.root","recreate");
   fout->cd();
@@ -113,6 +129,6 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
  Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0cut)
  {
  Double_t d0 = sqrt(dcax*dcax+dcay*dcay+dcaz*dcaz);
- if (d0<d0cut) return kTRUE;
+ if (d0>d0cut) return kTRUE;
  return kFALSE;
  }
