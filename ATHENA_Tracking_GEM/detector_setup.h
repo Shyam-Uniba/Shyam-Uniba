@@ -24,13 +24,13 @@
 
 
 //RICH
-//#define _RICH_
+#define _RICH_
 
 //MRICH
-//#define _MRICH_
+#define _MRICH_
 
 //DIRC
-//#define _DIRC_
+#define _DIRC_
 
 
 // MPGD                                                                                                                                               
@@ -39,7 +39,7 @@
 
 //GEMS                                                                                                                                                
 #define _INNERGEMS_
-//#define _OUTERGEMS_
+#define _OUTERGEMS_
 
 //Black holes to catch all hits outside of volume                                                                                                     
 #define _BLACKHOLE_                                                                                                                                

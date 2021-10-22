@@ -31,7 +31,7 @@
 #include <g4lblvtx/PHG4ParticleGenerator_flat_pT.h>
 //#include <g4lblvtx/AllSi_Al_support_Subsystem.h>
 //#include <g4lblvtx/EicFRichSubsystem.h>
-//#include <g4_modifieddrich/dRICH_Subsystem.h>
+#include <g4_modifieddrich/dRICH_Subsystem.h>
 #include "G4_BlackHole.C"
 
 #include "G4_DummymRICH.C"
@@ -55,12 +55,6 @@
 #include <EicRootVstSubsystem.h>
 #include <EtmOrphans.h>
 #endif
-
-
-//gdml
-//#include <gdmlimporter/GdmlImportDetectorSubsystem.h>
-//#include <gdmlimporter/SimpleNtuple.h>
-//#include <gdmlimporter/TrackFastSimEval.h>
 #include <g4detectors/PHG4GDMLSubsystem.h>
 
 #include "G4_GEM_EIC_v1.C"
@@ -148,7 +142,7 @@ void Fun4All_G4_Baseline2(
 			double etamax = 3.7,
 			int generatorVersion = 1, 		// Generator setting
 			int magnetic_field = 6, 		// Magnetic field setting
-			TString out_name = "./")	// output filename
+			TString out_name = "")	// output filename
 {	
 	// ======================================================================================================
   gSystem->Load("libfun4all");
@@ -396,84 +390,18 @@ void Fun4All_G4_Baseline2(
 	#ifdef _SIDISKS_
 	//---------------------------
 	// Disks
-/*	
-	double si_z_pos[] = {-121.,-105.4,-89.8,-74.2,-58.6,-43.0,-22.0,22.0,43.0,58.6,74.2,89.8,105.4, 121.};
- 	const int nDisks = sizeof(si_z_pos)/sizeof(*si_z_pos);
- 	double si_r_max[] = {19.0, 19.0, 19.0, 19.0, 19.0, 13.94, 7.13, 7.13, 13.94, 19.0, 19.0, 19.0, 19.0, 19.0};
- 	double si_r_min[] = {9.93, 8.35, 6.67, 4.99, 3.64, 3.64, 3.64, 3.64, 3.64, 3.64, 4.99, 6.67, 8.35, 9.93};
- */
-  	//double si_z_pos[] = {-121., -96.25, -71.5, -46.75, -22.0, 22.0, 46.75, 71.5, 96.25, 121.};
-  	
-	//expanded spacing 
-	//double si_z_pos[] = {-143., -115.5, -88., -60.5, -33, 33, 60.5, 88, 115.5, 143 };
-	
-	//Asymmetric expanded spacing 
-	//double si_z_pos[] = {-135., -109.5, -84., -58.5, -33, 33, 63., 93., 123., 153 };
 	
 	double si_z_pos[11] = {-145, -109, -73, -49, -25, 25, 49, 73, 103.67, 134.33, 165};
-/*
-	double SIZMin = 17;//41;
-	for (int i = 0; i < 6; i++)
-	{
-		if (i < 3)
-		{
-			double SINegSpacing = (TMath::Abs(mRICHPosition)-2-SIZMin)/4;
-			//si_z_pos[i] = -1*(TMath::Abs(mRICHPosition)-2) + SINegSpacing*i;
-			si_z_pos[i] = -1*(SIZMin) - SINegSpacing*i;
-		}
-		else
-		{
-			//double SIPosSpacing = (153-SIZMin)/4;
-			//double SIPosSpacing = (145-SIZMin)/4;
-			double SIPosSpacing = (170-SIZMin)/4;
-			si_z_pos[i] = SIZMin + SIPosSpacing*(i-3);
-		}
-	}
-*/	
-	
+
 	for (int j = 0 ; j< 6; j++) { cout << "Disk "<< j+1 << " : " << si_z_pos[j] << endl;}
 
 
 	//original projective
-	//double si_z_pos[] = {-121., -99., -77., -55., -33.0, 33.0, 55., 77., 99., 121.};
   	const int nDisks = sizeof(si_z_pos)/sizeof(*si_z_pos);
-  	//double si_r_max[] = {19.0, 19.0, 19.0, 19.0, 7.13, 7.13, 19.0, 19.0, 19.0, 19.0};
   	double si_r_max[11]= {43.23, 43.23, 43.23, 36.26, 18.5, 18.5, 36.26, 43.23, 43.23, 43.23, 43.23};
-/*
-	for (int iDisk = 0 ; iDisk < nDisks; iDisk++)
-	{
-		//si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 2.5);
-		si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 1.1) ;	
-		//Fudge factor added to the end to add a little extra radius to the inner disks and subtract from outer disks to extend to cone and not further
-		//if (iDisk < 3) si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 1.11) - (iDisk-1)*1.1 ;	
-		//else si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 1.11) - (iDisk-4)*1.1;	
-		//if (iDisk > 2 && iDisk < 7) si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 1.1);	
-		//else si_r_max[iDisk] = RadiusFromZEta(TMath::Abs(si_z_pos[iDisk]), 2.0);
-		cout << "r max for disk " << iDisk + 1 << " : " << si_r_max[iDisk] << endl;
-		//if (iDisk == 4 || iDisk == 5) si_r_max[iDisk] = 7.13;
-	}
-*/
-	//projective Si Disk (only first disk changes)
-	//double si_r_max[] = {19.0, 19.0, 19.0, 19.0, 16.47, 16.47, 19.0, 19.0, 19.0, 19.0};
-  	
-	//tweaked inner radii (set for mRICH -200 asymmetric, with z min 41)
-	//double si_r_min[] = {6.25, 6.0, 5.9, 3.64, 3.64, 3.64, 3.84, 6.795, 9.95, 10.5};
-	
-	//double si_r_min[] = {5.91, 4.7, 3.5, 3.18, 3.18, 3.18, 3.18, 3.5, 4.7, 5.91};
-	//Order changed from low z to high z -> in to out in neg, then in to out in pos
-	//double si_r_min[] = { 3.18, 3.18, 4.75, 3.18, 3.18, 6.75};
 	//hardcode baseline 2
 	double si_r_min[] = {7.15, 6.25, 3.5, 3.18, 3.18, 3.18, 3.18, 3.5, 8, 10, 11};
 	
-	//modifying the rear si disks for the study with multiple distances
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	si_r_min[i] = (-1.2/47)*(si_z_pos[i]+88) + 5.7;
-	//}	
-
-
-	//Original inner radii
-	//double si_r_min[] = {9.93, 7.25, 4.65, 3.64, 3.64, 3.64, 3.64, 4.65, 7.25, 9.93};
   	double si_thick_disk = 0.24/100.*9.37;
 
  	for (int ilayer = 0; ilayer < nDisks ; ilayer++){
@@ -536,17 +464,17 @@ void Fun4All_G4_Baseline2(
 	wrap_with_cylindrical_blackhole(g4Reco,250,-250,380,true);
 	#endif
 
-	//#ifdef _RICH_
+	#ifdef _RICH_
 	//EicFRichSubsystem *RICH = new EicFRichSubsystem("RICH");
-	//dRICH_Subsystem *RICH = new dRICH_Subsystem("RICH");
-	//g4Reco->registerSubsystem(RICH);
-	//#endif
+	 dRICH_Subsystem *RICH = new dRICH_Subsystem("RICH");
+	 g4Reco->registerSubsystem(RICH);
+	#endif
 	
-	//#ifdef _MRICH_
+	#ifdef _MRICH_
 	//PHG4mRICHSubsystem *mRICH = new PHG4mRICHSubsystem("mRICH", 0);
 	//g4Reco->registerSubsystem(mRICH);
-	//add_dummymRICH(g4Reco, 200, -186);	
-	//#endif
+	add_dummymRICH(g4Reco, 200, -186);	
+	#endif
 
 	//beampipe as implemented by Rey with slight modification
 	#ifdef _BEAMPIPE_
@@ -567,33 +495,9 @@ void Fun4All_G4_Baseline2(
                 gap_betweenCZ = 0;
                 nCZlayer = 1;
         }
-  //double BMT_r[6] = {20., 20.+nCZlayer*thicknessMPGD+gap_betweenCZ+Gap_betweenlayer, 50-nCZlayer*thicknessMPGD-gap_betweenCZ-Gap_betweenlayer/2, 50\
-+Gap_betweenlayer/2, 80-(nCZlayer*thicknessMPGD+gap_betweenCZ)*2-Gap_betweenlayer, 80-nCZlayer*thicknessMPGD-gap_betweenCZ};                          
-  	//double BMT_r[6] = {    47.7153, 49.5718, 71.8958, 73.7523, 75.6088, 77.4653  };
-  	
-	//spacing between layers: 1.8565cm 
-	//
-	//Two layers centered on 50cm and 76cm -> corresponding to approximately 210cm length for outer, and 140 for inner
-	//double BMT_r[4] = {  49.07175, 50.92825, 75.07175, 76.92825 };
-
 	//B2P2N2 4 Layers	
 	double BMT_r[4] = {47.72, 49.57, 75.61, 77.47};
 
-	//double BMT_r[5] = {  49.07175, 50.92825, 73.21525, 75.07175, 76.92825 };
-	//double BMT_r[6] = {  49.07175, 50.92825, 71.35875, 73.21525, 75.07175, 76.92825 };
-  	
-	//double BMT_r[5] = {    47.7153, 49.5718, 73.7523, 75.6088, 77.4653  };
-	//double BMT_r[4] = {    47.7153, 49.5718, 75.6088, 77.4653  };
-  	
-	/*
-	for (int iScale = 0; iScale < 6; iScale++)
-	{
-		//may want to actually scale only two values in the array, but maintain the spacing betwen layers in groups
-		BMT_r[iScale] = BMT_r[iScale]*1.2;
-	}
-	*/
-
-	//double BMT_r[4] = {   71.8958, 73.7523, 75.6088, 77.4653  };
 
 
         PHG4CylinderStripSubsystem *example01;
@@ -691,51 +595,6 @@ void Fun4All_G4_Baseline2(
 		cout << "Forward Ring 1 Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
 		MakeGEM(Params, fgt);
 
-/*
-		int NumberOfGEMS = 2; 
-		double ZStart = 85.0;
-		double SIPosSpacing = (170-SIZMin)/4;
-		double SINegSpacing = (TMath::Abs(mRICHPosition)-2-SIZMin)/4;
-		double NegZStart = SIZMin + 3*SINegSpacing;
-		double PosZStart = SIZMin + 3*SIPosSpacing;
-	    	double ForwardZSpacing = (170-PosZStart)/(NumberOfGEMS-1);//34.333;
-	    	//double ForwardZSpacing = (145-ZStart)/(NumberOfGEMS-1);//34.333;
-	    	//double ForwardZSpacing = (152-ZStart)/(NumberOfGEMS-1);//34.333;
-		double BackwardZSpacing = (TMath::Abs(mRICHPosition)-2-NegZStart)/(NumberOfGEMS-1);//28.333;
-
-
-
-		double ZPos = PosZStart;		
-
-
-		array<double,6> Params = FullGEMParameters(10*ZPos, 1.1, 10*(RadiusFromZEta(ZPos, 3.5)+2), 12);
-		for (int iGEM = 0; iGEM < NumberOfGEMS; iGEM++)
-		{
-			double TEMPZPos = 0;
-			ZPos = PosZStart+(iGEM*ForwardZSpacing);
-			if (ZPos <= 125) TEMPZPos = ZPos -1.716; //subtracted distance is the distance the disks are staggered such that the closer modules aren't exceeding the eta limits
-			else TEMPZPos = 125;
-			Params = FullGEMParameters(10*(TEMPZPos), 1.1, 10*(RadiusFromZEta(ZPos, 3.5)+2), 12);
-			Params[4]=10*(ZPos); //Copying previous parameters but shifting in Z
-			MakeGEM(Params, fgt);
-	    		cout << "Forward Disk " << iGEM+1 << " Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
-		}
-		for (int iGEM = 0; iGEM < NumberOfGEMS; iGEM++)
-		{
-			double TEMPZPos = 0;
-			ZPos = -1*NegZStart-(iGEM*BackwardZSpacing);
-			if (ZPos >= -125) TEMPZPos = ZPos +1.716;
-			else TEMPZPos = -125;
-			Params = FullGEMParameters(10*(TEMPZPos), 1.1, 10*(RadiusFromZEta(ZPos, 4)+2), 12);
-			Params[4]=10*(ZPos); //Copying previous parameters but shifting in Z
-			MakeGEM(Params, fgt);
-	    		cout << "Rear Disk " << iGEM+1 << " Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
-		}
-*/
-
-		//Hardcode the GEM Rings
-
-
 		}
  	        g4Reco->registerSubsystem(fgt);
 	}
@@ -760,9 +619,9 @@ void Fun4All_G4_Baseline2(
        		cout << "Length: " << Params[0] + 210 << endl; 
 	    cout << "Outer Disk Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
 		//Far Electron Side GEM disk
-	    	Params = FullGEMParameters(-1900, 1.1, 110, 12);
-	    	cout << "Rear Disk Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
-	    	MakeGEM(Params, fgt2);
+	  //  	Params = FullGEMParameters(-1900, 1.1, 110, 12);
+	   // 	cout << "Rear Disk Active radius: " << Params[1] - Params[0]/2 << " to " << Params[1] + Params[0]/2 << endl;	
+	   // 	MakeGEM(Params, fgt2);
 			
 		//	cout << "Top Width: " << Params[2] << endl;
        		//	cout << "Length: " << Params[0] + 210 << endl; 
@@ -1006,7 +865,7 @@ void Fun4All_G4_Baseline2(
 
 	se->run(nEvents);
 	se->End();
-	delete se;
 
+	delete se;
 	gSystem->Exit(0);
 }
