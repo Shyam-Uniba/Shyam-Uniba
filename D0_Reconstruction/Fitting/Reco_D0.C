@@ -72,10 +72,10 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
     
     Mom_Track1.SetXYZ(px[i],py[i],pz[i]);
  
-    Double_t E_Kminus1 = sqrt(Mom_Track1.Mag2()+mK*mK);       // Asssume Kaon
-    Double_t E_PionMinus1 = sqrt(Mom_Track1.Mag2()+mPi*mPi); // Asssume Pion
+    Double_t E_K1 = sqrt(Mom_Track1.Mag2()+mK*mK);       // Asssume Kaon
+    Double_t E_Pi1 = sqrt(Mom_Track1.Mag2()+mPi*mPi); // Asssume Pion
     
-    Bool_t check_d0_track1 = ImpactParameterSelection(pcax[i],pcay[i],pcaz[i],300.0e-4);
+    Bool_t check_d0_track1 = ImpactParameterSelection(pcax[i],pcay[i],pcaz[i],100.0e-4);
     if (!check_d0_track1) continue;
          
       for(Int_t j=0 ; j < Ntracks; j++) //Assume first Track Pi+
@@ -93,22 +93,27 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
      // Sum d02 cut
     Double_t sumd02_cut = 10000.e-8; 
     Double_t sum_d02_1 = (pcax[i]*pcax[i]+pcax[j]*pcax[j]);
-    if (sum_d02_1<sumd02_cut) continue; // sum d02cut
+ //   if (sum_d02_1<sumd02_cut) continue; // sum d02cut
   
-     Double_t E_PiPlus1 = sqrt(Mom_Track2.Mag2()+mPi*mPi); // Assume Pion
-     Double_t E_KPlus2 = sqrt(Mom_Track2.Mag2()+mK*mK); // Assume Kaon
+     Double_t E_Pi2 = sqrt(Mom_Track2.Mag2()+mPi*mPi); // Assume Pion
+     Double_t E_K2 = sqrt(Mom_Track2.Mag2()+mK*mK); // Assume Kaon
 
      if (charge[i]<0 && charge[j]>0)
      {
-     Double_t mD0 = sqrt((E_Kminus1+E_PiPlus1)*(E_Kminus1+E_PiPlus1)-Mom_Sum.Mag2()); // K-Pi+
+     Double_t mD0 = sqrt((E_K1+E_Pi2)*(E_K1+E_Pi2)-Mom_Sum.Mag2()); // K-Pi+
      h_InvMass->Fill(mD0);
-     }
-     
-     if (charge[j]>0 && charge[i]<0)
-     { 
-     Double_t mD0bar = sqrt((E_KPlus2+E_PionMinus1)*(E_KPlus2+E_PionMinus1)-Mom_Sum.Mag2()); // // K+Pi-
+     Double_t mD0bar = sqrt((E_K2+E_Pi1)*(E_K2+E_Pi1)-Mom_Sum.Mag2()); // // K+Pi-
      h_InvMass->Fill(mD0bar);
-     } 	          
+     }
+
+    else{
+    	Double_t mD0bar = sqrt((E_K1+E_Pi2)*(E_K1+E_Pi2)-Mom_Sum.Mag2()); // K-Pi+
+     h_InvMass->Fill(mD0bar);
+     Double_t mD0 = sqrt((E_K2+E_Pi1)*(E_K2+E_Pi1)-Mom_Sum.Mag2()); // // K+Pi-
+     h_InvMass->Fill(mD0);
+
+    }
+     	          
 	 
 	}//Particle loop j
       
