@@ -139,8 +139,9 @@ am_libg4lblvtx_la_OBJECTS = AllSiliconTrackerDetector.lo \
 	AllSi_vtx_serv_2lyr_Subsystem.lo \
 	AllSi_vtx_serv_2lyr_DisplayAction.lo G4LBLVtxDetector.lo \
 	G4LBLVtxDisplayAction.lo G4LBLVtxSteppingAction.lo \
-	G4LBLVtxSubsystem.lo SimpleNtuple.lo TrackFastSimEval.lo \
-	PHG4ParticleGenerator_flat_pT.lo MyJetAnalysis_AllSi.lo
+	G4LBLVtxSubsystem.lo SimpleNtuple.lo MyTrackFastSimEval.lo \
+	PHG4ParticleGenerator_flat_pT.lo MyJetAnalysis_AllSi.lo \
+	MyD0Analysis.lo
 libg4lblvtx_la_OBJECTS = $(am_libg4lblvtx_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -380,9 +381,10 @@ pkginclude_HEADERS = \
   AllSi_vtx_serv_2lyr_Subsystem.h \
   G4LBLVtxSubsystem.h \
   SimpleNtuple.h \
-  TrackFastSimEval.h \
+  MyTrackFastSimEval.h \
   PHG4ParticleGenerator_flat_pT.h \
-  MyJetAnalysis_AllSi.h
+  MyJetAnalysis_AllSi.h \
+  MyD0Analysis.h
 
 libg4lblvtx_la_SOURCES = \
   AllSiliconTrackerDetector.cc \
@@ -405,9 +407,10 @@ libg4lblvtx_la_SOURCES = \
   G4LBLVtxSteppingAction.cc \
   G4LBLVtxSubsystem.cc \
   SimpleNtuple.cc \
-  TrackFastSimEval.cc \
+  MyTrackFastSimEval.cc \
   PHG4ParticleGenerator_flat_pT.cc \
-  MyJetAnalysis_AllSi.cc
+  MyJetAnalysis_AllSi.cc \
+  MyD0Analysis.cc
 
 
 ################################################
@@ -535,10 +538,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/G4LBLVtxDisplayAction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/G4LBLVtxSteppingAction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/G4LBLVtxSubsystem.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MyD0Analysis.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MyJetAnalysis_AllSi.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MyTrackFastSimEval.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/PHG4ParticleGenerator_flat_pT.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/SimpleNtuple.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TrackFastSimEval.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testexternals.Po@am__quote@
 
 .cc.o:

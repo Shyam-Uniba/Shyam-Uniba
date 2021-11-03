@@ -30,7 +30,7 @@ pkginclude_HEADERS = \
   AllSi_vtx_serv_2lyr_Subsystem.h \
   G4LBLVtxSubsystem.h \
   SimpleNtuple.h \
-  TrackFastSimEval.h \
+  MyTrackFastSimEval.h \
   PHG4ParticleGenerator_flat_pT.h \
   MyJetAnalysis_AllSi.h \
   MyD0Analysis.h
@@ -56,7 +56,7 @@ libg4lblvtx_la_SOURCES = \
   G4LBLVtxSteppingAction.cc \
   G4LBLVtxSubsystem.cc \
   SimpleNtuple.cc \
-  TrackFastSimEval.cc \
+  MyTrackFastSimEval.cc \
   PHG4ParticleGenerator_flat_pT.cc \
   MyJetAnalysis_AllSi.cc \
   MyD0Analysis.cc
