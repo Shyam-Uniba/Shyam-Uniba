@@ -51,6 +51,7 @@ class AliHFMassFitter : public TNamed {
   void     SetInitialGaussianSigma(Double_t sigma) {fSigmaSgn=sigma;} /// change the default value of the sigma
   void     SetSideBands(Bool_t onlysidebands=kTRUE) {fSideBands=onlysidebands;} /// consider only side bands
   void     SetFixParam(Bool_t *fixpar){fFixPar=fixpar;}
+  void     ComputeSignificance(Double_t signal, Double_t errsignal, Double_t background,Double_t errbackground,Double_t significance,Double_t errsignificance) const;
   virtual void     SetDefaultFixParam();
   virtual  Bool_t   SetFixThisParam(Int_t thispar,Bool_t fixpar);
   virtual  void     SetFixGaussianMean(Double_t mean=1.865,Bool_t fixpar=kTRUE){SetInitialGaussianMean(mean); SetFixThisParam(fNFinalPars-2,fixpar);}

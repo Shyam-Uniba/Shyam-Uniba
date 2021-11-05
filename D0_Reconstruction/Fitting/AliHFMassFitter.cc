@@ -40,7 +40,7 @@
 #include <TDatabasePDG.h>
 
 #include "AliHFMassFitter.h"
-#include "AliVertexingHFUtils.h"
+//#include "AliVertexingHFUtils.h"
 
 
 using std::cout;
@@ -350,7 +350,7 @@ Bool_t AliHFMassFitter::SetFixThisParam(Int_t thispar,Bool_t fixpar){
   //return kFALSE if something wrong
 
   if(thispar>=fNFinalPars) {
-    AliError(Form("Error! Parameter out of bounds! Max is %d\n",fNFinalPars-1));
+   cout<<(Form("Error! Parameter out of bounds! Max is %d\n",fNFinalPars-1))<<endl;
     return kFALSE;
   }
   if(!fFixPar){
@@ -369,11 +369,11 @@ Bool_t AliHFMassFitter::SetFixThisParam(Int_t thispar,Bool_t fixpar){
 Bool_t AliHFMassFitter::GetFixThisParam(Int_t thispar)const{
   //return the value of fFixPar[thispar]
   if(thispar>=fNFinalPars) {
-    AliError(Form("Error! Parameter out of bounds! Max is %d\n",fNFinalPars-1));
+  //  AliError(Form("Error! Parameter out of bounds! Max is %d\n",fNFinalPars-1));
     return kFALSE;
   }
   if(!fFixPar) {
-    AliError("Error! Parameters to be fixed still not set");
+  cout<<("Error! Parameters to be fixed still not set");
     return kFALSE;
 
   }
@@ -557,7 +557,7 @@ void AliHFMassFitter::RebinMass(Int_t bingroup){
   // Rebin invariant mass histogram
 
   if(!fhistoInvMass){
-    AliError("Histogram not set!!");
+  cout<<("Histogram not set!!");
     return;
   }
   Int_t nbinshisto=fhistoInvMass->GetNbinsX();
@@ -824,7 +824,7 @@ Bool_t AliHFMassFitter::SideBandsBounds(){
   Double_t sidebandldouble=0.,sidebandrdouble=0.;
 
   if(fMass-fminMass < 0 || fmaxMass-fMass <0) {
-    AliError("Left limit of range > mean or right limit of range < mean: change left/right limit or initial mean value");
+  cout<<("Left limit of range > mean or right limit of range < mean: change left/right limit or initial mean value");
     return kFALSE;
   } 
 
@@ -869,11 +869,11 @@ Bool_t AliHFMassFitter::SideBandsBounds(){
   sidebandrdouble=fhistoInvMass->GetBinLowEdge(fSideBandr+1);
 
   if(TMath::Abs(tmp-sidebandrdouble) > 1e-6){
-    AliWarning(Form("%f is not allowed, changing it to the nearest value allowed: \n",tmp));
+   cout<<(Form("%f is not allowed, changing it to the nearest value allowed: \n",tmp));
   }
   cout<<sidebandrdouble<<" (bin "<<fSideBandr<<")"<<endl;
   if (fSideBandl==0 || fSideBandr==fNbin) {
-    AliError("Error! Range too little");
+    //AliError("Error! Range too little");
     return kFALSE;
   }
   return kTRUE;
@@ -1541,7 +1541,7 @@ void AliHFMassFitter::IntS(Float_t *valuewitherror) const {
 
   //gives the integral of signal obtained from fit parameters
   if(!valuewitherror) {
-    printf("AliHFMassFitter::IntS: got a null pointer\n");
+   cout<<("AliHFMassFitter::IntS: got a null pointer\n");
     return;
   }
 
@@ -1829,8 +1829,8 @@ void AliHFMassFitter::PlotFit(TVirtualPad* pd,Double_t nsigma,Int_t writeFitInfo
   if(hdraw->GetFunction("funcmass")) hdraw->GetFunction("funcmass")->DrawClone("same");
 
   if(writeFitInfo > 0){
-    TPaveText *pinfob=new TPaveText(0.6,0.86,1.,1.,"NDC");
-    TPaveText *pinfom=new TPaveText(0.6,0.7,1.,.87,"NDC");
+    TPaveText *pinfob=new TPaveText(0.5,0.80,1.,0.90,"NDC");
+    TPaveText *pinfom=new TPaveText(0.5,0.8,1.,.90,"NDC");
     pinfob->SetBorderSize(0);
     pinfob->SetFillStyle(0);
     pinfom->SetBorderSize(0);
@@ -1839,6 +1839,7 @@ void AliHFMassFitter::PlotFit(TVirtualPad* pd,Double_t nsigma,Int_t writeFitInfo
 
     for (Int_t i=fNFinalPars-3;i<fNFinalPars;i++){
       pinfom->SetTextColor(kBlue);
+      pinfom->SetTextSize(0.03);
       TString str=Form("%s = %.3f #pm %.3f",ff->GetParName(i),ff->GetParameter(i),ff->GetParError(i));
       if (ff->GetParameter(fNFinalPars-2)<0.2) str=Form("%s = %.3f #pm %.3f",ff->GetParName(i),ff->GetParameter(i)*1000,ff->GetParError(i)*1000);
       if(!(writeFitInfo==1 && i==fNFinalPars-3)) pinfom->AddText(str);
@@ -1846,7 +1847,7 @@ void AliHFMassFitter::PlotFit(TVirtualPad* pd,Double_t nsigma,Int_t writeFitInfo
     pd->cd();
     pinfom->Draw();
 
-    TPaveText *pinfo2=new TPaveText(0.1,0.1,0.6,0.4,"NDC");
+    TPaveText *pinfo2=new TPaveText(0.12,0.65,0.42,0.9,"NDC");
     pinfo2->SetBorderSize(0);
     pinfo2->SetFillStyle(0);
 
@@ -1860,7 +1861,7 @@ void AliHFMassFitter::PlotFit(TVirtualPad* pd,Double_t nsigma,Int_t writeFitInfo
       Signal(1.828,1.892,signal,errsignal);
       Background(1.828,1.892,bkg, errbkg);
      */
-    TString str=Form("Significance (%.0f#sigma) %.1f #pm %.1f ",nsigma,signif,errsignif);
+    TString str=Form("Significance (%.0f#sigma) %.1f",nsigma,signif);
     pinfo2->AddText(str);
     str=Form("S (%.0f#sigma) %.0f #pm %.0f ",nsigma,signal,errsignal);
     pinfo2->AddText(str);
@@ -2102,7 +2103,7 @@ void AliHFMassFitter::Significance(Double_t min, Double_t max, Double_t &signifi
   // Return significance integral in a range
 
   if(fcounter==0){
-    AliError("Number of fits is zero, check whether you made the fit before computing the significance!\n");
+  cout<<("Number of fits is zero, check whether you made the fit before computing the significance!\n");
     return;
   }
 
@@ -2116,11 +2117,25 @@ void AliHFMassFitter::Significance(Double_t min, Double_t max, Double_t &signifi
     errsignificance=0;
     return;
   }
-
-  //AliVertexingHFUtils::ComputeSignificance(signal,errsignal,background,errbackground,significance,errsignificance);
-
+  ComputeSignificance(signal,errsignal,background,errbackground,significance,errsignificance);
   return;
 }
+
+ void AliHFMassFitter::ComputeSignificance(Double_t signal, Double_t errsignal, Double_t background, Double_t errbackground, Double_t significance, Double_t errsignificance)const { 	
+  Double_t errSigSq=errsignal*errsignal;
+  Double_t errBkgSq=errbackground*errbackground;
+  Double_t sigPlusBkg=signal+background;
+  if(sigPlusBkg>0. && signal>0.){
+    significance =  signal/TMath::Sqrt(signal+background);
+    errsignificance = significance*TMath::Sqrt((errSigSq+errBkgSq)/(4.*sigPlusBkg*sigPlusBkg)+(background/sigPlusBkg)*errSigSq/signal/signal);
+  }else{
+    significance=0.;
+    errsignificance=0.;
+  }
+  return;
+ 	
+ }
+
 
 
 TH1F* AliHFMassFitter::GetResidualsAndPulls(TH1 *h,TF1 *f,Double_t minrange,Double_t maxrange,TH1 *hPulls,TH1 *hResidualTrend,TH1 *hPullsTrend){
@@ -2164,7 +2179,7 @@ TH1F* AliHFMassFitter::GetResidualsAndPulls(TH1 *h,TF1 *f,Double_t minrange,Doub
       if(res<min)min=res;
       if(res>max)max=res;
     }
-    //      Printf("Res = %f from %f - %f",res,h->GetBinContent(jst),f->Integral(h->GetBinLowEdge(jst),h->GetBinLowEdge(jst)+h->GetBinWidth(jst))/h->GetBinWidth(jst));
+    //     cout<<("Res = %f from %f - %f",res,h->GetBinContent(jst),f->Integral(h->GetBinLowEdge(jst),h->GetBinLowEdge(jst)+h->GetBinWidth(jst))/h->GetBinWidth(jst));
     if(hResidualTrend){
       hResidualTrend->SetBinContent(jst,res);
       hResidualTrend->SetBinError(jst,h->GetBinError(jst));
@@ -2205,13 +2220,13 @@ TH1F* AliHFMassFitter::GetOverBackgroundResidualsAndPulls(Double_t minrange,Doub
 
 
   if(!fhistoInvMass){
-    Printf("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, invariant mass histogram not avaialble!");
+   cout<<("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, invariant mass histogram not avaialble!");
     return 0x0;
   }
 
   TF1 *fback=fhistoInvMass->GetFunction("funcbkgRecalc"); 
   if(!fback){
-    Printf("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, funcbkgRecalc not available!");
+   cout<<("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, funcbkgRecalc not available!");
     return 0x0;
   }
 
@@ -2233,7 +2248,7 @@ TH1F* AliHFMassFitter::GetOverBackgroundResidualsAndPulls(Double_t minrange,Doub
   delete fbackCp;
 
   if(fSigmaSgn<0){
-    Printf("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, negative sigma: fit not performed or something went wrong, cannto draw gaussian term on top of residuals");    
+   cout<<("AliHFMassFitter::GetOverBackgroundResidualsAndPulls, negative sigma: fit not performed or something went wrong, cannto draw gaussian term on top of residuals");    
     return h;
   }
 
@@ -2253,13 +2268,13 @@ TH1F* AliHFMassFitter::GetAllRangeResidualsAndPulls(Double_t minrange,Double_t m
 
 
   if(!fhistoInvMass){
-    Printf("AliHFMassFitter::GetAllRangeResidualsAndPulls, invariant mass histogram not avaialble!");
+   cout<<("AliHFMassFitter::GetAllRangeResidualsAndPulls, invariant mass histogram not avaialble!");
     return 0x0;
   }
 
   TF1 *f=fhistoInvMass->GetFunction("funcmass"); 
   if(!f){
-    Printf("AliHFMassFitter::GetAllRangeResidualsAndPulls, funcmass not available!");
+   cout<<("AliHFMassFitter::GetAllRangeResidualsAndPulls, funcmass not available!");
     return 0x0;
   }
 
@@ -2302,7 +2317,7 @@ TPaveText* AliHFMassFitter::GetFitParametersBox(Double_t nsigma,Int_t mode){
 
 
 TPaveText* AliHFMassFitter::GetYieldBox(Double_t nsigma){
-  TPaveText *pinfo2=new TPaveText(0.1,0.1,0.6,0.4,"NDC");
+  TPaveText *pinfo2=new TPaveText(0.1,0.5,0.4,0.9,"NDC");
   pinfo2->SetBorderSize(0);
   pinfo2->SetFillStyle(0);
 

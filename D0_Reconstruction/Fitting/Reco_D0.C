@@ -29,7 +29,7 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
         gStyle->SetOptTitle(0);
         gStyle->SetPalette(55);
 
-  TFile *f = TFile::Open("D0_Analysis_AllSi_vbd_0.05_0.55_0.24_GEM_res_50.0um_DIRC_12_sect_B_ATHENA_210507_FastSimEval.root");
+  TFile *f = TFile::Open("out_p_ATHENA0507_FastSimEval.root");
   TTree *t = (TTree*)f->Get("D0Analysis"); 
 
   TH1D *h_InvMass = new TH1D("h_InvMass","D^{0} Mass Spectra",100,1.72,2.05);
@@ -40,10 +40,10 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
   
   //Analysis Variables............
 
-  const Int_t k=100000;
+  const Int_t k=10000;
   
   Int_t Ntracks =0;
-  Double_t px[k], py[k], pz[k], pcax[k], pcay[k], pcaz[k];
+  Float_t px[k], py[k], pz[k], pcax[k], pcay[k], pcaz[k];
   Int_t trackID[k], charge[k];
 
   t->SetBranchAddress ("tracks",&Ntracks);  
@@ -54,6 +54,7 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
   t->SetBranchAddress ("pcay", &pcay);
   t->SetBranchAddress ("pcaz", &pcaz);
   t->SetBranchAddress ("charge", &charge);
+  t->SetBranchAddress ("trackID", &trackID);
 
  
   TVector3 Mom_Track1, Mom_Track2, Mom_Sum;
@@ -67,33 +68,34 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
       
       for(Int_t i=0 ; i <Ntracks; i++) // Assume first Track K-
 	   { 
-
-    if (trackID[i]<0) continue; // Skip fake tracks
-    
+   // if (trackID[i]<0) continue; // Skip fake tracks
     Mom_Track1.SetXYZ(px[i],py[i],pz[i]);
+    if (Mom_Track1.Mag()<1.0) continue;
+ //   cout<<"px: "<<px[i]<<" py: "<<py[i]<<" pz: "<<pz[i]<<endl;
  
     Double_t E_K1 = sqrt(Mom_Track1.Mag2()+mK*mK);       // Asssume Kaon
     Double_t E_Pi1 = sqrt(Mom_Track1.Mag2()+mPi*mPi); // Asssume Pion
     
-    Bool_t check_d0_track1 = ImpactParameterSelection(pcax[i],pcay[i],pcaz[i],100.0e-4);
-    if (!check_d0_track1) continue;
+    Bool_t check_d0_track1 = ImpactParameterSelection(pcax[i],pcay[i],pcaz[i],50.0e-4);
+   // if (!check_d0_track1) continue;
          
       for(Int_t j=0 ; j < Ntracks; j++) //Assume first Track Pi+
 	   {	     
 
-     if (trackID[i]<0) continue; // Skip fake tracks
+    // if (trackID[i]<0) continue; // Skip fake tracks
      if (i==j) continue; // Same Tracks
 
      Mom_Track2.SetXYZ(px[j],py[j],pz[j]);
+     if (Mom_Track2.Mag()<1.0) continue;
      Mom_Sum = Mom_Track1+Mom_Track2;
 
-    Bool_t check_d0_track2 = ImpactParameterSelection(pcax[j],pcay[j],pcaz[j],100.0e-4);
-    if (!check_d0_track2) continue;
+    Bool_t check_d0_track2 = ImpactParameterSelection(pcax[j],pcay[j],pcaz[j],50.0e-4);
+   // if (!check_d0_track2) continue;
     
      // Sum d02 cut
     Double_t sumd02_cut = 10000.e-8; 
     Double_t sum_d02_1 = (pcax[i]*pcax[i]+pcax[j]*pcax[j]);
- //   if (sum_d02_1<sumd02_cut) continue; // sum d02cut
+  //  if (sum_d02_1<sumd02_cut) continue; // sum d02cut
   
      Double_t E_Pi2 = sqrt(Mom_Track2.Mag2()+mPi*mPi); // Assume Pion
      Double_t E_K2 = sqrt(Mom_Track2.Mag2()+mK*mK); // Assume Kaon
@@ -111,7 +113,6 @@ Bool_t ImpactParameterSelection(Int_t dcax, Int_t dcay, Int_t dcaz, Double_t d0c
      h_InvMass->Fill(mD0bar);
      Double_t mD0 = sqrt((E_K2+E_Pi1)*(E_K2+E_Pi1)-Mom_Sum.Mag2()); // // K+Pi-
      h_InvMass->Fill(mD0);
-
     }
      	          
 	 

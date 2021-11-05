@@ -49,7 +49,7 @@ R__LOAD_LIBRARY(libPHPythia8.so)
 // root -l "Fun4All_G4_simplified_v3.C(100,false,-1,-1,7)"
 
 void Fun4All_G4_simplified_v3_pythia8(
-			int nEvents        = 100000    ,	// number of events
+			int nEvents        = 1000    ,	// number of events
 			bool include_RICH  = false ,	// if true, RICH material will be included
 			double GEM_res     = 50.   ,	// um, if > 0 forward, backward GEMs will be included
 			int nDircSectors   = 12    ,	// Number of Quartz bars in the DIRC (The nominal Fun4All DIRC corresponds to 12)
