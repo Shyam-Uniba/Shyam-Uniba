@@ -214,7 +214,7 @@ void MyD0Analysis::fill_track_tree(PHCompositeNode *topNode)
   }
 
   PHG4TruthInfoContainer::ConstRange range =
-      _truth_container->GetPrimaryParticleRange();
+      _truth_container->GetParticleRange();
   //std::cout << "A2" << std::endl;
   for (PHG4TruthInfoContainer::ConstIterator truth_itr = range.first;
        truth_itr != range.second; ++truth_itr)
@@ -252,6 +252,8 @@ void MyD0Analysis::fill_track_tree(PHCompositeNode *topNode)
       }
     }
 
+    int pdg_track = fabs(g4particle->get_pid());
+    if (pdg_track!=211 && pdg_track!=321) continue;
     //std::cout << "B2" << std::endl;
     gtrackID[tracks] = g4particle->get_track_id();
     gflavor[tracks] = g4particle->get_pid();
@@ -259,7 +261,6 @@ void MyD0Analysis::fill_track_tree(PHCompositeNode *topNode)
     gpx[tracks] = g4particle->get_px();
     gpy[tracks] = g4particle->get_py();
     gpz[tracks] = g4particle->get_pz();
-
     gvx = NAN;
     gvy = NAN;
     gvz = NAN;
