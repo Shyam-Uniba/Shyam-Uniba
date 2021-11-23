@@ -30,17 +30,17 @@ void Plot_Pt_eta()
    }
    
    TMultiGraph *mg = new TMultiGraph();
-   TGraph *gr = new TGraph(n,eta_arr,p_min);
+   TGraph *gr = new TGraph(n,p_min,eta_arr);
    gr->SetMarkerColor(kBlue);
    gr->SetMarkerStyle(20);
    gr->SetMarkerSize(1.5);
 
-   TGraph *gr1 = new TGraph(n,eta_arr,p_max);
+   TGraph *gr1 = new TGraph(n,p_max,eta_arr);
    gr1->SetMarkerColor(kRed);
    gr1->SetMarkerStyle(45);
    gr1->SetMarkerSize(1.8);
 
-   TGraph *gr2 = new TGraph(n,eta_arr,p_highest);
+   TGraph *gr2 = new TGraph(n,p_highest,eta_arr);
    gr2->SetMarkerColor(kMagenta);
    gr2->SetMarkerStyle(47);
    gr2->SetMarkerSize(1.8);
@@ -51,15 +51,15 @@ void Plot_Pt_eta()
 
 			c1->cd();
 			mg->Draw("ap");
-   mg->GetXaxis()->SetTitle("#eta");
-   mg->GetYaxis()->SetTitle("p (GeV/c)");
-   mg->GetYaxis()->SetRangeUser(0.,200.);
+   mg->GetXaxis()->SetTitle("p (GeV/c)");
+   mg->GetYaxis()->SetTitle("#eta");
+  // mg->GetYaxis()->SetRangeUser(0.,200.);
    mg->GetXaxis()->CenterTitle();
    mg->GetYaxis()->CenterTitle();
    gPad->Modified();
    gPad->Update();
 
-  	TLegend *l1= new TLegend(0.40,0.80,0.70,0.93);
+  	TLegend *l1= new TLegend(0.60,0.50,0.70,0.70);
 			l1->SetTextSize(0.035);
 			l1->SetBorderSize(0);
 			l1->AddEntry(gr,"p_{T} = 1 GeV/c");

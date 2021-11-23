@@ -30,17 +30,17 @@ void Plot_P_eta()
    }
    
    TMultiGraph *mg = new TMultiGraph();
-   TGraph *gr = new TGraph(n,eta_arr,pt_min);
+   TGraph *gr = new TGraph(n,pt_min,eta_arr);
    gr->SetMarkerColor(kBlue);
    gr->SetMarkerStyle(20);
    gr->SetMarkerSize(1.5);
 
-   TGraph *gr1 = new TGraph(n,eta_arr,pt_max);
+   TGraph *gr1 = new TGraph(n,pt_max,eta_arr);
    gr1->SetMarkerColor(kRed);
    gr1->SetMarkerStyle(45);
    gr1->SetMarkerSize(1.8);
 
-   TGraph *gr2 = new TGraph(n,eta_arr,pt_highest);
+   TGraph *gr2 = new TGraph(n,pt_highest,eta_arr);
    gr2->SetMarkerColor(kMagenta);
    gr2->SetMarkerStyle(47);
    gr2->SetMarkerSize(1.8);
@@ -51,9 +51,9 @@ void Plot_P_eta()
 
 			c1->cd();
 			mg->Draw("ap");
-   mg->GetXaxis()->SetTitle("#eta");
-   mg->GetYaxis()->SetTitle("p_{T} (GeV/c)");
-   mg->GetYaxis()->SetRangeUser(0.,50.);
+   mg->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+   mg->GetYaxis()->SetTitle("#eta");
+   mg->GetXaxis()->SetRangeUser(0.,50.);
    mg->GetXaxis()->CenterTitle();
    mg->GetYaxis()->CenterTitle();
    gPad->Modified();
