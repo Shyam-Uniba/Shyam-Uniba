@@ -26,25 +26,26 @@
 	  
 
 	 
-	 Double_t N = 7; // 3 Vtx + 4Barrel
+	 Double_t N = 9; // 3 Vtx + 2Barrel + 4Micromegas
   Double_t resolution = 10*1.0e-6/sqrt(12); // pixel resolution in meter
   Double_t magfield = 3.0; // Mag field Eic 2.0 T
-  Double_t p =10000.0; // p means pt
+  Double_t pt = 1000.0; // pt = 1.0 GeV
+	 Double_t min_effradlen=0.013; // All Silicon Tracker
+  Double_t min_length = 0.7417; // Radius of outer Barrel layer-first layer    
 
 	
 void mom_resol_tracker_eta()
 {
 	       
-
         gStyle->SetTitleSize(0.04,"");
         gStyle->SetTitleSize(0.04,"X");	
-        gStyle->SetTitleSize(0.05,"Y");	
+        gStyle->SetTitleSize(0.04,"Y");	
         gStyle->SetTitleOffset(1.05,"Y");	
 
-  TCanvas *c1 = new TCanvas("c1", "c1",0,52,1500,800);
-  c1->SetGridy();
-  c1->SetMargin(0.12, 0.01 ,0.12,0.07);
-	
+							TCanvas *c1 = new TCanvas("c1", "c1",0,52,1400,1000);
+							c1->SetGridy();
+							c1->SetMargin(0.12, 0.01 ,0.10,0.07);
+						
         std::vector<Double_t> x,y,c,d,e,f; 
 	       std::vector<Double_t> mre,mrmu,mrpi,mrk,mrp; 
 
@@ -55,16 +56,15 @@ void mom_resol_tracker_eta()
         x.push_back(eta); // Eta
         //----Energy of incident particles---------- 
         Double_t ms_el=0.,ms_mu=0., ms_pi=0., ms_k=0. , ms_p=0. ;    
-        Double_t MSel=0.,MSmu=0., MSpi=0., MSk=0. , MSp=0. ; 
-
-	       Double_t effradlen=0.023; // All Silicon Tracker
-        Double_t length = 0.43; // Radius of outer Barrel layer in meter         
+        Double_t MSel=0.,MSmu=0., MSpi=0., MSk=0. , MSp=0. ;   
 
         Double_t theta = 2.0*TMath::ATan(TMath::Exp(-1.0*eta));
         Double_t sin_theta = fabs(TMath::Sin(theta));
 
-        length = fabs(length/sin_theta);
-        effradlen = fabs(effradlen/sin_theta); 
+        Double_t length = fabs(min_length/sin_theta);
+        Double_t effradlen = fabs(min_effradlen/sin_theta); 
+
+        Double_t p = pt*TMath::CosH(eta);
         
         MultipleScattering(mel,p,ms_el,effradlen);
         MultipleScattering(mmu,p,ms_mu,effradlen);
@@ -76,26 +76,17 @@ void mom_resol_tracker_eta()
         // Length can be parameterize as a function of eta or theta
        // Momentum (pT) measurement error due to multiple scattering
        
-        MSpi=(ms_pi*p*0.001)/(0.3*magfield*length*N);
-        MSpi = 100.*MSpi*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3)));
+        MSpi=(ms_pi*pt*0.001)/(0.3*magfield*length*N); // Momentum in GeV by multiplying 0.001
+        MSpi = 100.*MSpi*TMath::Sqrt(720/(N+4));
         
-        MSp=(ms_p*p*0.001)/(0.3*magfield*length*N);
-        MSp = 100.*MSp*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3))); // Gluckstern = sqrt(720/(N+4))
-       
-        //  pT resolution due to curvature measurement B = 0.5T
+       //  pT resolution due to curvature measurement B = 0.5T
 
-        Double_t pi_pT_resol = p*0.001*resolution/(0.3*magfield*length*length); 
-        pi_pT_resol = 100.*pi_pT_resol*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3)));
-        
-        Double_t p_pT_resol = p*0.001*resolution/(0.3*magfield*length*length); // pT resolution due to curvature measurement
-        p_pT_resol = 100.*p_pT_resol*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3))); 
+        Double_t pi_pT_resol = pt*0.001*resolution/(0.3*magfield*length*length); // pT resolution due to curvature measurement
+        pi_pT_resol = 100.*pi_pT_resol*TMath::Sqrt(720/(N+4));
+         
       
-         d.push_back(MSpi);
-    
-         f.push_back(MSp);       
- 
+         d.push_back(MSpi);     
          mrpi.push_back(pi_pT_resol);
-         mrp.push_back(p_pT_resol);
 
       //   cout<<"Pt MS Pi:"<<MSpi<<endl;
 
@@ -114,11 +105,11 @@ void mom_resol_tracker_eta()
 	      
      TGraph *gr1 = new TGraph(n,a,b);
      gr1->SetLineColor(2);
-     gr1->GetYaxis()->SetRangeUser(0.0, 2.0);
+     gr1->GetYaxis()->SetRangeUser(0.0, 1.0);
      gr1->SetLineWidth(1);
      gr1->SetMarkerColor(2);
      gr1->SetMarkerStyle(6);
-     gr1->SetTitle(Form("Transverse Momentum Resolution p_{T} = %1.1f (GeV/c)",p*0.001));
+     gr1->SetTitle(Form("Transverse Momentum Resolution p_{T} = %1.1f (GeV/c)",pt*0.001));
      gr1->GetXaxis()->SetTitle("#eta");
      gr1->GetXaxis()->CenterTitle(true);
      gr1->GetYaxis()->SetTitle("#frac{#sigma_{p_{T}}}{p_{T}}"); // #sigma_{x} (cm)
@@ -140,60 +131,19 @@ void mom_resol_tracker_eta()
      gr1sumpi-> SetLineStyle(9);
      gr1sumpi->Draw("same");
      
-     //------------Proton-------------------------
-            
-	     for(Int_t i=0;i<n;i++)
-      {
-	     b[i]=f[i];
-	     g[i] = mrp[i]; 
-	     h[i] = TMath::Sqrt(b[i]*b[i]+g[i]*g[i]);
-	     }  
-           
-      TGraph *gr3 = new TGraph(n,a,b);
-      gr3->SetLineColor(3);
-      gr3->SetLineWidth(1);
-      gr3->SetMarkerColor(3);
-      gr3->SetMarkerStyle(6);
-      gr3->Draw("same");  
-           
-      TGraph *gr4 = new TGraph(n,a,g);
-      gr4->SetMarkerColor(kBlue);
-      gr4->SetLineColor(kBlue);
-      gr4->SetLineWidth(1);
-      gr4->SetMarkerStyle(6); 
-      gr4->Draw("same");
-            
-      TGraph *gr1sump = new TGraph(n,a,h);
-      gr1sump->SetLineWidth(1);
-      gr1sump->SetMarkerColor(kMagenta);
-      gr1sump->SetLineColor(kMagenta);
-      gr1sump-> SetLineStyle(9);
-      gr1sump->SetMarkerStyle(6); 
-      gr1sump->Draw("same");
-
+   
  
     //--------------Legend Draw----------------------         
-         TLegend *leg_hist = new TLegend(0.6,0.6,0.99,0.93);
-         leg_hist->SetHeader("Particles in Silicon Tracker");
+         TLegend *leg_hist = new TLegend(0.65,0.7,0.99,0.93);
+         leg_hist->SetHeader("Particle in Silicon Tracker");
          leg_hist->SetTextFont(42);
-         leg_hist->SetTextSize(0.04);
+         leg_hist->SetTextSize(0.035);
    
-         leg_hist->AddEntry(gr1,"p_{T} Resol. M.S. (Pion)","l"); 
-         leg_hist->AddEntry(gr2,"p_{T} Resol. (Pion)","l");
-         leg_hist->AddEntry(gr3,"p_{T} Resol. M.S. (Proton)","l");
-         leg_hist->AddEntry(gr4,"p_{T} Resol. (Proton)","l");
+         leg_hist->AddEntry(gr1,"p_{T} Resol. (M.S.)","l"); 
+         leg_hist->AddEntry(gr2,"p_{T} Resol. (Sagitta)","l");
+         leg_hist->AddEntry(gr1sumpi,"Sum p_{T} Resol. (Pion)","l"); 
          leg_hist->Draw();
-         
-         TLegend *leg_hist1 = new TLegend(0.25,0.8,0.55,0.93);  
-         leg_hist1->SetTextFont(42);
-         leg_hist1->SetTextSize(0.04);
-   
-         leg_hist1->AddEntry(gr1sumpi,"Sum p_{T} Resol. (Pion)","l"); 
-         leg_hist1->AddEntry(gr1sump,"Sum p_{T} Resol. (Proton)","l");
-         leg_hist1->Draw();  
-        // c1->Print("Mom_resol.eps"); 
-        // c1->SaveAs("Mom_resol.Pdf"); 
-        // c1->SaveAs("Mom_resol.root");          
+        // c1->SaveAs("Mom_resol.Pdf");         
 }
 
   // This will return theta in radian

@@ -32,12 +32,17 @@
   Double_t resolution = (5.0*resolution_silicon+4.0*resolution_micromegas)/9.0; // pixel resolution in meter micormegas
   Double_t min_length = 0.7417; // Radius of outer Barrel layer-first layer
   Double_t magfield = 3.0; // Mag field Eic 3.0 T
-  Double_t eta = 0.0;
-  Double_t N_equivalent = 1.0;
-	 Double_t si_thick_barrel = 0.55/100.;
+  Double_t eta = 0.5;
+	 Double_t effradl_vtx = 3.0*0.0005; // Three Vertex layers
+	 Double_t effradl_barrel = 2.0*0.0055; // Two Barrel layers
+	 Double_t effradl_mm = 0.000047; // Micromegas layers
+  Double_t vtx[3] ={3.3,4.41,5.51};
+  Double_t Barr[2] = {13.38, 18.0};
+  Double_t MM[4] = {47.72, 49.57, 75.61, 77.47};
+
 
 	
-void mom_resol_tracker()
+void mom_resol_tracker_new()
 {
 	
         gStyle->SetTitleSize(0.04,"");
@@ -62,23 +67,24 @@ void mom_resol_tracker()
         Double_t sin_theta = fabs(TMath::Sin(theta));
 
         Double_t length = fabs(min_length/sin_theta);
-        Double_t effradlen = fabs(min_effradlen/sin_theta); 
-        N_equivalent = effradlen/si_thick_barrel;
+        Double_t effradl_vtx_eta = fabs(effradl_vtx/sin_theta); 
+	       Double_t effradl_barrel_eta = fabs(effradl_barrel/sin_theta); 
+	       Double_t effradl_mm_eta = fabs(effradl_mm/sin_theta);
+        Double_t length_vtx = (Barr[0]-vtx[0])*0.01/sin_theta; 
+        Double_t length_barr = (MM[0]-Barr[0])*0.01/sin_theta; 
+        Double_t length_mm = (MM[3]-MM[0])*0.01/sin_theta; 
 
         //----Energy of incident particles---------- 
-        Double_t ms_el=0.,ms_mu=0., ms_pi=0., ms_k=0. , ms_p=0. ;    
-        
-        MultipleScattering(mel,p,ms_el,effradlen);
-        MultipleScattering(mmu,p,ms_mu,effradlen);
-        MultipleScattering(mpi,p,ms_pi,effradlen);
-        MultipleScattering(mk,p,ms_k,effradlen);
-        MultipleScattering(mp,p,ms_p,effradlen);
-
+        Double_t  ms_pi_vtx=0., ms_pi_barr=0. , ms_pi_mm=0. ;    
+       
+        MultipleScattering(mpi,p,ms_pi_vtx,effradl_vtx_eta);
+        MultipleScattering(mpi,p,ms_pi_barr,effradl_barrel_eta);
+        MultipleScattering(mpi,p,ms_pi_mm,effradl_mm_eta);
         
         // Length can be parameterize as a function of eta or theta
        // Momentum (pT) measurement error due to multiple scattering
        
-        Double_t MSpi=100.*(ms_pi*pt*0.001)*TMath::Sqrt(720/(N+4))/(0.3*magfield*length*N_equivalent);
+        Double_t MSpi=100.*pt*0.001*TMath::Sqrt(720/(N+4))*((length_vtx*ms_pi_vtx/3)+(length_barr*ms_pi_barr/2)+(length_mm*ms_pi_mm/4))/(0.3*magfield*length*length);
         
        //  pT resolution due to curvature measurement B = 3.0T
         Double_t pi_pT_resol = 100.*pt*0.001*resolution*TMath::Sqrt(720/(N+4))/(0.3*magfield*length*length); 

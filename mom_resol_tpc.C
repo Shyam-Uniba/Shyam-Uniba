@@ -69,18 +69,18 @@ void mom_resol_tpc()
        // Momentum (pT) measurement error due to multiple scattering
        
         MSpi=(ms_pi*p*0.001)/(0.3*magfield*length*N);
-        MSpi = MSpi*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3)));
+        MSpi = MSpi*TMath::Sqrt(720/(N+4));
         
         MSp=(ms_p*p*0.001)/(0.3*magfield*length*N);
-        MSp = MSp*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3))); // Gluckstern 
+        MSp = MSp*TMath::Sqrt(720/(N+4)); // Gluckstern 
        
         //  pT resolution due to curvature measurement B = 0.5T
 
         Double_t pi_pT_resol = p*0.001*resolution/(0.3*magfield*length*length); 
-        pi_pT_resol = pi_pT_resol*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3)));
+        pi_pT_resol = pi_pT_resol*TMath::Sqrt(720/(N+4));
         
         Double_t p_pT_resol = p*0.001*resolution/(0.3*magfield*length*length); // pT resolution due to curvature measurement
-        p_pT_resol = p_pT_resol*TMath::Sqrt((4*180*N*N*N)/((N-1)*(N+1)*(N+2)*(N+3)));
+        p_pT_resol = p_pT_resol*TMath::Sqrt(720/(N+4));
       
          d.push_back(MSpi);
     
