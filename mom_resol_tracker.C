@@ -30,11 +30,9 @@
   Double_t resolution_silicon = 10*1.0e-6/sqrt(12); // pixel resolution in meter
   Double_t resolution_micromegas = 150*1.0e-6; // pixel resolution in meter micormegas
   Double_t resolution = (5.0*resolution_silicon+4.0*resolution_micromegas)/9.0; // pixel resolution in meter micormegas
-  Double_t min_length = 0.7417; // Radius of outer Barrel layer-first layer
+  Double_t min_length = 0.7747; // Radius of outer Barrel layer-first layer
   Double_t magfield = 3.0; // Mag field Eic 3.0 T
-  Double_t eta = 0.0;
-  Double_t N_equivalent = 1.0;
-	 Double_t si_thick_barrel = 0.55/100.;
+  Double_t eta = 0.5;
 
 	
 void mom_resol_tracker()
@@ -63,7 +61,6 @@ void mom_resol_tracker()
 
         Double_t length = fabs(min_length/sin_theta);
         Double_t effradlen = fabs(min_effradlen/sin_theta); 
-        N_equivalent = effradlen/si_thick_barrel;
 
         //----Energy of incident particles---------- 
         Double_t ms_el=0.,ms_mu=0., ms_pi=0., ms_k=0. , ms_p=0. ;    
@@ -78,10 +75,11 @@ void mom_resol_tracker()
         // Length can be parameterize as a function of eta or theta
        // Momentum (pT) measurement error due to multiple scattering
        
-        Double_t MSpi=100.*(ms_pi*pt*0.001)*TMath::Sqrt(720/(N+4))/(0.3*magfield*length*N_equivalent);
+        Double_t MSpi=100.*(ms_pi*pt*0.001)*TMath::Sqrt(720/(N+4))/(0.3*magfield*length*N);
         
        //  pT resolution due to curvature measurement B = 3.0T
         Double_t pi_pT_resol = 100.*pt*0.001*resolution*TMath::Sqrt(720/(N+4))/(0.3*magfield*length*length); 
+        
         
         d.push_back(MSpi);      
         mrpi.push_back(pi_pT_resol);
