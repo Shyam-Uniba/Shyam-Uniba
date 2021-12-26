@@ -211,16 +211,6 @@ void pythia_next_event()
          track->SetLineColor(kColors[1]);
  
       gTrackList->AddElement(track);
- 
-      /*
-        printf("%d - %d %d %d %d %d %d\n", i,
-        p.GetKF(), p.GetKS(), 0, 0,
-        p.GetFirstChild()-nh-1, p.GetLastChild()-nh-1);
-        printf("%d - %f %f %f %f\n", i,
-        p.GetPx(), p.GetPy(), p.GetPz(), p.GetEnergy(),
-        printf("%d - %f %f %f %f\n", i,
-        p.GetVx(), p.GetVy(), p.GetVz(), p.GetTime());
-      */
    }
  
    gTrackList->MakeTracks();
