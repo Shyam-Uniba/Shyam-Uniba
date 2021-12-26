@@ -51,12 +51,12 @@ void pythia8_display()
 // Constants.
 //------------------------------------------------------------------------------
  
-const Double_t kR_min = 240;
-const Double_t kR_max = 250;
-const Double_t kZ_d   = 300;
+const Double_t kR_min = 10.;
+const Double_t kR_max = 10.5;
+const Double_t kZ_d   = 20.;
  
 // Solenoid field along z, in Tesla.
-const Double_t kMagField = 4;
+const Double_t kMagField = 3;
  
 // Color for Higgs, Zs and muons
 const Color_t  kColors[3] = { kRed, kGreen, kYellow };
@@ -96,15 +96,24 @@ void run_pythia_display()
    g_pythia = new TPythia8;
    TPythia8& P = * g_pythia;
  
-   P.ReadString("HardQCD:all = on");
-   P.ReadString("Random:setSeed = on");
-   // use a reproducible seed: always the same results for the tutorial.
-   P.ReadString("Random:seed = 42");
+  // P.ReadString("HardQCD:all = on");
+  P.ReadString("SoftQCD:inelastic = on"); // Pythia MB
+  P.ReadString("Random:setSeed = on");
+  P.ReadString("Random:seed = 200000000");
+  P.ReadString("PartonLevel:MPI = on");
+  P.ReadString("PhaseSpace:pTHatMin = 0.0");
+  //pythia.readString("PhaseSpace:pTHatMinDiverge = 1"); 
+  P.ReadString("Beams:idA = 2212");
+  P.ReadString("Beams:idB = 2212");   // pid for proton
+  P.ReadString("Beams:eCM = 13000."); // 13000 TeV
+  P.ReadString("ColourReconnection:reconnect = on");
+  P.ReadString("MultipartonInteractions:Kfactor= 1");
+  P.ReadString("Random:setSeed = on");
  
  
 // Initialize
  
-   P.Initialize(2212 /* p */, 2212 /* p */, 14000. /* TeV */);
+  P.Initialize(2212 /* p */, 2212 /* p */, 13000. /* TeV */);
  
    //========================================================================
    // Create views and containers.
@@ -118,13 +127,13 @@ void run_pythia_display()
  
    b = new TEveGeoShape("Barell 1");
    b->SetShape(new TGeoTube(kR_min, kR_max, kZ_d));
-   b->SetMainColor(kCyan);
+   b->SetMainColor(kRed);
    b->SetMainTransparency(80);
    fake_geom->AddElement(b);
  
    b = new TEveGeoShape("Barell 2");
    b->SetShape(new TGeoTube(2*kR_min, 2*kR_max, 2*kZ_d));
-   b->SetMainColor(kPink-3);
+   b->SetMainColor(kGreen);
    b->SetMainTransparency(80);
    fake_geom->AddElement(b);
  
@@ -147,8 +156,8 @@ void run_pythia_display()
  
    TEveTrackPropagator* trkProp = gTrackList->GetPropagator();
    trkProp->SetMagField(kMagField);
-   trkProp->SetMaxR(2*kR_max);
-   trkProp->SetMaxZ(2*kZ_d);
+   trkProp->SetMaxR(3.*kR_max);
+   trkProp->SetMaxZ(3.*kZ_d);
  
    //========================================================================
    //========================================================================
@@ -187,7 +196,7 @@ void pythia_next_event()
 
        Int_t ist = p.GetStatusCode();
       // Positive codes are final particles.
-      if (ist <= 0) continue;
+      if (ist != 1) continue;
       Int_t pdg = p.GetPdgCode();
       Float_t charge = TDatabasePDG::Instance()->GetParticle(pdg)->Charge();
       if (charge == 0.) continue;
@@ -284,3 +293,26 @@ void pythia_make_gui()
 }
  
 #endif
+
+/*
+ Pythia 6
+
+    status 1: Stable final-state particle
+    status 2: Unstable particle
+    status 10902: Exactly the same as status 2 above
+    status 3: Documentary particle; Often a process generated outside pythia, then passed to it for showering 
+
+Pythia 8
+
+    Negative vs. Positive: A particle which decays is given a negative status; the final state only consists of positive-status particles
+    status 1: Final-state particle
+    status 11-19: Beam particles
+    status 21-29: Particles from the hardest subprocess
+    status 31-39: Particles from subsequent subprocesses in multiple interactions
+    status 41-49: Particles produced by initial-state showers (ISR, or generally particles not from the final state of the hard process)
+    status 51-59: Particles produced by final-state showers
+    status 61-69: Particles produced by beam-remnant treatment
+    status 71-79: Particles about to be hadronized (input partons to a hadron)
+    status 81-89: Primary output of hadronization process (first level of hadrons)
+    status 91-99: Particles produced in final decay process, or by Bose-Einstein effects (?) 
+*/
