@@ -35,6 +35,9 @@ void pythia8_display()
       return;
    }
 #endif
+ //gSystem->Setenv("PYTHIA8DATA",Form("%s/xmldoc",getenv("PYTHIA8")));
+ //gSystem->Setenv("PYTHIA8",Form("%s/xmldoc",getenv("PYTHIA8")));
+ //gSystem->getenv("PYTHIA8");
 // Load libraries
    gSystem->Load("libEG");
    gSystem->Load("libEGPythia8");
@@ -51,17 +54,13 @@ void pythia8_display()
 // Constants.
 //------------------------------------------------------------------------------
  
-const Double_t kR_min = 10.;
-const Double_t kR_max = 10.5;
-const Double_t kZ_d   = 20.;
+const Double_t kR_min = 0.0;
+const Double_t kR_max = 10.;
+const Double_t kZ_d   = 50.;
  
 // Solenoid field along z, in Tesla.
 const Double_t kMagField = 3;
- 
-// Color for Higgs, Zs and muons
-const Color_t  kColors[3] = { kRed, kGreen, kYellow };
- 
- 
+
 TPythia8   *g_pythia = 0;
  
 // Implemented in MultiView.C
@@ -121,29 +120,46 @@ void run_pythia_display()
  
    TEveManager::Create();
  
-   TEveElementList *fake_geom = new TEveElementList("Geometry");
+   TEveElementList *Athena_Tracker = new TEveElementList("Geometry");
  
    TEveGeoShape *b;
- 
-   b = new TEveGeoShape("Barell 1");
-   b->SetShape(new TGeoTube(kR_min, kR_max, kZ_d));
-   b->SetMainColor(kRed);
+
+	// Vertexing
+  	double si_vtx_r_pos[] = {3.3,4.35,5.4}; 
+	  const int nVtxLayers = sizeof(si_vtx_r_pos)/sizeof(*si_vtx_r_pos);
+	  double si_z_vtxlength[] = {28, 28, 28};
+
+	// Barrel
+ 	 double si_r_pos[] = {13.34, 17.96};
+   const int nTrckLayers = sizeof(si_r_pos)/sizeof(*si_r_pos);
+	  double si_z_length[] = {34.34, 46.68};
+
+	  double si_thick = 0.55/100.*9.37;
+
+   for (int i=0; i<nVtxLayers+nTrckLayers; i++){
+   if (i<3){
+   b = new TEveGeoShape(Form("Vtx_%d",i));
+   b->SetShape(new TGeoTube(si_vtx_r_pos[i], si_vtx_r_pos[i]+si_thick, si_z_vtxlength[i]));
+   b->SetMainColor(kRed);  	
+   }	
+   else{
+   b = new TEveGeoShape(Form("Barr_%d",i-3));
+   b->SetShape(new TGeoTube(si_r_pos[i-3], si_r_pos[i-3]+si_thick, si_z_length[i-3]));
+   b->SetMainColor(kGreen); 	
+   }
    b->SetMainTransparency(80);
-   fake_geom->AddElement(b);
+   Athena_Tracker->AddElement(b);
+  }
+  
+
  
-   b = new TEveGeoShape("Barell 2");
-   b->SetShape(new TGeoTube(2*kR_min, 2*kR_max, 2*kZ_d));
-   b->SetMainColor(kGreen);
-   b->SetMainTransparency(80);
-   fake_geom->AddElement(b);
- 
-   gEve->AddGlobalElement(fake_geom);
+   gEve->AddGlobalElement(Athena_Tracker);
  
  
    gMultiView = new MultiView;
  
-   gMultiView->ImportGeomRPhi(fake_geom);
-   gMultiView->ImportGeomRhoZ(fake_geom);
+   gMultiView->ImportGeomRPhi(Athena_Tracker);
+   gMultiView->ImportGeomRhoZ(Athena_Tracker);
  
    gEve->GetBrowser()->GetTabRight()->SetTab(1);
  
@@ -156,8 +172,8 @@ void run_pythia_display()
  
    TEveTrackPropagator* trkProp = gTrackList->GetPropagator();
    trkProp->SetMagField(kMagField);
-   trkProp->SetMaxR(3.*kR_max);
-   trkProp->SetMaxZ(3.*kZ_d);
+   trkProp->SetMaxR(2.0*kR_max);
+   trkProp->SetMaxZ(kZ_d);
  
    //========================================================================
    //========================================================================
@@ -205,11 +221,12 @@ void pythia_next_event()
       track->SetName(Form("%s [%d]", pb.GetName(), i));
       track->SetStdTitle();
       track->SetAttLineAttMarker(gTrackList);
-      if (i == 0)
-         track->SetLineColor(kColors[0]);
-      else if (i <= 2)
-         track->SetLineColor(kColors[1]);
- 
+      if (fabs(pdg)==211) track->SetLineColor(kYellow);
+      else if (fabs(pdg)==321) track->SetLineColor(kMagenta);
+      else if (fabs(pdg)==2212) track->SetLineColor(kBlue);
+      else if (fabs(pdg)==13) track->SetLineColor(kCyan);
+      else if (fabs(pdg)==11) track->SetLineColor(kWhite);
+      else track->SetLineColor(28); 
       gTrackList->AddElement(track);
    }
  
