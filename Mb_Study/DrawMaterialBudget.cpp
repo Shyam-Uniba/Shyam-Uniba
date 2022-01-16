@@ -8,24 +8,25 @@ void DrawMaterialBudget(const char* name="simple_geom.gdml"){
   }
 
    TObjArray* allvolumes = gGeoManager->GetListOfVolumes();
-    gGeoManager->GetListOfNodes()->Print();
-    gGeoManager->GetListOfVolumes()->Print();
+  //  gGeoManager->GetListOfNodes()->Print();
+  //  gGeoManager->GetListOfVolumes()->Print();
     for(Int_t i=0; i<allvolumes->GetEntries();i++){
           TGeoVolume* vol= (TGeoVolume*)allvolumes->At(i);
           TString volname = vol->GetIconName();
+          cout<<"Volume No: "<<i<<"   Name: "<<volname<<endl;
           //if (volname.Contains("SVTX")) vol->SetLineColor(kRed); 	
           //else if (volname.Contains("BARR")) vol->SetLineColor(kBlue); 
           vol->SetTransparency(20); // set the transparency level for the volumes
           
         // if (volname.Contains("InnerTrackerBarrel") || volname.Contains("VertexBarrel") || volname.Contains("MedialTrackerBarrel") || volname.Contains("OuterTrackerBarrel"))
-        if (volname.Contains("BMT"))
+        if (volname.Contains("gem"))
          {  
           Int_t nd = vol->GetNdaughters();
           for (Int_t i=0; i<nd; i++) {
           TString detname = vol->GetNode(i)->GetName();
          // if (!detname.Contains("layer")) continue;
           cout<<"==========================="<<endl;
-         // cout<<"Layer Name: "<<detname<<"Det Name"<<volname<<endl;
+          cout<<"Layer Name: "<<detname<<"Det Name"<<volname<<endl;
          // vol->InspectShape();
          // vol->InspectMaterial();
 
@@ -37,7 +38,10 @@ void DrawMaterialBudget(const char* name="simple_geom.gdml"){
 	TCanvas *cradlen = new TCanvas("radlen", "radiation length");
 	cradlen->SetRightMargin(0.18);
  //TH2F *X0 = gGeoManager->GetTopVolume()->LegoPlot(180,0.,180.,180,0.,360.);
- TH2F *X0 = gGeoManager->GetVolume("BMT_2")->LegoPlot(180,0.,180.,180,0.,360.);
+// TH2F *TGeoChecker::LegoPlot This function is defined in TGeoChecker
+// https://root.cern.ch/doc/master/TGeoChecker_8cxx_source.html#l02040 line 20240
+// gGeoManager->RandomRays(1000, 0., 0., 0.);
+ TH2F *X0 = gGeoManager->GetVolume(21)->LegoPlot(180,0.,180.,180,0.,360.);
 //TH2F* LegoPlot(Int_t ntheta = 20, Double_t themin = 0., Double_t themax = 180., Int_t nphi = 60, Double_t phimin = 0., Double_t phimax = 360., Double_t rmin = 0., Double_t rmax = 9999999, Option_t* option = "") 	// *MENU*
 
   X0->SetXTitle( "#varphi (deg)");
