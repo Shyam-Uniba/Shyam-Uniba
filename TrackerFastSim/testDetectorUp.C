@@ -40,7 +40,7 @@ void testDetectorUp(float etamin, float etamax) {
   Double_t resZMM         = 150.0e-4;
   Double_t eff            = 1.0;
   //
-  //  /*
+  //  
   its.AddLayer((char*)"VTX1",  3.3 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTX2",  4.35 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTX3",  5.40 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 

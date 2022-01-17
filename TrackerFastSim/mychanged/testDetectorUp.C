@@ -1,7 +1,7 @@
 
 // You have to load the class before ... ;-)
 // .L DetectorK.cxx++
-// !!!!!!Change Magentic field always in class!!!!!!!!!!!!!!!!!!! 
+
 //void standardPlots() {
 #include "DetectorK.h"
 #include "DetectorK.cxx"
@@ -21,9 +21,10 @@ void testDetectorUp(float etamin, float etamax) {
   for (int i=0; i<nbins; i++){
   its.SetAvgRapidity(eta); // This is pesudorapidity eta
   its.SetParticleMass(0.140); // pion 
-  its.SetBField(3.0); // set magnetic field 3 Tesla
+  its.SetBField(3.0); // Set Magnetic field 3.0 Tesla
   Double_t theta = 2.0*TMath::ATan(TMath::Exp(-1.0*eta));
   Double_t sin_theta = fabs(TMath::Sin(theta));
+
 // Don't assign Rphi resolution and Z Resolution, it will be assigned very large number
   // and finally considered as dead layer
   its.AddLayer((char*)"bpipe",3.1,0.0022/sin_theta); // thickness 760 mum; x/x0 = 0.076/35 = 0.0022;
