@@ -210,6 +210,7 @@ class DetectorK : public TNamed {
   TGraph* GetGraphMomentumResolution(Int_t color, Int_t linewidth=1);
   TGraph* GetGraphTotalMomentumResolution(Int_t color, Int_t linewidth=1);
   TGraph* GetGraphPointingResolution(Int_t axis,Int_t color, Int_t linewidth=1);
+  TGraph* GetGraphPointingResolutionvsMom(Int_t axis,Int_t color, Int_t linewidth=1);
   TGraph* GetGraphPointingResolutionTeleEqu(Int_t axis,Int_t color, Int_t linewidth=1);
   TGraph* GetGraphLayerInfo(Int_t plot, Int_t color, Int_t linewidth=1);
 

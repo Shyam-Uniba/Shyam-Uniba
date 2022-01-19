@@ -1555,6 +1555,41 @@ TGraph * DetectorK::GetGraphPointingResolution(Int_t axis, Int_t color, Int_t li
 
 }
 
+TGraph * DetectorK::GetGraphPointingResolutionvsMom(Int_t axis, Int_t color, Int_t linewidth) {
+ 
+  // Returns the pointing resolution
+  // axis = 0 ... rphi pointing resolution
+  // axis = 1 ... z pointing resolution
+  //
+
+  TGraph * graph =  0;
+
+  if (axis==0) {
+    graph = new TGraph ( kNptBins, fTotalMomenta, fResolutionRPhi ) ;
+    graph->SetTitle("R-#phi Pointing Resolution .vs. Momentum" ) ;
+    graph->GetYaxis()->SetTitle("R-#phi Pointing Resolution (#mum)") ;
+  } else {
+    graph =  new TGraph ( kNptBins, fTotalMomenta, fResolutionZ ) ;
+    graph->SetTitle("Z Pointing Resolution .vs. Momentum" ) ;
+    graph->GetYaxis()->SetTitle("Z Pointing Resolution (#mum)") ;
+  }
+  
+  graph->SetMinimum(1) ;
+  graph->SetMaximum(1000.1) ;
+  graph->GetXaxis()->SetTitle("Momentum (GeV/c)") ;
+  graph->GetXaxis()->CenterTitle();
+  graph->GetXaxis()->SetNoExponent(1) ;
+  graph->GetXaxis()->SetMoreLogLabels(1) ;
+  graph->GetYaxis()->CenterTitle();
+  
+  graph->SetLineWidth(linewidth);
+  graph->SetLineColor(color);
+  graph->SetMarkerColor(color);
+  
+  return graph;
+
+}
+
 TGraph * DetectorK::GetGraphLayerInfo(Int_t plot, Int_t color, Int_t linewidth) {
  
   // Returns the pointing resolution
@@ -2116,7 +2151,8 @@ void DetectorK::MakeStandardPlots(Bool_t add, Int_t color, Int_t linewidth,Bool_
   // Produces the standard performace plots
   //
   TGraph *eff,*momRes,*pointRes;
-  TGraph *PtRes,*pointResXY, *pointResZ, *PResol;
+  TGraph *PtRes,*pointResXY, *pointResZ, *PResol, *pointResXY_Mom, *pointResZ_Mom;
+
   if (!add) {
 
     TFile *fout = new TFile(Form("Output/FastSimulation_Output_eta_%1.2f.root",fAvgRapidity),"recreate");
@@ -2161,13 +2197,23 @@ void DetectorK::MakeStandardPlots(Bool_t add, Int_t color, Int_t linewidth,Bool_
     PResol->SetName(Form("grTotalMomRes%d",1));
     PResol->Draw("AL");
 
+    // Pointing Resolutions vs Momentum
+    pointResXY_Mom = GetGraphPointingResolutionvsMom(0,color,linewidth);
+    pointResXY_Mom->SetName(Form("pointRRes_Mom%d",0));
+    pointResXY_Mom->Draw("AL");
+
+    pointResZ_Mom = GetGraphPointingResolutionvsMom(1,color,linewidth);
+    pointResZ_Mom->SetName(Form("pointZRes_Mom%d",0));    
+    pointResZ_Mom->Draw("AL");
+
     fout->cd();
     PtRes->Write();
     PResol->Write();
     pointResXY->Write();
     pointResZ->Write();
+    pointResXY_Mom->Write();
+    pointResZ_Mom->Write();
     fout->Close();
-    
   } else {
     
     TVirtualPad *c1 = gPad->GetMother();

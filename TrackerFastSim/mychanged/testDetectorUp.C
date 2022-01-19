@@ -22,10 +22,12 @@ void testDetectorUp(float etamin, float etamax) {
   its.SetAvgRapidity(eta); // This is pesudorapidity eta
   its.SetParticleMass(0.140); // pion 
   its.SetBField(3.0); // Set Magnetic field 3.0 Tesla
+  Double_t theta = 2.0*TMath::ATan(TMath::Exp(-1.0*eta));
+  Double_t sin_theta = fabs(TMath::Sin(theta));
 
 // Don't assign Rphi resolution and Z Resolution, it will be assigned very large number
   // and finally considered as dead layer
-  its.AddLayer((char*)"bpipe",3.1,0.0022); // thickness 760 mum; x/x0 = 0.076/35 = 0.0022;
+  its.AddLayer((char*)"bpipe",3.1,0.0022/sin_theta); // thickness 760 mum; x/x0 = 0.076/35 = 0.0022;
   its.AddLayer((char*)"vertex",     0,     0); // dummy vertex for matrix calculation
   // new ideal Pixel properties?
   Double_t x_x0VTX     = 0.0005; // Per layer VTX
@@ -40,15 +42,15 @@ void testDetectorUp(float etamin, float etamax) {
   Double_t eff            = 1.0;
   //
   //  /*
-  its.AddLayer((char*)"VTX1",  3.3 ,  x_x0VTX, resRPhiVTX, resZVTX,eff); 
-  its.AddLayer((char*)"VTX2",  4.35 ,  x_x0VTX, resRPhiVTX, resZVTX,eff); 
-  its.AddLayer((char*)"VTX3",  5.40 ,  x_x0VTX, resRPhiVTX, resZVTX,eff); 
-  its.AddLayer((char*)"BARR1", 13.34, x_x0BARR, resRPhiBARR, resZBARR,eff); 
-  its.AddLayer((char*)"BARR2", 17.96, x_x0BARR, resRPhiBARR, resZBARR,eff); 
-  its.AddLayer((char*)"MM1",  47.72 ,  x_x0MM, resRPhiMM, resZMM,eff); 
-  its.AddLayer((char*)"MM2",  49.57 ,  x_x0MM, resRPhiMM, resZMM,eff); 
-  its.AddLayer((char*)"MM3",  75.61 ,  x_x0MM, resRPhiMM, resZMM,eff); 
-  its.AddLayer((char*)"MM4",  77.46 ,  x_x0MM, resRPhiMM, resZMM,eff); 
+  its.AddLayer((char*)"VTX1",  3.3 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
+  its.AddLayer((char*)"VTX2",  4.35 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
+  its.AddLayer((char*)"VTX3",  5.40 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
+  its.AddLayer((char*)"BARR1", 13.34, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
+  its.AddLayer((char*)"BARR2", 17.96, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
+  its.AddLayer((char*)"MM1",  47.72 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
+  its.AddLayer((char*)"MM2",  49.57 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
+  its.AddLayer((char*)"MM3",  75.61 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
+  its.AddLayer((char*)"MM4",  77.46 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
   
   //TCanvas *c = new TCanvas("c","c",1200,1000);
   //c->cd();
