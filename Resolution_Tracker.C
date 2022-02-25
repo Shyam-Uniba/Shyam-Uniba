@@ -23,11 +23,11 @@
   Double_t resolution_z = 10*1.0e-6/sqrt(12); // pixel resolution_z in meter
   Double_t min_length = 0.05; // Radius of outer Barrel layer-first layer
   Double_t magfield = 3.0; // Mag field Eic 3.0 T
-  Double_t eta = 0.0;
+  Double_t eta = 0.01;
   Double_t r0 = 0.02; // 2cm radius of first layer
 
   Double_t N_factor_Pt_Arc = sqrt(720*pow(N,3)/((N-1)*(N+1)*(N+2)*(N+3)));
-  Double_t N_factor_Pt_MS = sqrt(N/(pow(N,2)-1));
+  Double_t N_factor_Pt_MS = N/sqrt(pow(N,2)-1);
 
   Double_t N_2 = pow(N,2); Double_t N_3 = pow(N,3);
   Double_t r0_l0 = r0/min_length; Double_t r0_l0_2 = pow(r0_l0,2); Double_t r0_l0_3 = pow(r0_l0,3); Double_t r0_l0_4 = pow(r0_l0,4);
@@ -88,7 +88,7 @@ void Resolution_Tracker()
            
        //  pT resolution 
         Double_t pi_pT_resol_Arc = 100.*pt*0.001*resolution_rphi*N_factor_Pt_Arc/(0.3*magfield*length*length); 
-        Double_t pi_pT_MS = 100.*N_factor_Pt_MS*ms_pi/(0.3*magfield*length);  
+        Double_t pi_pT_MS = 100.*N_factor_Pt_MS*ms_pi/(0.3*magfield*length); 
 
        //  Transverse Pointing Angle Resolution
         Double_t Trans_PA_resol_Arc = 3.0*resolution_rphi*N_factor_Pt_TransPA_SR; 
@@ -126,7 +126,7 @@ void Resolution_Tracker()
      gr1->SetLineWidth(1);
      gr1->SetMarkerColor(2);
      gr1->SetMarkerStyle(6);
-     gr1->SetTitle(Form("Transverse Momentum Resolution for #eta = %1.1f",eta));
+     gr1->SetTitle(Form("Transverse Momentum Resolution for #eta = %1.2f",eta));
      gr1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
      gr1->GetXaxis()->CenterTitle(true);
      gr1->GetYaxis()->SetTitle("#frac{#sigma_{p_{T}}}{p_{T}}"); // #sigma_{x} (cm)
@@ -158,6 +158,14 @@ void Resolution_Tracker()
      leg_hist->AddEntry(gr2,"p_{T} Resol. (Sagitta)","l");
      leg_hist->AddEntry(gr1sumpi,"Sum p_{T} Resol. (Pion)","l"); 
      leg_hist->Draw();
+     
+     TGraph *gr_Pt_Resol = (TGraph*)gr1sumpi->Clone();
+     gr_Pt_Resol->SetName("Pt_Resol");
+     gr_Pt_Resol->SetTitle(Form("Transverse Momentum Resolution for #eta = %1.2f",eta));
+     gr_Pt_Resol->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+     gr_Pt_Resol->GetXaxis()->CenterTitle(true);
+     gr_Pt_Resol->GetYaxis()->SetTitle("#frac{#sigma_{p_{T}}}{p_{T}}"); // #sigma_{x} (cm)
+     gr_Pt_Resol->GetYaxis()->CenterTitle(true);
 
   //----------Pion Transverse Pointing Resolution----------------------------------	 
     for(Int_t i=0;i<n;i++)
@@ -174,7 +182,7 @@ void Resolution_Tracker()
      gr1->SetLineWidth(1);
      gr1->SetMarkerColor(2);
      gr1->SetMarkerStyle(6);
-     gr1->SetTitle(Form("Transverse Pointing Resolution for #eta = %1.1f",eta));
+     gr1->SetTitle(Form("Transverse Pointing Resolution for #eta = %1.2f",eta));
      gr1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
      gr1->GetXaxis()->CenterTitle(true);
      gr1->GetYaxis()->SetTitle("Transverse Pointing Resolution (#mum)"); // #sigma_{x} (cm)
@@ -196,6 +204,14 @@ void Resolution_Tracker()
      gr1sumpi->SetMarkerStyle(6); 
      gr1sumpi-> SetLineStyle(9);
      gr1sumpi->Draw("same");
+     
+     TGraph *gr_TPA_Resol = (TGraph*)gr1sumpi->Clone();
+     gr_TPA_Resol->SetName("Trans_PA");
+     gr_TPA_Resol->SetTitle(Form("Transverse Pointing Resolution for #eta = %1.2f",eta));
+     gr_TPA_Resol->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+     gr_TPA_Resol->GetXaxis()->CenterTitle(true);
+     gr_TPA_Resol->GetYaxis()->SetTitle("Transverse Pointing Resolution (#mum)"); // #sigma_{x} (cm)
+     gr_TPA_Resol->GetYaxis()->CenterTitle(true);
      
     //--------------Legend Draw----------------------         
      leg_hist = new TLegend(0.60,0.7,0.99,0.93);
@@ -222,7 +238,7 @@ void Resolution_Tracker()
      gr1->SetLineWidth(1);
      gr1->SetMarkerColor(2);
      gr1->SetMarkerStyle(6);
-     gr1->SetTitle(Form("Longitudinal Pointing Resolution for #eta = %1.1f",eta));
+     gr1->SetTitle(Form("Longitudinal Pointing Resolution for #eta = %1.2f",eta));
      gr1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
      gr1->GetXaxis()->CenterTitle(true);
      gr1->GetYaxis()->SetTitle("Longitudinal Pointing Resolution (#mum)"); // #sigma_{x} (cm)
@@ -245,6 +261,13 @@ void Resolution_Tracker()
      gr1sumpi-> SetLineStyle(9);
      gr1sumpi->Draw("same");
      
+     TGraph *gr_LPA_Resol = (TGraph*)gr1sumpi->Clone();
+     gr_LPA_Resol->SetName("Long_PA");
+     gr_LPA_Resol->SetTitle(Form("Longitudinal Pointing Resolution for #eta = %1.2f",eta));
+     gr_LPA_Resol->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+     gr_LPA_Resol->GetXaxis()->CenterTitle(true);
+     gr_LPA_Resol->GetYaxis()->SetTitle("Longitudinal Pointing Resolution (#mum)"); // #sigma_{x} (cm)
+     gr_LPA_Resol->GetYaxis()->CenterTitle(true);
     //--------------Legend Draw----------------------         
      leg_hist = new TLegend(0.60,0.7,0.99,0.93);
      leg_hist->SetHeader("Particle in Silicon Tracker");
@@ -255,11 +278,16 @@ void Resolution_Tracker()
      leg_hist->AddEntry(gr1sumpi,"Sum Longitudinal PA Resol. (Pion)","l"); 
      leg_hist->Draw();
 
-
+     TFile *fout = new TFile(Form("TrackerResolution_eta_%1.2f.root",eta),"recreate");
+     fout->cd();
+     gr_Pt_Resol->Write();
+     gr_TPA_Resol->Write();
+     gr_LPA_Resol->Write();
+     fout->Close();
           
 }
-  // This will return theta in radian
-		void MultipleScatteringComponent(Double_t mp, Double_t momI, Double_t &Ptresol, Double_t effradlen, Int_t N){
+    // This function is basically 1/beta*f(d/X0Sintheta)
+		void MultipleScatteringComponent(Double_t mp, Double_t momI, Double_t &Ptresol, Double_t effradlen, Int_t N){ 
 			Double_t En = TMath::Sqrt(mp*mp+momI*momI);
 			Double_t beta = momI/En;
 			Ptresol=(0.0136/beta)*(TMath::Sqrt(effradlen))*(1+0.038*TMath::Log(effradlen)); //*(1+0.038*TMath::Log(effradlen))
