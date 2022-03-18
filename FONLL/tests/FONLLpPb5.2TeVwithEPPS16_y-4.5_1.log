@@ -1,0 +1,112 @@
+==== LHAPDF6 USING DEFAULT-TYPE LHAGLUE INTERFACE ====
+LHAPDF 6.3.0 loading /home/shyam/Documents/FONLL/install_lhapdf/share/LHAPDF/cteq66/cteq66_0000.dat
+cteq66 PDF set, member #0, version 1; LHAPDF ID = 10550
+  enter prefix for this run
+  pdf type is described by 3 numbers
+  pdflib uses all 3; other may use less
+  All energy values are in GeV
+  Beam type are:
+  -1 for p_bar, 1 for p, 0 for (n+p)/2, 2 for n,
+  3 for pi^+, -3 for pi^-
+  4 for photon, 5 for electron
+  beam1 has positive rapidity
+
+ enter beam 1 type, energy, 3 pdf numbers
+
+ enter beam 2 type, energy, 3 pdf numbers
+
+  heavy quark mass
+
+ LambdaQCD_5 in GeV, (<=0 for default
+
+ fact. and ren. scale factors
+
+ enter pt,y_lab
+
+  enter 1 for FONLL, 2 for Fixed Order, 3 for resummed in the massless limit (no power suppressed mass terms)
+  check: alpha_s(Mz)=  0.11798160000000001     
+  pdfpar: ********** WARNING !!!! ******************
+  PDF Scheme set to MSbar; if you are using a DIS pdf
+  the result will be wrong
+  check: alpha_s(Mz)=  0.11798160000000001     
+  pdfpar: ********** WARNING !!!! ******************
+  PDF Scheme set to MSbar; if you are using a DIS pdf
+  the result will be wrong
+  assuming bottom quark
+ CM energy=   5027.9220359906139     
+ enter maxfcn = # of gaussian points
+ In what follows: nptype=1 -> proton, 4-> photon, 5-> electron
+ ngroup is not used.
+ enter nptype, ngroup, nset (beam1)
+  check: alpha_s(Mz)=  0.11798160000000001     
+  pdfpar: ********** WARNING !!!! ******************
+  PDF Scheme set to MSbar; if you are using a DIS pdf
+  the result will be wrong
+  lambda(pdf)=  0.22600015483267408     
+  scheme(pdf)=MS
+ enter nptype, ngroup, nset (beam2)
+  check: alpha_s(Mz)=  0.11798160000000001     
+  pdfpar: ********** WARNING !!!! ******************
+  PDF Scheme set to MSbar; if you are using a DIS pdf
+  the result will be wrong
+  lambda(pdf)=  0.22600015483267408     
+  scheme(pdf)=MS
+ enter Lambda_5 (0 for default)
+ enter dfpy,dfpxf,ctpy,dfp,dfy,dfxf,ctxdfp for task selection,
+ precede by - if you want rapidity by row
+  d sigma /( dy d (pT**2) )
+  enter 1 to convert dsig/dpt^2 --> dsig/dpt
+ enter # of light flavours
+  enter 1 for the nlf+1  scheme, 0 for nlf scheme)
+  enter the rescaling factor for alpha_S
+  alpha_S --> alpha_S/rscalpha
+ enter process and CM energy; instead of CM energy, one can
+ also enter hadron momenta and hadron masses (enter m_had<0
+ for default values). Valid entries are:
+ pr+pr- 1800  (proton antiproton at E_cm=1800)
+ pr+nu+ 100 0 -1 -1 (100 GeV protons on nucleons (i.e. (p+n)/2)
+                     masses are set to 0.938 GeV)
+ pr+nu+ 100 0 0 -1 (100 GeV protons on nucleons (i.e. (p+n)/2 )
+      kinematics of the incoming hadron in the massless limit)
+ ph pr+ 200   (photon-proton at E_cm=200 GeV)
+ ph pr+ 20 820 0 (photon-proton with k_gamma=20 GeV)
+                  k_pr=820 GeV, and neglecting proton mass)
+ ph nu+ 30    (photon-nucleon ( i.e. (p+n)/2 ) at E_cm=30 GeV)
+ ph nu+ 100 0 -1 -1 (100 GeV photon on nucleon at fixed target,
+                     with m_ph=0, m_nu=0.938 GeV)
+ el pr+ 300   ( electron proton at E_cm=300 GeV)
+ nu+pr+   5027.9219999999996     
+  enter 1,2 or 3 to specify frame:
+  1 for rapidity relative to CM of incoming hadrons
+  2 to CM of hadron 2 (i.e., fixed target)
+  3 in lab. (according to momenta entered earlier)
+ enter gg, qq, qg, any other for all
+to compute (sigma(Q)+sigma(Qbar))/2 from the given channel
+(-,-qq,-qg for total and partial asymmetry=(sigma(Q)-sigma(Qbar))/2
+ will return (sigma(Q)+sigma(Q_bar))/2
+  enter 1 for reference scale mu0=sqrt(m^2+pt^2)
+        2 for reference scale mu0=pt
+        3 to be prompted for sequence in mu0
+  enter ffact, xmu_fact=ffact*mu0
+  ffact =   1.0000000000000000     
+  enter 1 to keep ffact=1 only in structure functions
+  (for debugging purposes only), 0 otherwise
+ enter fren, xmu_ren=fren*mu0
+  fren =   1.0000000000000000     
+ enter a mass value, to set rapidity and pt values to
+ 0,.2,.4,.6,.8*ymax, pt=.02,.2,.3,.6,1,1.2,1.5,2.2.5,3 * mass
+ enter a negative value to be prompted for y and pt sequence
+ enter y value(s), * to terminate the sequence
+ NB: rapidities must be given in the LAB FRAME
+ enter pt value(s), * to terminate the sequence
+  enter mass of heavy quark followed by an integer=
+  0 for massive, 1 for massless, 2 for massless leading log
+Thanks for using LHAPDF 6.3.0. Please make sure to cite the paper:
+  Eur.Phys.J. C75 (2015) 3, 132  (http://arxiv.org/abs/1412.7420)
+ enter filename to go, . to ouput to screen
+ .                                                                     
+ xlam = 0.2260D+00
+  cme =0.5028D+04
+  m=0.4750D+01
+  alfa=  0.21658248933732244      at scale    4.7510525149697092     
+ Missing file: EPS09NLOR_208                                     

@@ -1,0 +1,4 @@
+/home/shyam/Desktop/MakeExample/cmake/build/CMakeFiles/rebuild_cache.dir
+/home/shyam/Desktop/MakeExample/cmake/build/CMakeFiles/efficiency.dir
+/home/shyam/Desktop/MakeExample/cmake/build/CMakeFiles/edit_cache.dir
+/home/shyam/Desktop/MakeExample/cmake/build/CMakeFiles/main.dir
