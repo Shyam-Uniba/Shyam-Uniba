@@ -1,0 +1,48 @@
+#################################################################
+# Digitisation and reconstruction parameters for TPC
+# Format:
+# parameter_name:parameter_type(i-integer, d-double) parameter_value
+# TPCDigiPar
+# Description of parameters
+#################################################################
+[CeeTpcDigiPar]
+CeeTpcGasFile:Int_t 0
+EField:Double_t 400
+AttachFlag:Int_t 0
+LogitudinaldiffusionFlag:Int_t 1
+TransversediffusionFlag:Int_t 1
+DriftDistortionFlag:Int_t 0
+yGem:Double_t 40
+yMax:Double_t 40
+Gain:Double_t 2000
+Supression:Double_t 0.001
+Spread_xz:Double_t 0.028
+Mean_time_GEM:Double_t 491.7
+Spread_time:Double_t 14.9
+MinSignalAmp:Double_t 13
+rMin:Double_t 0.
+rMax:Double_t 100
+PadPlaneFile:Int_t 1
+PadShapeFile:Int_t 3   
+PadShapeRange:Double_t 0.5
+PadShapeStep:Double_t 0.02
+PadShapeIntStep:Double_t 0.01
+ADCThreshold:Int_t 10
+ADCMax:Int_t 2500
+ADCBits:Int_t 10
+SamplingFreq:Double_t 40
+T0_wallclock:Double_t -200000
+TimeBits:Int_t 28
+PSAThreshold:Int_t 10
+Shaper_tDiff:Double_t 50
+Shaper_tInt:Double_t 50
+Shaper_tSig:Double_t 2
+TOTPSA:Int_t 1
+GAUSSIANNOISE:Int_t 0
+GAUSSIANNOISEAMP:Int_t 0
+Rate:Double_t 2e-2
+TimeStep: Int_t 100 
+Maxtimebins: Int_t 145
+#################################################################
+### DigiTpc/macro/padplane.dat will be read from tpc_files.par (Line no. 1)
+### DigiTpc/macro/2mmPads.dat will be read from tpc_files.par (Line no. 2)
