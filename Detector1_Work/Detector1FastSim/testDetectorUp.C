@@ -7,7 +7,7 @@
 #include "DetectorK.h"
 #include "DetectorK.cxx"
 
-void testDetectorUp(float etamin, float etamax) {
+void testDetectorUp(float etamin=0.0, float etamax=0.5) {
 
 
         gSystem->Exec("rm -rf Output");
@@ -33,30 +33,31 @@ void testDetectorUp(float etamin, float etamax) {
   its.AddLayer((char*)"vertex",     0,     0); // dummy vertex for matrix calculation
   // new ideal Pixel properties?
   Double_t x_x0VTX     = 0.0005; // Per layer VTX
-  Double_t x_x0VTX_SUP     = 0.3/30; // VTX Support
-  Double_t x_x0BARR    = 0.0005; // Per layer BARR
+  Double_t x_x0VTX_SUP     = 0.03/30; // VTX Support realistic by Ernst
+  Double_t x_x0BARR    = 0.0055; // Per layer BARR
   Double_t x_x0BARR_SUP    = 0.03/30; // Per layer BARR
   Double_t x_x0MM      = 0.00773532/3; // Per layer Micromegas
   Double_t x_x0TOF      = 0.05582; // LGAD layer
   Double_t x_x0DIRC     = 0.12737983; // DIRC
   Double_t resRPhiVTX     = 10.0e-4/sqrt(12); 
   Double_t resRPhiBARR    = 10.0e-4/sqrt(12); 
-  Double_t resRPhiMM      = 55.0e-4; 
+  Double_t resRPhiMM      = 150.0e-4; 
   Double_t resZVTX        = 10.0e-4/sqrt(12); 
   Double_t resZBARR       = 10.0e-4/sqrt(12); 
-  Double_t resZMM         = 55.0e-4;
+  Double_t resZMM         = 150.0e-4;
   Double_t resRPhiTOF = 30.0e-4; // 30 mum
   Double_t resZTOF = 30.0e-4; // 30 mum
   Double_t eff            = 1.0;
+  Double_t shift = 0.0; // cm
   //
   //  
   its.AddLayer((char*)"VTX1",  3.3 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTX2",  4.35 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTX3",  5.40 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTXSUPPORT",  6.3 ,  x_x0VTX_SUP/sin_theta); 
-  its.AddLayer((char*)"BARR1", 21.0, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
-  its.AddLayer((char*)"BARR2", 22.68, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
-  its.AddLayer((char*)"BARRSUPPORT", 23.50 ,  x_x0BARR_SUP/sin_theta); 
+  its.AddLayer((char*)"BARR1", 21.0+shift, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
+  its.AddLayer((char*)"BARR2", 22.68+shift, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
+  its.AddLayer((char*)"BARRSUPPORT", 23.50+shift,  x_x0BARR_SUP/sin_theta); 
   its.AddLayer((char*)"MM1",  33.14 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
   its.AddLayer((char*)"MM2",  51.0 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
   its.AddLayer((char*)"TOF",  64.0 ,  x_x0TOF/sin_theta, resRPhiTOF, resZTOF,eff); 
@@ -67,6 +68,7 @@ void testDetectorUp(float etamin, float etamax) {
   //c->cd();
  // its.PlotLayout(1);
   its.PrintLayout();
+  //exit(0);
   its.SolveViaBilloir(0);
   its.MakeStandardPlots(0,2,1,kTRUE);
 

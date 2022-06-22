@@ -25,7 +25,7 @@ void Plot_P_eta()
    eta_arr[index] = i*0.1;
    pt_min[index] = 1.0/(TMath::CosH(i*0.1)); // p = pt*Cosh(eta);
    pt_max[index] = 5.0/(TMath::CosH(i*0.1));
-   pt_highest[index] = 30.0/(TMath::CosH(i*0.1));
+   pt_highest[index] = 10.0/(TMath::CosH(i*0.1));
    index++;
    }
    
@@ -64,7 +64,7 @@ void Plot_P_eta()
 			l1->SetBorderSize(0);
 			l1->AddEntry(gr,"p = 1 GeV/c");
 			l1->AddEntry(gr1,"p = 15 GeV/c");
-			l1->AddEntry(gr2,"p = 30 GeV/c");
+			l1->AddEntry(gr2,"p = 10 GeV/c");
 			l1->Draw();
    
    c1->SaveAs("pt_eta_corr.png");

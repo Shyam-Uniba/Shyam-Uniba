@@ -20,7 +20,7 @@ void PlotFastSimOutput(float etamin, float etamax){
   TGraph *grPRXY_Mom[nbins], *grPRZ_Mom[nbins];
 
     // Reading the Graph
-    for (int i=0; i<nbins+1; i++){
+    for (int i=0; i<nbins; i++){
      if (fabs(eta) >= -0.0001 && fabs(eta) <= 0.0001) eta = 0.00; // avoid negative -0.00
     	f[i] = TFile::Open(Form("Output/FastSimulation_Output_eta_%1.2f.root",eta));
       grP[i] =   (TGraph*) f[i]->Get("grTotalMomRes1");
