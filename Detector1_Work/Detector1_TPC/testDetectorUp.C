@@ -50,14 +50,14 @@ void testDetectorUp(float etamin=0.0, float etamax=0.0) {
   Double_t eff            = 1.0;
   Double_t shift = 0.0; // cm
   
-  Double_t resRPhiTPC = 95.0e-4; // 65 mum
-  Double_t resZTPC = 145.0e-4; // 65 mum 
+  Double_t resRPhiTPC = 95.0e-4; // 95 mum
+  Double_t resZTPC = 145.0e-4; // 145 mum 
   Float_t radLPerRow = 0.1/13289.4;  
   Float_t radLInnerCage = 0.005; // 0.5%
   Float_t radLOuterCage = 0.005; // 0.5%
   Float_t tpcRadialPitch  =    0.1 ;    // cm
-  Float_t tpcRows            =  201 ;
-  Float_t rowOneRadius = 20.; // cm
+  Float_t tpcRows            =  200 ;
+  Float_t rowOneRadius = 20.1; // cm
   Bool_t flag_addTPC = true;
   
   //
@@ -66,17 +66,17 @@ void testDetectorUp(float etamin=0.0, float etamax=0.0) {
   its.AddLayer((char*)"VTX2",  4.8 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"VTX3",  10.5 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff); 
   its.AddLayer((char*)"Barr1",  18.0 ,  x_x0VTX/sin_theta, resRPhiVTX, resZVTX,eff);
-  its.AddLayer((char*)"InnerCage",  19.5,  radLInnerCage/sin_theta); 
 //  its.AddLayer((char*)"VTXSUPPORT",  13.0 ,  x_x0VTX_SUP/sin_theta); 
   if (flag_addTPC){
+   its.AddLayer((char*)"InnerCage",  19.5,  radLInnerCage/sin_theta); 
   for ( Int_t k = 0 ; k < tpcRows; k++ ) {    
     Float_t rowRadius =0;
     rowRadius =  rowOneRadius + k*tpcRadialPitch ;
     TString name = Form("tpc_%d",k);
-    its.AddLayer((char*) name.Data(),rowRadius,radLPerRow,resRPhiTPC,resZTPC,eff);    
-  }
+    its.AddLayer((char*) name.Data(),rowRadius,radLPerRow,resRPhiTPC,resZTPC,eff);  
   }
   its.AddLayer((char*)"OuterCage",  40.5,  radLOuterCage/sin_theta); 
+  }
   its.AddLayer((char*)"BARR2", 42.0+shift, x_x0BARR/sin_theta, resRPhiBARR, resZBARR,eff); 
  // its.AddLayer((char*)"BARRSUPPORT", 42.50+shift,  x_x0BARR_SUP/sin_theta); 
   its.AddLayer((char*)"MPGD1",  60.0 ,  x_x0MM/sin_theta, resRPhiMM, resZMM,eff); 
