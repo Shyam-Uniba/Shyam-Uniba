@@ -26,20 +26,24 @@
 	version="v1 2021-03-16">
   <comment> EPIC </comment>
   </info>
+
+  <!-- Standard environmental conditions: 20 °C, 1 atm -->
+  <std_conditions type="NTP"/>
+
   <define>
-  <documentation level="2">
+    <documentation level="2">
       ## Main Constant Definitions
 
       The ip6 (or other ip) defines should be included first.
       These files have only a define tags.
-  </documentation>
+    </documentation>
     <include ref="${BEAMLINE_PATH}/ip6/definitions.xml" />
     <include ref="${BEAMLINE_PATH}/ip6/far_forward/fields_275.xml" />
     <include ref="${DETECTOR_PATH}/compact/definitions.xml" />
   </define>
 
   <includes>
-    <gdmlFile ref="${DETECTOR_PATH}/compact/elements.xml"/>
+    <gdmlFile ref="${DD4hepINSTALL}/DDDetectors/compact/elements.xml"/>
     <gdmlFile ref="${DETECTOR_PATH}/compact/materials.xml"/>
     <file     ref="${DETECTOR_PATH}/compact/optical_materials.xml"/>
   </includes>
@@ -72,7 +76,7 @@
     which are subsquently used in the central detector construction -- e.g. the vertex tracker
     uses the beampipe OD to help define its placement.
 
-    The IP subsystems include the Far forward and backward regions. The list of subsystem includes:
+       The IP subsystems include the Far forward and backward regions. The list of subsystem includes:
      - Interaction region beampipe
      - B0 tracker
      - Off-momentum tracker
@@ -91,13 +95,25 @@
   <documentation level="10">
     ## Central tracking detectors
   </documentation>
-  <include ref="${DETECTOR_PATH}/compact/tracker.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/definitions.xml"/>
 
+  <include ref="${DETECTOR_PATH}/compact/tracking/vertex_barrel.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/silicon_barrel.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/mpgd_barrel.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/mpgd_dirc.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/silicon_disks.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/support_service_assembly.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/tof_barrel.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/tracking/tof_endcap.xml"/>
+  
   <documentation level="10">
     ## PID detectors
   </documentation>
+  <include ref="${DETECTOR_PATH}/compact/dirc.xml"/>
   
-  <include ref="${DETECTOR_PATH}/compact/fake_dirc.xml"/>
+  <include ref="${DETECTOR_PATH}/compact/drich.xml"/>
+  
+  <include ref="${DETECTOR_PATH}/compact/mrich.xml"/>
   
   <documentation level="11">
     ## Central beam pipe
